@@ -9,25 +9,31 @@
 // ../common/amoled_touch.h) a nabezna hrana tlacitka BOOT.
 // ===================================================================
 
+enum : uint8_t { G_NONE = 0, G_LEFT, G_RIGHT, G_UP, G_DOWN, G_TAP };
+
 static bool     swPrev = false;
 static int      swX0 = 0, swY0 = 0;
 static uint32_t swT0 = 0;
 
-// vyhodnoceni pri zvednuti prstu: +1 = tah doleva (dalsi obrazovka),
-// -1 = tah doprava (predchozi), 0 = nic
-static int inputSwipe() {
-  int r = 0;
+// gesto vyhodnocene pri zvednuti prstu: tah doleva/doprava/nahoru/dolu
+// (posun >= SWIPE_MIN_PX v prevazujicim smeru) nebo tuknuti (kratke, bez posunu)
+static uint8_t inputGesture() {
+  uint8_t g = G_NONE;
   if (touchDown && !swPrev) {
     swX0 = touchX;
     swY0 = touchY;
     swT0 = millis();
   } else if (!touchDown && swPrev) {
     const int dx = touchX - swX0, dy = touchY - swY0;   // touchX/Y drzi posledni pozici
-    if (millis() - swT0 <= SWIPE_MAX_MS && abs(dx) >= SWIPE_MIN_PX && abs(dx) > abs(dy))
-      r = dx < 0 ? 1 : -1;
+    const uint32_t dur = millis() - swT0;
+    if (dur <= SWIPE_MAX_MS) {
+      if (abs(dx) >= SWIPE_MIN_PX && abs(dx) > abs(dy)) g = dx < 0 ? G_LEFT : G_RIGHT;
+      else if (abs(dy) >= SWIPE_MIN_PX) g = dy < 0 ? G_UP : G_DOWN;
+      else if (abs(dx) < TAP_MOVE_PX && abs(dy) < TAP_MOVE_PX && dur <= TAP_MAX_MS) g = G_TAP;
+    }
   }
   swPrev = touchDown;
-  return r;
+  return g;
 }
 
 static bool btnPrev = false;

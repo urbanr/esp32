@@ -3,6 +3,7 @@
 #include <Arduino.h>
 #include <math.h>
 #include "config.h"
+#include "ship_crt.h"   // LR_W / LR_H aktualni mrizky
 
 // ===================================================================
 // Simulace letu: faze (cekani / let / pauza / cil), cas letu, nahodne
@@ -136,41 +137,30 @@ static void telemetryTick() {
   tmPulse = 72.0f + 20.0f * (speed / SPEED_MAX_KMS) + noise(2.0f);
 }
 
-// novy let: nahodne planety (v pasech odspodu nahoru), jmena, kratery,
-// start, delky useku, koncove stavy zasob
-static void simNewFlight() {
-  const int top = 18, bottom = LR_H - 44;
+// rozmisteni planet a startu v aktualni mrizce (v pasech odspodu nahoru),
+// kratery, delky useku; volat pri novem letu i pri zmene mrizky (postup
+// letu je pomerny k delce trasy, takze zustane zachovan)
+static void simLayout() {
+  const int top = LR_H / 8, bottom = LR_H - LR_H / 4;
   const int band = (bottom - top) / PLANET_COUNT;
-
-  // 4 ruzna jmena
-  int used[PLANET_COUNT];
-  for (int i = 0; i < PLANET_COUNT; i++) {
-    int n;
-    bool dup;
-    do {
-      n = random(PLANET_NAME_COUNT);
-      dup = false;
-      for (int k = 0; k < i; k++) if (used[k] == n) dup = true;
-    } while (dup);
-    used[i] = n;
-  }
+  const int rMin = LR_H / 30 < 2 ? 2 : LR_H / 30, rMax = LR_H / 18 < rMin + 1 ? rMin + 1 : LR_H / 18;
 
   for (int i = 0; i < PLANET_COUNT; i++) {
     Planet &pl = planets[i];
-    pl.r = random(5, 9);
+    pl.r = random(rMin, rMax);
     const int yMax = bottom - i * band - pl.r;   // planeta 1 dole, 4 nahore
     const int yMin = yMax - band + 2 * pl.r;
     pl.y = yMin < yMax ? random(yMin, yMax + 1) : yMax;
-    pl.x = random(12 + pl.r, LR_W - 12 - pl.r);
-    pl.name = PLANET_NAMES[used[i]];
+    const int xMin = LR_W / 8 + pl.r, xMax = LR_W - LR_W / 8 - pl.r;
+    pl.x = xMin < xMax ? random(xMin, xMax) : LR_W / 2;
     for (int k = 0; k < 3; k++) {
-      const float a = frand() * TWO_PI, rr = frange(1, pl.r - 2);
+      const float a = frand() * TWO_PI, rr = frange(1, pl.r - 2 < 1 ? 1 : pl.r - 2);
       pl.dot[k][0] = (int8_t)lroundf(cosf(a) * rr);
       pl.dot[k][1] = (int8_t)lroundf(sinf(a) * rr);
     }
   }
-  startX = random(20, LR_W - 20);
-  startY = LR_H - 32;
+  startX = random(LR_W / 6, LR_W - LR_W / 6);
+  startY = LR_H - LR_H / 6 - 2;
 
   routeLen = 0;
   float px = startX, py = startY;
@@ -182,6 +172,23 @@ static void simNewFlight() {
     py = planets[i].y;
   }
   if (routeLen < 1) routeLen = 1;
+}
+
+// novy let: jmena planet, rozmisteni, koncove stavy zasob
+static void simNewFlight() {
+  int used[PLANET_COUNT];
+  for (int i = 0; i < PLANET_COUNT; i++) {
+    int n;
+    bool dup;
+    do {
+      n = random(PLANET_NAME_COUNT);
+      dup = false;
+      for (int k = 0; k < i; k++) if (used[k] == n) dup = true;
+    } while (dup);
+    used[i] = n;
+    planets[i].name = PLANET_NAMES[n];
+  }
+  simLayout();
 
   foodEnd = frange(SUPPLY_END_MIN, SUPPLY_END_MAX);
   drinkEnd = frange(SUPPLY_END_MIN, SUPPLY_END_MAX);

@@ -79,8 +79,21 @@ void shipLoop() {
   if (dt > 0.1f) dt = 0.1f;
 
   if (inputButtonPressed()) simButton();
-  const int sw = inputSwipe();
-  if (sw) screen = (screen + sw + SCREEN_COUNT) % SCREEN_COUNT;
+  const uint8_t g = inputGesture();
+  switch (g) {
+    case G_LEFT:  screen = (screen + 1) % SCREEN_COUNT; break;
+    case G_RIGHT: screen = (screen + SCREEN_COUNT - 1) % SCREEN_COUNT; break;
+    case G_TAP:   if (screen == 3) crtRandomize(); break;
+    case G_UP:    // hrubsi mrizka; planety se rozmisti znovu v novych rozmerech
+    case G_DOWN:
+      if (screen == 3) {
+        const int s = crt.scale + (g == G_UP ? 1 : -1);
+        if (!crtSetScale(s)) USBSerial.println("zmena mrizky: malo RAM");
+        simLayout();
+      }
+      break;
+    default: break;
+  }
 
   simUpdate(dt);
   if (audioOk) soundEvents();
