@@ -1,5 +1,12 @@
 #pragma once
 
+// ===== sada spritu (vyber pred kompilaci) =====
+#define SPRITES_KLASIK        0      // rucne kreslene ASCII sprity, prostredi procedurálne
+#define SPRITES_ASTRA         1      // balicek kanal-komplet.zip (ChatGPT Astra) vcetne dlazdic
+#ifndef SPRITE_SET
+#define SPRITE_SET            SPRITES_ASTRA   // lze prebit z prikazove radky: --build-property compiler.cpp.extra_flags=-DSPRITE_SET=0
+#endif
+
 // ===== obraz: displej na sirku (tlacitko dole), hruba mrizka =====
 #define CRT_SCALE             3      // px displeje na bod (pevne; filtr pocita s 3)
 #define ROTATE_CW             0      // 1: logicke x roste s fyzickym y displeje; 0: opacne (kdyz je obraz vzhuru nohama)

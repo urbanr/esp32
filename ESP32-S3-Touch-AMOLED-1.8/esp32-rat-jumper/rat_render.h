@@ -36,6 +36,29 @@ static void blit(const Sprite &s, int x, int y) {
   }
 }
 
+// blit omezeny na sloupce obrazovky [cx0, cx1) - orez opakovanych dlazdic
+static void blitClip(const Sprite &s, int x, int y, int cx0, int cx1) {
+  if (cx0 < 0) cx0 = 0;
+  if (cx1 > LW) cx1 = LW;
+  for (int j = 0; j < s.h; j++) {
+    const int yy = y + j;
+    if (yy < 0 || yy >= LH) continue;
+    const char *row = s.rows[j];
+    for (int i = 0; i < s.w; i++) {
+      const int xx = x + i;
+      if (xx < cx0 || xx >= cx1) continue;
+      const char ch = row[i];
+      if (ch != '.') fb[yy * LW + xx] = legend[(int)ch];
+    }
+  }
+}
+
+// opakovani dlazdice vodorovne pres [x0, x1) se svetovym posunem off
+static void tileRow(const Sprite &t, int y, int x0, int x1, int off) {
+  int x = x0 - ((off % t.w) + t.w) % t.w;
+  for (; x < x1; x += t.w) blitClip(t, x, y, x0, x1);
+}
+
 static void text(int x, int y, const char *s, uint8_t c, int size = 1) {
   lr->setTextSize(size);
   lr->setTextColor(c);
@@ -63,15 +86,23 @@ static void drawWall() {
     const int first = ((off - shift) / bw) * bw - off + shift - bw;
     for (int x = first; x < LW; x += bw) {
       const uint32_t h = hash2((x + off) / bw, row);
+#if SPRITES_HAVE_TILES
+      blit(h % 7 == 0 ? TILE_BRICK2 : (h % 3 == 0 ? TILE_BRICK1 : TILE_BRICK0), x, y);
+#else
       const uint8_t c = (h % 7 == 0) ? C_BRICK_DARK : ((h % 3 == 0) ? C_BRICK2 : C_BRICK);
       lr->fillRect(x, y, bw - 1, bh - 1, c);
       lr->drawFastHLine(x, y + bh - 1, bw, C_MORTAR);
       lr->drawFastVLine(x + bw - 1, y, bh, C_MORTAR);
+#endif
     }
   }
 }
 
 static void drawCeiling() {
+#if SPRITES_HAVE_TILES
+  tileRow(TILE_CEILING, 0, 0, LW, (int)scrollX);   // vcetne krapniku pres okraj stropu
+  return;
+#endif
   lr->fillRect(0, 0, LW, CEIL_H, C_CEIL);
   lr->drawFastHLine(0, CEIL_H - 1, LW, C_CEIL_DARK);
   const int off = (int)scrollX;
@@ -87,6 +118,23 @@ static void drawCeiling() {
 }
 
 // chodnik s dirami a voda pod nim
+#if SPRITES_HAVE_TILES
+static void drawFloorAndWater() {
+  const int f = (int)(anim * 7) & 3;   // faze vody
+  const Sprite *water[4] = { &TILE_WATER0, &TILE_WATER1, &TILE_WATER2, &TILE_WATER3 };
+  const Sprite *hole[4] = { &TILE_HOLE_WATER0, &TILE_HOLE_WATER1, &TILE_HOLE_WATER2, &TILE_HOLE_WATER3 };
+  tileRow(*water[f], WATER_Y, 0, LW, (int)(scrollX * 0.6f));
+  tileRow(TILE_WALKWAY, FLOOR_Y, 0, LW, (int)scrollX);
+  for (int i = 0; i < MAX_GAP; i++) {
+    const Gap &g = gaps[i];
+    if (!g.alive) continue;
+    const int x0 = (int)(g.x - scrollX);
+    tileRow(*hole[f], FLOOR_Y, x0, x0 + g.w, (int)(scrollX * 0.6f));
+    blit(TILE_HOLE_EDGE_L, x0 - TILE_HOLE_EDGE_L.w, FLOOR_Y);
+    blit(TILE_HOLE_EDGE_R, x0 + g.w, FLOOR_Y);
+  }
+}
+#else
 static void drawFloorAndWater() {
   lr->fillRect(0, WATER_Y, LW, LH - WATER_Y, C_WATER);
   // vlny: hladina a par odlesku
@@ -113,10 +161,19 @@ static void drawFloorAndWater() {
     lr->drawFastVLine(x0 + g.w, FLOOR_Y, FLOOR_H, C_STONE_DARK);
   }
 }
+#endif
 
 // policka = vodorovna trubka s mechem
 static void drawPlatform(const Platform &p) {
   const int x = (int)(p.x - scrollX), y = p.y;
+#if SPRITES_HAVE_TILES
+  tileRow(TILE_SHELF, y, x, x + p.w, -x);
+  blit(TILE_SHELF_CAP_L, x, y);
+  blit(TILE_SHELF_CAP_R, x + p.w - TILE_SHELF_CAP_R.w, y);
+  for (int k = 3; k < p.w - 5; k += 5)
+    if (hash2((int)p.x + k, p.y) % 3 == 0) blit(TILE_MOSS, x + k, y - TILE_MOSS.h);
+  return;
+#endif
   lr->fillRect(x, y, p.w, PLATFORM_H, C_PIPE);
   lr->drawFastHLine(x, y + 1, p.w, C_PIPE_LIGHT);
   lr->drawFastHLine(x, y + PLATFORM_H - 2, p.w, C_PIPE_DARK);
@@ -134,7 +191,11 @@ static void drawPlatform(const Platform &p) {
 static void drawSpider(const SpiderE &s) {
   const int x = (int)(s.x - scrollX);
   const int yb = (int)spiderY(s);
+#if SPRITES_HAVE_TILES
+  for (int ty = CEIL_H; ty < yb - 8; ty += TILE_THREAD.h) blit(TILE_THREAD, x, ty);
+#else
   lr->drawFastVLine(x, CEIL_H, yb - 8 - CEIL_H, C_THREAD);
+#endif
   const Sprite &sp = ((int)(anim * 4) & 1) ? SPR_SPIDER1 : SPR_SPIDER0;
   blit(sp, x - sp.w / 2, yb - sp.h);
 }
@@ -158,7 +219,11 @@ static void drawOverlayBox(int y, int h) {
 }
 
 static void drawTitle() {
+#if SPRITES_HAVE_TILES
+  blit(TILE_PANEL_INTRO, 14, 22);
+#else
   drawOverlayBox(22, 62);
+#endif
   textCenter(27, "KRYSA", C_TEXT, 2);
   textCenter(44, "SKOKAN", C_TEXT, 2);
   textCenter(63, "TUKNI = SKOK", C_WHITE);
@@ -168,7 +233,11 @@ static void drawTitle() {
 }
 
 static void drawOver() {
+#if SPRITES_HAVE_TILES
+  blit(TILE_PANEL_OVER, 14, 26);
+#else
   drawOverlayBox(26, 56);
+#endif
   textCenter(31, "KONEC", C_RED, 2);
   snprintf(txt, sizeof(txt), "BODY %d", score);
   textCenter(52, txt, C_WHITE);
@@ -196,6 +265,18 @@ static void drawScene() {
   }
   for (int i = 0; i < MAX_SPIDER; i++) if (spiders[i].alive) drawSpider(spiders[i]);
   if (state != ST_TITLE) drawRat();
+#if SPRITES_HAVE_TILES
+  if (sparkT > 0) {
+    const Sprite *sp[4] = { &TILE_SPARK0, &TILE_SPARK1, &TILE_SPARK2, &TILE_SPARK3 };
+    int f = (int)((SPARK_S - sparkT) / SPARK_S * 4); if (f > 3) f = 3;
+    blit(*sp[f], sparkX - sp[f]->w / 2, sparkY - sp[f]->h / 2);
+  }
+  if (splashT > 0) {
+    const Sprite *sp[4] = { &TILE_SPLASH0, &TILE_SPLASH1, &TILE_SPLASH2, &TILE_SPLASH3 };
+    int f = (int)((SPLASH_S - splashT) / SPLASH_S * 4); if (f > 3) f = 3;
+    blit(*sp[f], splashX - sp[f]->w / 2, WATER_Y - sp[f]->h);
+  }
+#endif
   drawHud();
   if (state == ST_TITLE) drawTitle();
   else if (state == ST_OVER) drawOver();

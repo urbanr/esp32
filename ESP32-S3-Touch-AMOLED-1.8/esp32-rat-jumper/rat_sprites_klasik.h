@@ -1,0 +1,162 @@
+#pragma once
+
+#include "rat_sprites_def.h"
+
+// ===================================================================
+// Sada spritu KLASIK - rucne kreslene ASCII sprity (puvodni sada).
+// ===================================================================
+
+// krysa 20x12, beh (dve faze nohou) a skok
+SPRITE(SPR_RAT_RUN0,
+  "..............kkk...",
+  ".............kpppk..",
+  "......kkkkkkkkgppk..",
+  "p...kkggggggggggggk.",
+  ".p.kgggggggggggggggk",
+  ".pkgggggggggggggwKgk",
+  "kpgggggggggggggggggk",
+  ".kggggggggggggggggpk",
+  "..kkGGGGGGGGGGGGkkk.",
+  "....kGk.....kGk.....",
+  "....kk.......kk.....",
+  "....................")
+SPRITE(SPR_RAT_RUN1,
+  "..............kkk...",
+  ".............kpppk..",
+  "......kkkkkkkkgppk..",
+  ".p..kkggggggggggggk.",
+  "p..kgggggggggggggggk",
+  ".pkgggggggggggggwKgk",
+  "kpgggggggggggggggggk",
+  ".kggggggggggggggggpk",
+  "..kkGGGGGGGGGGGGkkk.",
+  "......kGk.kGk.......",
+  ".......kk..kk.......",
+  "....................")
+SPRITE(SPR_RAT_JUMP,
+  "..............kkk...",
+  ".............kpppk..",
+  "......kkkkkkkkgppk..",
+  "....kkggggggggggggk.",
+  "...kgggggggggggggggk",
+  "..kgggggggggggggwKgk",
+  ".pkggggggggggggggggk",
+  "p.kggggggggggggggpk.",
+  "...kkGGGGGGGGGGGkk..",
+  "....kGGk...kGGk.....",
+  ".....kk.....kk......",
+  "....................")
+
+// pavouk 11x9, dve faze nohou
+SPRITE(SPR_SPIDER0,
+  "..k.....k..",
+  "...k...k...",
+  "..kkVVVkk..",
+  ".k.kVvVk.k.",
+  "k..kVVVk..k",
+  "...kvVvk...",
+  "..k.rkr.k..",
+  ".k..kkk..k.",
+  "k.........k")
+SPRITE(SPR_SPIDER1,
+  ".k.......k.",
+  "..k.....k..",
+  "..kkVVVkk..",
+  "k..kVvVk..k",
+  ".k.kVVVk.k.",
+  "...kvVvk...",
+  ".k..rkr..k.",
+  "k...kkk...k",
+  "...........")
+
+// odpadky k jidlu
+SPRITE(SPR_CAN,
+  ".kkkkk.",
+  "kSsssSk",
+  "kssssSk",
+  "kSRRRSk",
+  "kSRRRSk",
+  "kSRRRSk",
+  "kssssSk",
+  "kSsssSk",
+  "kSsssSk",
+  ".kkkkk.")
+SPRITE(SPR_PEAR,
+  "....kb..",
+  "...kb...",
+  "...kek..",
+  "..keeek.",
+  "..keeek.",
+  ".keeeeek",
+  "keeeeeEk",
+  "keeeeEEk",
+  ".keeEEk.",
+  "..kkkk..")
+SPRITE(SPR_PAPER,
+  "..kkkk..",
+  ".kccccck",
+  "kcccCcck",
+  "kccCcCck",
+  "kcCccck.",
+  ".kcCcck.",
+  "..kkkk..")
+SPRITE(SPR_ROLL,
+  "..kkkkk..",
+  ".kwwwwwk.",
+  "kwwkkkwwk",
+  "kwkbbbkwk",
+  "kwkbbbkwk",
+  "kwwkkkwwk",
+  ".kwwwwwk.",
+  "..kkkkk..")
+
+// prekazky na chodniku
+SPRITE(SPR_PIPE_STUB,
+  "kkkkkkkkkk",
+  "kOoLooooOk",
+  "kOoLooooOk",
+  "kkkkkkkkkk",
+  "..kOLoOk..",
+  "..kOLoOk..",
+  "..kOLoOk..",
+  "..kOLoOk..",
+  "..kOLoOk..",
+  "..kOLoOk..",
+  "..kOLoOk..",
+  "..kOLoOk..",
+  "..kOLoOk..",
+  "..kOLoOk..")
+SPRITE(SPR_CRATE,
+  "kkkkkkkkkkkk",
+  "kHxxxxxxxxHk",
+  "kxHxxxxxxHxk",
+  "kxxHxxxxHxxk",
+  "kxxxHHHHxxxk",
+  "kxxxHHHHxxxk",
+  "kxxHxxxxHxxk",
+  "kxHxxxxxxHxk",
+  "kHxxxxxxxxHk",
+  "kXXXXXXXXXXk",
+  "kkkkkkkkkkkk")
+SPRITE(SPR_SLIME,
+  "....kkkkkkk.....",
+  "..kknnnnnnnkk...",
+  ".knnnNnnnnNnnnk.",
+  "kNnnnnnnNnnnnnNk",
+  "kkkkkkkkkkkkkkkk")
+
+// HUD
+SPRITE(SPR_HEART,
+  ".kk.kk.",
+  "krrkrrk",
+  "krrrrrk",
+  ".krrrk.",
+  "..krk..",
+  "...k...")
+SPRITE(SPR_HEART_EMPTY,
+  ".kk.kk.",
+  "kKKkKKk",
+  "kKKKKKk",
+  ".kKKKk.",
+  "..kKk..",
+  "...k...")

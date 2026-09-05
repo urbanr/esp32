@@ -27,7 +27,8 @@ Odpadky: plechovka, hruška, zmuchlaný papír, role toaletního papíru; každ�
 
 ## Grafika
 
-- Sprity jsou ASCII art v `rat_sprites.h` (znak → barva podle legendy v `rat_palette.h`, `.` průhledná), kreslí se přímo z řetězců. Krysa 20×12 (dvě fáze běhu, skok), pavouk 11×9 (dvě fáze), odpadky, překážky, srdíčka.
+- Dvě sady spritů, volba před kompilací v `config.h` (`SPRITE_SET`): **KLASIK** (`rat_sprites_klasik.h`, ručně kreslené ASCII, prostředí procedurálně) a **ASTRA** (`rat_sprites_astra.h`, vygenerováno skriptem z balíčku `kanal-komplet.zip` od ChatGPT; obsahuje i dlaždice prostředí: cihly, strop, chodník, díry a voda ve 4 fázích, police s koncovkami a mechem, vlákno, panely, jiskra při sebrání, šplouchnutí). Z příkazové řádky: `--build-property compiler.cpp.extra_flags=-DSPRITE_SET=0` (0 = KLASIK, 1 = ASTRA).
+- Sprity jsou ASCII art (znak → barva podle legendy, `.` průhledná), kreslí se přímo z řetězců. Rozměry v bodech: krysa 20×12 (dvě fáze běhu, skok), pavouk 11×9 (dvě fáze), plechovka 7×10, hruška 8×10, papír 8×7, role 9×8, trubka 10×14, bedna 12×11, sliz 16×5, srdíčko 7×6. Kompletní zadání pro grafika je v `prompt-grafika.md`.
 - Paleta ~50 barev RGB888 (`PALETTE`), tmavé obrysy `k`, jasné výplně. Pozadí (cihly, strop, chodník, voda, police) se kreslí procedurálně primitivy Arduino_GFX do indexovaného canvasu (`Arduino_Canvas_Indexed`, režim přímých indexů).
 
 ## Barevný CRT filtr (bez PSRAM)
@@ -53,7 +54,7 @@ Přes sdílený `../common/amoled_audio.h` (ES8311 + I2S, task na jádře 0). Sy
 | `rat_app.h` | modul `ratBegin/ratLoop/ratEnd`, vstup (ťuknutí, BOOT) |
 | `config.h` | rozměry světa, fyzika, pravidla, CRT, zvuk |
 | `rat_palette.h` | paleta a legenda znaků spritů |
-| `rat_sprites.h` | sprity v ASCII |
+| `rat_sprites.h` | výběr sady; `rat_sprites_def.h` definice, `rat_sprites_klasik.h` / `rat_sprites_astra.h` sady |
 | `rat_world.h` | stav hry, generátor vzorů, fyzika, kolize |
 | `rat_render.h` | kreslení scény, HUD, úvod a konec |
 | `rat_crt.h` | indexovaný canvas, barevný CRT filtr, přenos po pruzích (otočený obraz) |

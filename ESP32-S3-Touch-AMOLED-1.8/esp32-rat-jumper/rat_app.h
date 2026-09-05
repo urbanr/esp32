@@ -53,6 +53,9 @@ static void handleInput() {
 bool ratBegin() {
   randomSeed(esp_random());
   paletteInit();
+#if SPRITE_SET == SPRITES_ASTRA
+  for (int i = 0; i < ASTRA_LEGEND_COUNT; i++) legend[(int)ASTRA_LEGEND[i].ch] = ASTRA_LEGEND[i].idx;
+#endif
   pinMode(0, INPUT_PULLUP);
   btnPrev = (digitalRead(0) == LOW);
   touchPrev = touchDown;

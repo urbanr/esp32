@@ -104,7 +104,7 @@ Dětská skákačka na displeji otočeném **na šířku** (BOOT dole). Krysa b�
 | rychlost světa | 44 → 96 bodů/s, roste o 1,2 za sekundu |
 | konec | KONEC, body a nejlepší výsledek od zapnutí |
 
-- **Technika:** svět 150×123 bodů (1 bod = 3×3 px) v 8bitovém indexovaném canvasu, vlastní paleta ~50 barev, sprity jako ASCII art přímo v kódu. Generátor náhodně skládá vzory (překážka, díra, police s odpadky, pavouk) s mezerou rostoucí s rychlostí. Fyzika: gravitace, skok jen ze země (s krátkou tolerancí po sjetí z hrany), přistání na policích jen shora.
+- **Technika:** svět 150×123 bodů (1 bod = 3×3 px) v 8bitovém indexovaném canvasu, vlastní paleta ~50 barev, sprity jako ASCII art přímo v kódu. Dvě sady grafiky přepínané před kompilací (`SPRITE_SET`): KLASIK (ruční, prostředí kreslené kódem) a ASTRA (balíček pixel artu od ChatGPT včetně dlaždic prostředí, výchozí). Generátor náhodně skládá vzory (překážka, díra, police s odpadky, pavouk) s mezerou rostoucí s rychlostí. Fyzika: gravitace, skok jen ze země (s krátkou tolerancí po sjetí z hrany), přistání na policích jen shora.
 - **CRT filtr:** obraz je otočený, takže fyzický řádek displeje = logický sloupec hry; každý pruh se skládá napříč. Stopa paprsku, scanlines s prosvitem, RGB maska (v každém bodu tři proužky R/G/B), vinětace, blikání. Vše v `config.h`.
 - **Zvuk:** sdílený modul `common/amoled_audio.h` (ES8311 + I2S), „8bitové" obdélníkové tóny: skok, vysoký skok, dopad, sebrání, zásah, šplouchnutí, konec, start.
 - Specifikace: [`rat-jumper.md`](ESP32-S3-Touch-AMOLED-1.8/esp32-rat-jumper/rat-jumper.md).

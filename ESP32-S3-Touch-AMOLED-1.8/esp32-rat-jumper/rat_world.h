@@ -44,6 +44,11 @@ static bool  onGround = true;
 static float coyote = 0, invuln = 0, anim = 0;
 static int   lives = LIVES, score = 0, best = 0;
 static uint8_t pendingSound = SND_NONE;
+// kratke vizualni efekty (kresli rat_render.h, jen sada s dlazdicemi)
+static float sparkT = 0, splashT = 0;      // zbyvajici cas efektu (s)
+static int   sparkX = 0, sparkY = 0, splashX = 0;
+#define SPARK_S  0.35f
+#define SPLASH_S 0.5f
 
 static inline void sound(uint8_t s) { pendingSound = s; }
 
@@ -193,6 +198,7 @@ static void ratHit(bool splash) {
   lives--;
   invuln = INVULN_S;
   sound(splash ? SND_SPLASH : SND_HIT);
+  if (splash) { splashT = SPLASH_S; splashX = RAT_X + RAT_W / 2; }
   if (lives <= 0) {
     state = ST_OVER;
     if (score > best) best = score;
@@ -206,6 +212,8 @@ static inline bool overlap(float ax0, float ay0, float ax1, float ay1, float bx0
 
 static void worldUpdate(float dt) {
   anim += dt;
+  if (sparkT > 0) sparkT -= dt;
+  if (splashT > 0) splashT -= dt;
   if (state != ST_PLAY) return;
 
   runTime += dt;
@@ -273,6 +281,9 @@ static void worldUpdate(float dt) {
       it.alive = false;
       score++;
       sound(SND_COLLECT);
+      sparkT = SPARK_S;
+      sparkX = (int)(it.x - scrollX) + s->w / 2;
+      sparkY = it.y + s->h / 2;
     }
   }
 

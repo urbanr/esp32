@@ -8,6 +8,7 @@
 #include "../common/amoled_app.h"
 #include "config.h"
 #include "rat_palette.h"
+#include "rat_sprites.h"   // PALETTE_EXTRA sady spritu
 
 // ===================================================================
 // Barevna "stara obrazovka" na displeji otocenem na sirku. Hra se
@@ -51,10 +52,14 @@ static uint8_t blend[LH][3];                           // barvy logickeho sloupc
 
 static void crtBuildTables() {
   for (int i = 0; i < 256; i++) {
-    const int c = i < C_COUNT ? i : 0;
-    palR[i] = PALETTE[c][0];
-    palG[i] = PALETTE[c][1];
-    palB[i] = PALETTE[c][2];
+    const uint8_t *c = PALETTE[0];
+    if (i < C_COUNT) c = PALETTE[i];
+#ifdef PALETTE_EXTRA_COUNT
+    else if (i - C_COUNT < PALETTE_EXTRA_COUNT) c = PALETTE_EXTRA[i - C_COUNT];
+#endif
+    palR[i] = c[0];
+    palG[i] = c[1];
+    palB[i] = c[2];
   }
   for (int py = 0; py < LCD_HEIGHT; py++) {
     const int q = ROTATE_CW ? py : (LCD_HEIGHT - 1 - py);
