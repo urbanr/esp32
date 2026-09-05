@@ -58,6 +58,17 @@ Aplikace písek / hvězdy / vodováha a launcher tuto inicializaci nedělají sa
 - BOOT tlačítko (GPIO0) je jediné uživatelské tlačítko vyvedené jako běžný GPIO (`INPUT_PULLUP`, stisk = LOW).
 - **Blokující USBSerial (HWCDC):** když na počítači nikdo sériový port nečte, `USBSerial.print/printf` čeká na vyprázdnění USB FIFO s timeoutem — každý výpis zastaví smyčku na desítky až stovky ms. Animace pak vypadá jako ~1 fps a „opraví se", jakmile se otevře sériový monitor (matoucí!). Řešení: hned po `USBSerial.begin()` zavolat `USBSerial.setTxTimeoutMs(0)` — nečtený výstup se zahodí, smyčka neblokuje (zjištěno v esp32-amoled-starfield).
 
+### Výkon a fps (zkušenosti z CRT filtrů rakety a krysy)
+
+- **Měřit, ne odhadovat.** Debug výpis fps počítej z neoříznutého času snímku (`micros()` před a po smyčce). Když se `dt` pro fyziku ořezává (např. na 50 ms), ořezaný součet dá stále „20 fps", i když je snímek delší. Rozděl měření na kreslení scény / skládání pruhů / čekání na DMA; u krysy se ukázalo, že 49 z 67 ms byla příprava sloupců, ne pixely.
+- **Strop je DMA:** celý displej 368×448 RGB565 přes QSPI 40 MHz trvá ~15–16 ms → max ~60 fps. Pruhy 368×32 s ping-pong buffery a `waitPending(1)` počítají další pruh během přenosu; cokoli nad 16 ms výpočtu na snímek už fps snižuje.
+- **Cena za pixel je v paměťových přístupech**, ne v aritmetice: na 240 MHz vyšlo ~5 cyklů na load/store. Násobení v pixelové smyčce nahradit tabulkami; ideál je **jedno čtení předpočítané tabulky na pixel** (krysa: `fastLut[vinětace][fáze masky][fáze scanline][index palety]` → hotový RGB565 s prohozenými bajty, 36 KB). Míchání dvou hodnot (prosvit sousedního řádku, prolnutí se sousedním sloupcem) násobí cenu 2–3× (16 fps vs. 34 fps).
+- **Nepočítat totéž vícekrát:** u otočeného obrazu odpovídá jeden logický sloupec třem fyzickým řádkům; příprava sloupce se dělala 448× místo 150×. Posuvné okno předpočítaných sloupců (předchozí/aktuální/další) to řeší.
+- **Zpracovávat po skupinách sdílejících data** (trojice fyzických px jednoho logického bodu): ušetří opakované indexové load-y.
+- **`-O2` místo výchozího `-Os`**: soubor `build_opt.h` ve sketchi s řádkem `-O2` (core ho přidá ke všem překladům sketche i knihoven). Kreslení scény zrychlilo ~1,7×, pixelová smyčka ~1,3×; flash +4 %.
+- **Indexovaný canvas** (`Arduino_Canvas_Indexed`, `setDirectUseColorIndex(true)`): 8 bit na bod, index palety se předává přímo jako „barva" — bez hledání v paletě při každém zápisu.
+- Statické tabulky a buffery drž v interní RAM (žádná PSRAM), DMA buffery musí být interní tak jako tak.
+
 ### Build a upload (arduino-cli)
 
 Deska je z esp32 core (`esp32:esp32`, verze 3.3.11). Výchozí FQBN pro CLI buildy:
