@@ -23,19 +23,19 @@ static uint32_t lastUs = 0;
 static bool touchPrev = false, btnPrev = false;
 static bool audioOk = false;
 
-static void debugPrint(float dt) {
+static void debugPrint(uint32_t usFrame, uint32_t usDraw, uint32_t usPresent) {
 #if DEBUG_PERIOD_MS > 0
-  static uint32_t lastMs = 0;
+  static uint32_t lastMs = 0, fSum = 0, dSum = 0, pSum = 0;
   static int frames = 0;
-  static float timeSum = 0;
   frames++;
-  timeSum += dt;
+  fSum += usFrame; dSum += usDraw; pSum += usPresent;
   const uint32_t now = millis();
   if (now - lastMs < DEBUG_PERIOD_MS) return;
   lastMs = now;
-  USBSerial.printf("fps %.1f  stav %d  body %d  rychlost %.0f\n", frames / timeSum, state, score, speed);
-  frames = 0;
-  timeSum = 0;
+  USBSerial.printf("cpu %lu MHz  fps %.1f  us snimek %lu kresleni %lu pruhy %lu (cekani %lu vypocet %lu z toho blend %lu)  stav %d body %d\n",
+                   (unsigned long)getCpuFrequencyMhz(), 1e6f * frames / fSum, fSum / frames, dSum / frames, pSum / frames,
+                   usWait / frames, usCompose / frames, usBlend / frames, state, score);
+  frames = 0; fSum = dSum = pSum = 0; usWait = usCompose = usBlend = 0;
 #endif
 }
 
@@ -82,9 +82,11 @@ void ratLoop() {
   worldUpdate(dt);
   if (audioOk) ratAudioPump();
   else pendingSound = SND_NONE;
+  const uint32_t t1 = micros();
   drawScene();
+  const uint32_t t2 = micros();
   crtPresent();
-  debugPrint(dt);
+  debugPrint(micros() - now, t2 - t1, micros() - t2);
 }
 
 void ratEnd() {

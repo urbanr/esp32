@@ -41,12 +41,13 @@
 #define INVULN_S              1.6f   // nezranitelnost po zasahu (blikani)
 
 // ===== CRT filtr (barevny) =====
+#define CRT_SOFT              0      // 1 = mekky rezim (prosvit radku, prolnuti sloupcu; ~16 fps), 0 = rychly (jen scanlines + maska + vineta)
 #define CRT_ROW_TOP           225    // jas horniho radku bodu 0-255 (scanline: stred 255)
 #define CRT_ROW_BOT           80     // jas dolniho radku bodu
 #define CRT_ROW_BLEED         110    // prosvit sousedniho radku do okrajovych radku 0-255
 #define CRT_MASK              120    // sila RGB masky: o kolik (0-255) se utlumi cizi kanaly v prouzku
 #define CRT_MASK_GAIN         1.25f  // kompenzace jasu masky
-#define CRT_VIGNETTE          0.30f
+#define CRT_VIGNETTE          0.0f   // 0 = bez vinetace
 #define CRT_FLICKER           10     // nahodne kolisani jasu snimku (0-255)
 
 // ===== zvuk =====

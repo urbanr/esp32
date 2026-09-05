@@ -35,10 +35,11 @@ Odpadky: plechovka, hruška, zmuchlaný papír, role toaletního papíru; každ�
 
 Canvas 150×123 × 8 bit (18 KB). Na displej po fyzických pruzích 368×32 přes vlastní SPI/DMA zařízení (jako hvězdy). Protože je obraz otočený, fyzický řádek displeje = logický sloupec hry: pro každý fyzický řádek se vezme jeden sloupec přes všechny logické řádky. Filtr:
 
-- **stopa paprsku**: krajní třetiny bodu prolnuté se sousedním bodem ve směru logického x,
-- **scanlines**: z trojice fyzických sloupců (logický řádek) je střední plný, horní `CRT_ROW_TOP`, dolní `CRT_ROW_BOT`, oba prosvícené sousedním řádkem (`CRT_ROW_BLEED`),
+- **scanlines**: z trojice fyzických sloupců (logický řádek) je střední plný, horní `CRT_ROW_TOP`, dolní `CRT_ROW_BOT`,
 - **RGB maska**: trojice fyzických řádků v bodu nese po řadě červenou, zelenou a modrou; cizí kanály utlumené o `CRT_MASK`, jas kompenzuje `CRT_MASK_GAIN`,
-- **vinětace** (`CRT_VIGNETTE`) a **blikání** (`CRT_FLICKER`).
+- **vinětace** (`CRT_VIGNETTE`, výchozí 0 = vypnuto) a **blikání** (`CRT_FLICKER`).
+
+Dva režimy (`CRT_SOFT` v `config.h`): **rychlý** (výchozí, ~34 fps) má pixel = jedno čtení předpočítané tabulky paleta × scanline × maska × vinětace × blikání; **měkký** (`CRT_SOFT 1`, ~16 fps) navíc prosvěcuje sousední řádky (`CRT_ROW_BLEED`) a prolíná krajní třetiny bodu se sousedním sloupcem (stopa paprsku). Sketch se překládá s `-O2` (`build_opt.h`); s výchozím `-Os` byl rychlý režim o třetinu pomalejší.
 
 `ROTATE_CW` v `config.h` otočí obraz o 180°, když je po nahrání vzhůru nohama.
 

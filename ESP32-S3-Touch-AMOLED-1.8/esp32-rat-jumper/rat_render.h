@@ -167,7 +167,7 @@ static void drawFloorAndWater() {
 static void drawPlatform(const Platform &p) {
   const int x = (int)(p.x - scrollX), y = p.y;
 #if SPRITES_HAVE_TILES
-  tileRow(TILE_SHELF, y, x, x + p.w, -x);
+  tileRow(TILE_SHELF, y, x, x + p.w, 0);   // ukotveno na zacatek police
   blit(TILE_SHELF_CAP_L, x, y);
   blit(TILE_SHELF_CAP_R, x + p.w - TILE_SHELF_CAP_R.w, y);
   for (int k = 3; k < p.w - 5; k += 5)

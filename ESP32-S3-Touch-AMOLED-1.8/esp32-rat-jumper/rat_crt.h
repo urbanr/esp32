@@ -40,15 +40,31 @@ static spi_device_handle_t lcdDev = nullptr;
 static spi_transaction_t colorTrans[2];
 static spi_transaction_t cmdTrans[3];
 static int pending = 0;
+static uint32_t usWait = 0, usCompose = 0, usBlend = 0;   // diagnostika casu snimku
 
 static uint8_t palR[256], palG[256], palB[256];
 static uint8_t colLx[LCD_HEIGHT], colP[LCD_HEIGHT];    // fyzicky radek -> logicky sloupec, faze 0-2
 static uint8_t rowLy[LCD_WIDTH], rowK[LCD_WIDTH];      // fyzicky sloupec -> logicky radek, faze 0-2
-static uint16_t vigF[LCD_WIDTH > LCD_HEIGHT ? LCD_WIDTH : LCD_HEIGHT];   // vinetace pres fyzicky sloupec (0-256)
-static uint16_t vigRow[LCD_HEIGHT];                    // vinetace pres fyzicky radek
-static int maskW[3][3];                                // [faze radku][kanal] 0-512
-static int rowW[3];                                    // vaha vlastniho radku (se zapocitanym blikanim)
-static uint8_t blend[LH][3];                           // barvy logickeho sloupce po stope paprsku
+static uint8_t vigL[LCD_WIDTH], vigRowL[LCD_HEIGHT];   // uroven vinetace 0-7 (sloupec, radek)
+// [uroven vinetace][faze radku = kanal masky][kanal][hodnota] -> prispevek do RGB565
+// s prohozenymi bajty (OR tri prispevku = cely pixel); maska a vinetace uz zapocitane
+static uint16_t lut16[8][3][3][256];
+static uint8_t flickLut[256];                          // jas snimku (blikani)
+static uint8_t topLut[256], botLut[256], bleedLut[256];  // vahy radku scanline (horni, dolni, prosvit)
+#if !CRT_SOFT
+// rychly rezim: [uroven vinetace][faze radku p][faze sloupce k][index palety] -> cely pixel RGB565 (prohozene bajty)
+static uint16_t fastLut[8][3][3][256];
+static uint8_t colIdxBuf[LH];                          // indexy aktualniho logickeho sloupce
+static int fastCol = -1;
+static int16_t rPx0[LH];                               // fyzicky sloupec faze k=0 pro logicky radek r
+static uint8_t rCnt[LH];                               // pocet fyzickych sloupcu radku (3, krajni 2)
+#endif
+static uint16_t preOff[LCD_WIDTH];                     // fyzicky sloupec -> offset do colBuf[.] (k, radek)
+
+static inline uint16_t part565swapped(int ch, int v) {
+  uint16_t c = ch == 0 ? ((v & 0xF8) << 8) : (ch == 1 ? ((v & 0xFC) << 3) : (v >> 3));
+  return (c >> 8) | (c << 8);
+}
 
 static void crtBuildTables() {
   for (int i = 0; i < 256; i++) {
@@ -60,24 +76,48 @@ static void crtBuildTables() {
     palR[i] = c[0];
     palG[i] = c[1];
     palB[i] = c[2];
+    flickLut[i] = (uint8_t)i;
   }
   for (int py = 0; py < LCD_HEIGHT; py++) {
     const int q = ROTATE_CW ? py : (LCD_HEIGHT - 1 - py);
     colLx[py] = (uint8_t)(q / CRT_SCALE);
     colP[py] = (uint8_t)(q % CRT_SCALE);
     const float d = (py - LCD_HEIGHT / 2.0f) / (LCD_HEIGHT / 2.0f);
-    vigRow[py] = (uint16_t)(256 * (1.0f - CRT_VIGNETTE * d * d));
+    int l = (int)lroundf((1.0f - CRT_VIGNETTE * d * d) * 8.0f) - 1;
+    vigRowL[py] = (uint8_t)(l < 0 ? 0 : (l > 7 ? 7 : l));
   }
   for (int px = 0; px < LCD_WIDTH; px++) {
     const int q = ROTATE_CW ? (LCD_WIDTH - 1 - px) : px;
     rowLy[px] = (uint8_t)(q / CRT_SCALE);
     rowK[px] = (uint8_t)(q % CRT_SCALE);
+    preOff[px] = (uint16_t)(rowK[px] * LH * 3 + rowLy[px] * 3);
     const float d = (px - LCD_WIDTH / 2.0f) / (LCD_WIDTH / 2.0f);
-    vigF[px] = (uint16_t)(256 * (1.0f - CRT_VIGNETTE * d * d));
+    int l = (int)lroundf((1.0f - CRT_VIGNETTE * d * d) * 8.0f) - 1;
+    vigL[px] = (uint8_t)(l < 0 ? 0 : (l > 7 ? 7 : l));
   }
-  for (int p = 0; p < 3; p++)
-    for (int ch = 0; ch < 3; ch++)
-      maskW[p][ch] = (int)((p == ch ? 256 : 256 - CRT_MASK) * CRT_MASK_GAIN);
+#if !CRT_SOFT
+  for (int r = 0; r < LH; r++) {
+    rPx0[r] = (int16_t)(ROTATE_CW ? (LCD_WIDTH - 1 - r * CRT_SCALE) : r * CRT_SCALE);
+    const int rest = LCD_WIDTH - r * CRT_SCALE;
+    rCnt[r] = (uint8_t)(rest < CRT_SCALE ? rest : CRT_SCALE);
+  }
+#endif
+  for (int v = 0; v < 256; v++) {
+    topLut[v] = (uint8_t)((v * CRT_ROW_TOP) >> 8);
+    botLut[v] = (uint8_t)((v * CRT_ROW_BOT) >> 8);
+    bleedLut[v] = (uint8_t)((v * CRT_ROW_BLEED) >> 8);
+  }
+  for (int lvl = 0; lvl < 8; lvl++) {
+    const float vig = (lvl + 1) / 8.0f;
+    for (int p = 0; p < 3; p++)
+      for (int ch = 0; ch < 3; ch++) {
+        const float mask = (p == ch ? 1.0f : (256 - CRT_MASK) / 256.0f) * CRT_MASK_GAIN;
+        for (int v = 0; v < 256; v++) {
+          int o = (int)(v * mask * vig + 0.5f);
+          lut16[lvl][p][ch][v] = part565swapped(ch, o > 255 ? 255 : o);
+        }
+      }
+  }
 }
 
 static void IRAM_ATTR csLow(spi_transaction_t *) { REG_WRITE(GPIO_OUT_W1TC_REG, 1u << LCD_CS); }
@@ -153,72 +193,153 @@ static void queueStripe(int buf) {
   queueTrans(&t);
 }
 
-// barvy logickeho sloupce c pro fazi p (stopa paprsku: krajni tretina
-// bodu = 3 dily vlastni + 1 dil soused ve smeru logickeho x)
-static void blendColumn(int c, int p) {
-  int nb = c;
-  if (p == 0 && c > 0) nb = c - 1;
-  else if (p == 2 && c < LW - 1) nb = c + 1;
-  const uint8_t *col = fb + c, *ncol = fb + nb;
-  for (int r = 0; r < LH; r++, col += LW, ncol += LW) {
-    const int i = *col, j = *ncol;
-    if (p == 1 || i == j) {
-      blend[r][0] = palR[i]; blend[r][1] = palG[i]; blend[r][2] = palB[i];
-    } else {
-      blend[r][0] = (3 * palR[i] + palR[j]) >> 2;
-      blend[r][1] = (3 * palG[i] + palG[j]) >> 2;
-      blend[r][2] = (3 * palB[i] + palB[j]) >> 2;
+// predpocet jednoho logickeho sloupce: barvy z palety (s blikanim) a tri
+// varianty radku podle faze sloupce k (scanline + prosvit sousedniho radku)
+// pres tabulky topLut/botLut/bleedLut -> dst[k][r][ch]
+static void computeCol(int c, uint8_t dst[3][LH][3]) {
+  static uint8_t rgb[LH][3];
+  const uint8_t *col = fb + c;
+  for (int r = 0; r < LH; r++, col += LW) {
+    const int i = *col;
+    rgb[r][0] = flickLut[palR[i]]; rgb[r][1] = flickLut[palG[i]]; rgb[r][2] = flickLut[palB[i]];
+  }
+  for (int r = 0; r < LH; r++) {
+    const uint8_t *b0 = rgb[r];
+    const uint8_t *bp = r > 0 ? rgb[r - 1] : b0;
+    const uint8_t *bn = r < LH - 1 ? rgb[r + 1] : b0;
+    for (int ch = 0; ch < 3; ch++) {
+      dst[1][r][ch] = b0[ch];
+      int t = topLut[b0[ch]] + bleedLut[bp[ch]];
+      dst[0][r][ch] = (uint8_t)(t > 255 ? 255 : t);
+      t = botLut[b0[ch]] + bleedLut[bn[ch]];
+      dst[2][r][ch] = (uint8_t)(t > 255 ? 255 : t);
     }
   }
 }
 
-static inline uint16_t pack565swapped(int r, int g, int b) {
-  if (r > 255) r = 255;
-  if (g > 255) g = 255;
-  if (b > 255) b = 255;
-  const uint16_t c = ((r & 0xF8) << 8) | ((g & 0xFC) << 3) | (b >> 3);
-  return (c >> 8) | (c << 8);
+// posuvne okno tri logickych sloupcu (predchozi, aktualni, dalsi)
+static uint8_t colBuf[3][3][LH][3];
+static uint8_t (*colPrev)[LH][3], (*colCur)[LH][3], (*colNext)[LH][3];
+static int curCol = -1;
+
+static void seekCol(int c) {
+  if (c == curCol) return;
+  if (c == curCol + 1) {
+    uint8_t (*t)[LH][3] = colPrev;
+    colPrev = colCur; colCur = colNext; colNext = t;
+    if (c + 1 < LW) computeCol(c + 1, colNext); else memcpy(colNext, colCur, sizeof(colBuf[0]));
+  } else {
+    colPrev = colBuf[0]; colCur = colBuf[1]; colNext = colBuf[2];
+    computeCol(c, colCur);
+    if (c > 0) computeCol(c - 1, colPrev); else memcpy(colPrev, colCur, sizeof(colBuf[0]));
+    if (c + 1 < LW) computeCol(c + 1, colNext); else memcpy(colNext, colCur, sizeof(colBuf[0]));
+  }
+  curCol = c;
 }
 
-// jeden fyzicky pruh: pro kazdy fyzicky radek jeden logicky sloupec
+// jeden fyzicky pruh: pro kazdy fyzicky radek jeden logicky sloupec;
+// krajni faze (p 0/2) = 3 dily vlastni sloupec + 1 dil soused (stopa
+// paprsku); pixel = OR tri prispevku z tabulky (maska, vinetace, RGB565)
 static void composeStripe(uint16_t *buf, int y0) {
   for (int py = y0; py < y0 + STRIPE_H; py++) {
     const int c = colLx[py], p = colP[py];
-    blendColumn(c, p);
-    const int *mw = maskW[p];
-    const int vr = vigRow[py];
+    const uint32_t tb = micros();
+    seekCol(c);
+    usBlend += micros() - tb;
+    const int vr = vigRowL[py];
+    const uint16_t *bases[8];
+    for (int lvl = 0; lvl < 8; lvl++) bases[lvl] = &lut16[lvl][p][0][0];
+    const uint8_t *cur = &colCur[0][0][0];
+    const uint8_t *nb = p == 0 ? &colPrev[0][0][0] : &colNext[0][0][0];
+    const uint16_t *off = preOff;
+    const uint8_t *vl = vigL;
     uint16_t *out = buf + (py - y0) * LCD_WIDTH;
-    for (int px = 0; px < LCD_WIDTH; px++) {
-      const int r = rowLy[px], k = rowK[px];
-      const uint8_t *b0 = blend[r];
-      int cr = b0[0] * rowW[k], cg = b0[1] * rowW[k], cb = b0[2] * rowW[k];
-      if (k == 0 && r > 0) {
-        const uint8_t *b1 = blend[r - 1];
-        cr += b1[0] * CRT_ROW_BLEED; cg += b1[1] * CRT_ROW_BLEED; cb += b1[2] * CRT_ROW_BLEED;
-      } else if (k == 2 && r < LH - 1) {
-        const uint8_t *b1 = blend[r + 1];
-        cr += b1[0] * CRT_ROW_BLEED; cg += b1[1] * CRT_ROW_BLEED; cb += b1[2] * CRT_ROW_BLEED;
+    if (p == 1) {
+      for (int px = 0; px < LCD_WIDTH; px++) {
+        const uint8_t *v = cur + off[px];
+        const uint16_t *l = bases[(vl[px] + vr) >> 1];
+        out[px] = l[v[0]] | l[256 + v[1]] | l[512 + v[2]];
       }
-      const int v = (vigF[px] * vr) >> 8;   // vinetace 0-256
-      cr = (((cr >> 8) * mw[0]) >> 8) * v >> 8;
-      cg = (((cg >> 8) * mw[1]) >> 8) * v >> 8;
-      cb = (((cb >> 8) * mw[2]) >> 8) * v >> 8;
-      out[px] = pack565swapped(cr, cg, cb);
+    } else {
+      for (int px = 0; px < LCD_WIDTH; px++) {
+        const uint8_t *v = cur + off[px], *w = nb + off[px];
+        const uint16_t *l = bases[(vl[px] + vr) >> 1];
+        out[px] = l[(3 * v[0] + w[0]) >> 2] | l[256 + ((3 * v[1] + w[1]) >> 2)] | l[512 + ((3 * v[2] + w[2]) >> 2)];
+      }
     }
   }
 }
 
+#if !CRT_SOFT
+// rychly rezim: tabulka celeho pixelu; blikani se zapocita do tabulky (prepocet kazdy snimek)
+static void fastBuild(int flick) {
+  const int kw[3] = { CRT_ROW_TOP, 256, CRT_ROW_BOT };
+  for (int lvl = 0; lvl < 8; lvl++)
+    for (int p = 0; p < 3; p++)
+      for (int k = 0; k < 3; k++) {
+        const int base = (kw[k] * flick) >> 8;
+        int m[3];
+        for (int ch = 0; ch < 3; ch++)
+          m[ch] = (int)((p == ch ? 256 : 256 - CRT_MASK) * CRT_MASK_GAIN * (lvl + 1) / 8.0f * base / 256.0f);
+        uint16_t *t = fastLut[lvl][p][k];
+        for (int i = 0; i < 256; i++) {
+          int r = (palR[i] * m[0]) >> 8, g = (palG[i] * m[1]) >> 8, b = (palB[i] * m[2]) >> 8;
+          if (r > 255) r = 255;
+          if (g > 255) g = 255;
+          if (b > 255) b = 255;
+          const uint16_t c = ((r & 0xF8) << 8) | ((g & 0xFC) << 3) | (b >> 3);
+          t[i] = (c >> 8) | (c << 8);
+        }
+      }
+}
+
+// jeden fyzicky pruh v rychlem rezimu: pixel = jedno cteni tabulky
+static void composeStripeFast(uint16_t *buf, int y0) {
+  for (int py = y0; py < y0 + STRIPE_H; py++) {
+    const int c = colLx[py], p = colP[py];
+    if (c != fastCol) {
+      const uint8_t *col = fb + c;
+      for (int r = 0; r < LH; r++, col += LW) colIdxBuf[r] = *col;
+      fastCol = c;
+    }
+    const int vr = vigRowL[py];
+    const uint16_t *bases[8];
+    for (int lvl = 0; lvl < 8; lvl++) bases[lvl] = &fastLut[lvl][p][0][0];
+    uint16_t *out = buf + (py - y0) * LCD_WIDTH;
+    // po trojicich: jeden logicky radek r = tri fyzicke sloupce (k = 0, 1, 2)
+    const int dir = ROTATE_CW ? -1 : 1;
+    for (int r = 0; r < LH; r++) {
+      const int idx = colIdxBuf[r];
+      int px = rPx0[r];
+      for (int k = 0; k < rCnt[r]; k++, px += dir)
+        out[px] = bases[(vigL[px] + vr) >> 1][k * 256 + idx];
+    }
+  }
+}
+#endif
+
 static void crtPresent() {
   const int flick = 256 - random(CRT_FLICKER + 1);
-  rowW[0] = (CRT_ROW_TOP * flick) >> 8;
-  rowW[1] = flick;
-  rowW[2] = (CRT_ROW_BOT * flick) >> 8;
+  for (int i = 0; i < 256; i++) flickLut[i] = (uint8_t)((i * flick) >> 8);
+  curCol = -1;   // novy snimek: okno sloupcu se prepocita
+#if !CRT_SOFT
+  fastBuild(flick);
+  fastCol = -1;
+#endif
 
   int stripeIdx = 0;
   for (int y0 = 0; y0 < LCD_HEIGHT; y0 += STRIPE_H, stripeIdx++) {
     const int buf = stripeIdx & 1;
+    const uint32_t t0 = micros();
     waitPending(1);
+    const uint32_t t1 = micros();
+#if CRT_SOFT
     composeStripe(stripes[buf], y0);
+#else
+    composeStripeFast(stripes[buf], y0);
+#endif
+    usWait += t1 - t0;
+    usCompose += micros() - t1;
     queueCmd(0, 0x2A, 0, LCD_WIDTH - 1, true);
     queueCmd(1, 0x2B, y0, y0 + STRIPE_H - 1, true);
     queueCmd(2, 0x2C, 0, 0, false);
