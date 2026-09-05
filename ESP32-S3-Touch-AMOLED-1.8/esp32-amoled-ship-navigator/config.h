@@ -48,7 +48,6 @@
 #define BLINK_MS              500    // perioda blikani hlasek
 
 // ===== zvuk (ES8311 + I2S, synteza v ship_audio.h) =====
-#define AUDIO_RATE            16000  // vzorkovaci frekvence
 #define AUDIO_VOLUME          70     // hlasitost kodeku 0-100
 #define AUDIO_MASTER          0.6f   // celkove zeslabeni syntezy 0-1
 #define AUDIO_ENGINE_GAIN     0.55f  // sila motoru (sum) za letu

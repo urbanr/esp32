@@ -5,7 +5,7 @@ Pokusy a hračky pro ESP32, psané v Arduino C++ (arduino-cli / Arduino IDE, esp
 Obsah:
 
 - [Waveshare ESP32-S3-Touch-AMOLED-1.8](#waveshare-esp32-s3-touch-amoled-18)
-  - [Písek](#písek--esp32-amoled-sand) · [Hvězdy](#hvězdy--esp32-amoled-starfield) · [Vodováha](#vodováha--esp32-amoled-bubble-level) · [Launcher](#launcher--esp32-amoled-launcher) · [Raketa](#raketa--esp32-amoled-ship-navigator) · [Testovací sketche](#testovací-sketche)
+  - [Písek](#písek--esp32-amoled-sand) · [Hvězdy](#hvězdy--esp32-amoled-starfield) · [Vodováha](#vodováha--esp32-amoled-bubble-level) · [Launcher](#launcher--esp32-amoled-launcher) · [Raketa](#raketa--esp32-amoled-ship-navigator) · [Krysa skokan](#krysa-skokan--esp32-rat-jumper) · [Testovací sketche](#testovací-sketche)
 - [OLED SSD1351 128×128](#oled-ssd1351-128128-na-esp32)
   - [displayOnOffTest](#displayonofftest) · [finger](#finger) · [fingerRelief](#fingerrelief)
 - [Build](#build) · [Licence](#licence)
@@ -75,6 +75,39 @@ Dětská palubní deska rakety ve stylu zeleného monitoru z 80. let. Let trvá 
 - **CRT filtr:** scéna se kreslí do bufferu s hrubou mřížkou (výchozí 4×4 px na bod, drobný font 3×5) a při přenosu po pruzích se přidá dosvit fosforu, bloom a záře, měkká stopa paprsku, scanlines, svislé proužky masky, vinětace, blikání jasu, plovoucí pruh a jiskry. Výchozí hodnoty jsou vyladěné na zařízení, vše je v `config.h` a za běhu na čtvrté obrazovce.
 - **Zvuk:** kodek ES8311 přes I2S, zvuky se syntetizují v samostatném tasku: hukot motoru podle rychlosti, start, syčení trysek při minutí planety, přistání, pípnutí pauzy.
 - Specifikace: [`ship-navigator.md`](ESP32-S3-Touch-AMOLED-1.8/esp32-amoled-ship-navigator/ship-navigator.md).
+
+### Krysa skokan — `esp32-rat-jumper`
+
+Dětská skákačka na displeji otočeném **na šířku** (BOOT dole). Krysa běží kanálem, hráč skáče přes překážky, po policích z trubek se dostává do vyšších pater a sbírá odpadky k jídlu. Barevná pixel grafika ve stylu 16bitových skákaček přes **barevný CRT filtr** s RGB maskou.
+
+<p>
+<img src="docs/img/rat-jumper-uvod.png" width="460" alt="Úvodní obrazovka Krysa skokan">
+</p>
+
+| Ovládání | Účinek |
+|---|---|
+| ťuknutí kamkoli | skok |
+| BOOT | vysoký skok (na police ve 2. patře) |
+| ťuknutí v úvodu / po konci | nová hra |
+
+| Ve stoce | Co dělá |
+|---|---|
+| rezavá trubka, bedna, louže slizu | překážky na chodníku, náraz bere srdíčko |
+| díra v chodníku | pod ní voda; pád = srdíčko, krysa pak „plave" zpět |
+| police (trubky s mechem) | dvě patra, přistání jen shora |
+| pavouk na vlákně | houpe se ze stropu, dotyk bere srdíčko |
+| plechovka, hruška, papír, role toaletního papíru | odpadky k jídlu, každý 1 bod |
+
+| Pravidla | Hodnota |
+|---|---|
+| srdíčka | 3, po zásahu 1,6 s nezranitelnosti (krysa bliká) |
+| rychlost světa | 44 → 96 bodů/s, roste o 1,2 za sekundu |
+| konec | KONEC, body a nejlepší výsledek od zapnutí |
+
+- **Technika:** svět 150×123 bodů (1 bod = 3×3 px) v 8bitovém indexovaném canvasu, vlastní paleta ~50 barev, sprity jako ASCII art přímo v kódu. Generátor náhodně skládá vzory (překážka, díra, police s odpadky, pavouk) s mezerou rostoucí s rychlostí. Fyzika: gravitace, skok jen ze země (s krátkou tolerancí po sjetí z hrany), přistání na policích jen shora.
+- **CRT filtr:** obraz je otočený, takže fyzický řádek displeje = logický sloupec hry; každý pruh se skládá napříč. Stopa paprsku, scanlines s prosvitem, RGB maska (v každém bodu tři proužky R/G/B), vinětace, blikání. Vše v `config.h`.
+- **Zvuk:** sdílený modul `common/amoled_audio.h` (ES8311 + I2S), „8bitové" obdélníkové tóny: skok, vysoký skok, dopad, sebrání, zásah, šplouchnutí, konec, start.
+- Specifikace: [`rat-jumper.md`](ESP32-S3-Touch-AMOLED-1.8/esp32-rat-jumper/rat-jumper.md).
 
 ### Testovací sketche
 

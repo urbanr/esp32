@@ -62,7 +62,7 @@ bool shipBegin() {
     return false;
   }
   lr->setTextWrap(false);
-  audioOk = audioBegin();
+  audioOk = shipAudioBegin();
   USBSerial.println(audioOk ? "ES8311 OK" : "ES8311 init fail - bez zvuku");
   simNewFlight();
   prevPhase = phase;
@@ -105,5 +105,5 @@ void shipLoop() {
 void shipEnd() {
   // dokonci DMA, uvolni buffer, zastavi zvuk; pak smi kreslit launcher pres gfx
   crtEnd();
-  if (audioOk) audioEnd();
+  if (audioOk) shipAudioEnd();
 }

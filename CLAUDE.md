@@ -6,7 +6,7 @@ Adresář s ESP32 projekty. Každé zařízení má svůj podadresář a svou ka
 
 | Adresář | Zařízení | Kapitola |
 |---|---|---|
-| `ESP32-S3-Touch-AMOLED-1.8/` | Waveshare ESP32-S3-Touch-AMOLED-1.8 (aplikace: `esp32-amoled-sand/` — spec `sand.md`, `esp32-amoled-starfield/` — spec `starfield.md`, `esp32-amoled-bubble-level/` — spec `bubble-level.md`, `esp32-amoled-launcher/` — spec `launcher.md`, všechny tři v jednom firmwaru; `esp32-amoled-ship-navigator/` — spec `ship-navigator.md`, zatím samostatně; sdílený kód `common/`; dále `ESP32-S3-Touch-AMOLED-1.8-test/`, `motoriste-kokoti/`) | níže |
+| `ESP32-S3-Touch-AMOLED-1.8/` | Waveshare ESP32-S3-Touch-AMOLED-1.8 (aplikace: `esp32-amoled-sand/` — spec `sand.md`, `esp32-amoled-starfield/` — spec `starfield.md`, `esp32-amoled-bubble-level/` — spec `bubble-level.md`, `esp32-amoled-launcher/` — spec `launcher.md`, všechny tři v jednom firmwaru; `esp32-amoled-ship-navigator/` — spec `ship-navigator.md`, zatím samostatně; `esp32-rat-jumper/` — spec `rat-jumper.md`, displej na šířku, zatím samostatně; sdílený kód `common/` (hardware, dotyk, zvuk ES8311); dále `ESP32-S3-Touch-AMOLED-1.8-test/`, `motoriste-kokoti/`) | níže |
 | `128display-test/` | zatím bez kapitoly | — |
 
 ---
