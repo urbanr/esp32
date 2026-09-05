@@ -42,5 +42,4 @@
 // ===== render =====
 #define LCD_QSPI_HZ           40000000 // takt QSPI pro prenos pixelu (80 MHz = rychlejsi, overit obraz)
 #define STRIPE_H              32      // vyska pruhu DMA bufferu (deli LCD_HEIGHT, pruh < 32 KB)
-#define DISPLAY_BRIGHTNESS    200     // 0-255
 #define DEBUG_PERIOD_MS       1000    // perioda diagnostiky na USBSerial; 0 = vypnuto

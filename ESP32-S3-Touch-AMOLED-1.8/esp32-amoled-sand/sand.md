@@ -9,7 +9,7 @@ Referenční algoritmus je desktopová JS předloha (falling sand v HTML canvasu
 | Zdroj | Čip | Přístup |
 |---|---|---|
 | Displej 368×448 | SH8601 (QSPI) | Arduino_GFX_Library, init dle CLAUDE.md |
-| Dotyk | FT3168 | Arduino_DriveBus (`Arduino_FT3x68`), interrupt na `TP_INT` |
+| Dotyk | FT3168 | Arduino_DriveBus (`Arduino_FT3x68`), poll každou otočku smyčky v `../common/amoled_touch.h` |
 | Akcelerometr | QMI8658 | SensorLib (`SensorQMI8658.hpp`), stejná I2C (SDA 15, SCL 14) |
 | Expander (napájení LCD) | XCA9554 @ 0x20 | Adafruit_XCA9554, piny 0–2 OUTPUT→HIGH s delay |
 
@@ -19,14 +19,17 @@ Piny z `pin_config.h` (knihovna Mylibrary). Logování HWCDC USBSerial.
 
 | Soubor | Obsah |
 |---|---|
-| `esp32-amoled-sand.ino` | setup/loop, inicializace HW, hlavní tick smyčka |
+| `esp32-amoled-sand.ino` | tenký wrapper: `hwInit()`, `touchBegin()`, `sandBegin()`; v loopu `touchRead()` + `sandLoop()` |
+| `sand_app.h` | modul aplikace: `sandBegin()/sandLoop()/sandEnd()`, hlavní tick smyčka |
 | `config.h` | všechny laditelné parametry (viz níže) |
 | `sand_sim.h` | stav simulace: grid, pravidla pádu, freeze/lepivost, emitter, mazání |
 | `sand_render.h` | diferenciální render změněných buněk na displej |
-| `sand_input.h` | čtení QMI8658 (vektor gravitace, detekce třepání) a FT3168 (touch) |
+| `sand_input.h` | čtení QMI8658 (vektor gravitace, detekce třepání) |
 | `sand_palette.h` | generování pískové palety z kontrastu |
 
 Kreslicí pomocné funkce berou cíl jako `Arduino_GFX *dst`.
+
+**Rozdělení sketch / modul:** kód aplikace je v modulu `sand_app.h` s funkcemi `bool sandBegin()` (plná inicializace a překreslení, jako původní `setup()` po inicializaci hardwaru), `void sandLoop()` a `void sandEnd()`. Stejný modul používá samostatný sketch `esp32-amoled-sand.ino` i launcher (`../esp32-amoled-launcher`, přepínání aplikací dvojklikem). Inicializace hardwaru (USBSerial, I2C s recovery, expander, SPI sběrnice, panel, jas `AMOLED_BRIGHTNESS`) je sdílená v `../common/amoled_hw.h` (`hwInit()`), dotyk FT3168 čte `../common/amoled_touch.h` (`touchRead()` každou otočku smyčky) a modul ho dostává jako `touchDown/touchX/touchY` přes `../common/amoled_app.h`. Kromě tří funkcí `sandBegin/sandLoop/sandEnd` je vše v modulu `static` — v launcheru je každá aplikace vlastní překladová jednotka.
 
 ## Grid a stav simulace
 

@@ -15,6 +15,10 @@
 static Arduino_Canvas *bubbleCanvas = nullptr;
 static Arduino_Canvas *textCanvas = nullptr;
 
+// naposledy vykresleny text naklonu (renderTiltText)
+static int textLastTx = 9999, textLastTy = 9999;
+static uint32_t textLastMs = 0;
+
 static uint16_t caseColor565, liquidLut[1024];
 static uint16_t bubbleFill565, bubbleEdge565, bubbleHi565, target565, text565;
 
@@ -88,11 +92,27 @@ static bool renderInit(Arduino_GFX *gfx) {
   text565 = rgb565(TILT_TEXT_COLOR);
   buildLiquidLut();
 
-  bubbleCanvas = new Arduino_Canvas(BUBBLE_CANVAS_PX, BUBBLE_CANVAS_PX, gfx, 0, 0);
-  if (!bubbleCanvas->begin(GFX_SKIP_OUTPUT_BEGIN)) return false;
-  textCanvas = new Arduino_Canvas(96, 40, gfx, 4, 4);
-  if (!textCanvas->begin(GFX_SKIP_OUTPUT_BEGIN)) return false;
+  if (!bubbleCanvas) {
+    bubbleCanvas = new Arduino_Canvas(BUBBLE_CANVAS_PX, BUBBLE_CANVAS_PX, gfx, 0, 0);
+    if (!bubbleCanvas->begin(GFX_SKIP_OUTPUT_BEGIN)) return false;
+  }
+  if (!textCanvas) {
+    textCanvas = new Arduino_Canvas(96, 40, gfx, 4, 4);
+    if (!textCanvas->begin(GFX_SKIP_OUTPUT_BEGIN)) return false;
+  }
+  // po novem drawStaticScene se text musi prekreslit i pri stejnem naklonu
+  textLastTx = 9999;
+  textLastTy = 9999;
+  textLastMs = 0;
   return true;
+}
+
+// uvolneni canvasu (destruktor Arduino_Canvas uvolni framebuffer)
+static void renderFree() {
+  delete bubbleCanvas;
+  bubbleCanvas = nullptr;
+  delete textCanvas;
+  textCanvas = nullptr;
 }
 
 // cely staticky obraz: pouzdro + kapalina po radcich pres LUT,
@@ -144,19 +164,17 @@ static void renderBubbleMove(Arduino_GFX *gfx, int oldX, int oldY, int newX, int
 
 // text naklonu v levem hornim rohu; prekresli jen pri zmene hodnoty
 static void renderTiltText(float txDeg, float tyDeg) {
-  static int lastTx = 9999, lastTy = 9999;
-  static uint32_t lastMs = 0;
   const uint32_t now = millis();
-  if (now - lastMs < TILT_TEXT_PERIOD_MS) return;
+  if (now - textLastMs < TILT_TEXT_PERIOD_MS) return;
   const int tx = (int)roundf(txDeg * 10), ty = (int)roundf(tyDeg * 10);
-  if (tx == lastTx && ty == lastTy) return;
-  lastTx = tx; lastTy = ty; lastMs = now;
+  if (tx == textLastTx && ty == textLastTy) return;
+  textLastTx = tx; textLastTy = ty; textLastMs = now;
   textCanvas->fillScreen(caseColor565);
   textCanvas->setTextSize(2);
   textCanvas->setTextColor(text565);
   textCanvas->setCursor(0, 0);
-  textCanvas->printf("X:%+5.1f", txDeg);
+  textCanvas->printf("X:%+5.1f", tx / 10.0f);   // ze zaokrouhlenych desetin: nikdy "-0.0"
   textCanvas->setCursor(0, 21);
-  textCanvas->printf("Y:%+5.1f", tyDeg);
+  textCanvas->printf("Y:%+5.1f", ty / 10.0f);
   textCanvas->flush();
 }

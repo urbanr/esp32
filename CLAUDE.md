@@ -6,7 +6,7 @@ Adresář s ESP32 projekty. Každé zařízení má svůj podadresář a svou ka
 
 | Adresář | Zařízení | Kapitola |
 |---|---|---|
-| `ESP32-S3-Touch-AMOLED-1.8/` | Waveshare ESP32-S3-Touch-AMOLED-1.8 (podprojekty: `ESP32-S3-Touch-AMOLED-1.8-test/`, `motoriste-kokoti/`, `esp32-amoled-starfield/` — spec `starfield.md`) | níže |
+| `ESP32-S3-Touch-AMOLED-1.8/` | Waveshare ESP32-S3-Touch-AMOLED-1.8 (aplikace: `esp32-amoled-sand/` — spec `sand.md`, `esp32-amoled-starfield/` — spec `starfield.md`, `esp32-amoled-bubble-level/` — spec `bubble-level.md`, `esp32-amoled-launcher/` — spec `launcher.md`, všechny tři v jednom firmwaru; `esp32-amoled-ship-navigator/` — spec `ship-navigator.md`, zatím samostatně; sdílený kód `common/`; dále `ESP32-S3-Touch-AMOLED-1.8-test/`, `motoriste-kokoti/`) | níže |
 | `128display-test/` | zatím bez kapitoly | — |
 
 ---
@@ -29,6 +29,17 @@ Arduino_DataBus *bus = new Arduino_ESP32QSPI(LCD_CS, LCD_SCLK, LCD_SDIO0, LCD_SD
 Arduino_GFX *gfx = new Arduino_SH8601(bus, GFX_NOT_DEFINED, 0, LCD_WIDTH, LCD_HEIGHT);
 ```
 
+Aplikace písek / hvězdy / vodováha a launcher tuto inicializaci nedělají samy — používají `hwInit()` z `common/amoled_hw.h` (viz „Sdílený kód a launcher" níže), který navíc sám inicializuje SPI sběrnici s větší max. transakcí a knihovně předá `GFX_SKIP_DATABUS_UNDERLAYING_BEGIN`.
+
+### Sdílený kód a launcher
+
+- `common/amoled_hw.h` — **jediná** inicializace hardwaru (`hwInit()`: USBSerial + `setTxTimeoutMs(0)`, I2C recovery, XCA9554, `spi_bus_initialize` s `max_transfer_sz = AMOLED_SPI_MAX_TRANSFER`, `gfx->begin(GFX_SKIP_DATABUS_UNDERLAYING_BEGIN)`, černý displej, jas). Sběrnice se tvoří s `is_shared_interface = true`, aby ji knihovna nedržela trvale a DMA zařízení hvězd se k ní dostalo. Obsahuje **definice** objektů (`USBSerial`, `gfx`, …) — includovat jen z hlavního `.ino`.
+- `common/amoled_touch.h` — dotyk FT3168 (`touchBegin()`, `touchRead()` každou otočku smyčky → `touchDown`, `touchX`, `touchY`). Také definice, také jen z hlavního `.ino`.
+- `common/amoled_app.h` — rozhraní pro moduly aplikací (`extern gfx`, `USBSerial`, stav dotyku, makra `AMOLED_BRIGHTNESS`, `AMOLED_SPI_MAX_TRANSFER`). Moduly includují jen tento soubor.
+- **Modul aplikace** `<app>_app.h` v adresáři aplikace: ne-`static` funkce `bool xxxBegin()` (plná inicializace + celé překreslení, vynulování `lastUs/timeAcc`), `void xxxLoop()`, `void xxxEnd()` (po něm musí jít kreslit přes `gfx`: hvězdy `waitPending(0)`, vodováha uvolní canvasy). Vše ostatní v modulu zůstává `static`. Samostatný sketch aplikace je tenká obálka `hwInit(); xxxBegin();` / `xxxLoop();`.
+- **Launcher** `esp32-amoled-launcher/`: jedna aplikace = jeden `app_*.cpp`, který jen includuje `../<app>/<app>_app.h`. Každá aplikace je tak vlastní překladová jednotka → její `static` symboly (`qmi`, `inputRead`, `renderInit`, …) ani její `config.h` nekolidují s ostatními. Nová aplikace = modul + řádek v tabulce `apps[]`. Launcher nesmí kreslit přes `gfx`, dokud běží hvězdy (sdílený CS pin); před kreslením po hvězdách volá `gfx->setRotation(0)` (invalidace cache okna CASET/PASET v knihovně).
+- Include přes `../` (`"../common/amoled_hw.h"`, `"../esp32-amoled-sand/sand_app.h"`) funguje v arduino-cli i Arduino IDE (core přidává `-I{build.source.path}`); vnořený `#include "config.h"` se hledá nejdřív v adresáři hlavičky, takže každá aplikace dostane svůj. V IDE se soubory mimo sketch neukazují v záložkách.
+
 ### Pravidla pro neblikající (flicker-free) vykreslování
 
 - **Nikdy** nepřekresluj dynamický obsah přímo na displej sekvencí „smaž oblast (`fillRect`) → nakresli nový obsah". Displej mezi oběma kroky zobrazí prázdnou plochu, což způsobuje problikávání.
@@ -41,7 +52,9 @@ Arduino_GFX *gfx = new Arduino_SH8601(bus, GFX_NOT_DEFINED, 0, LCD_WIDTH, LCD_HE
 
 ### Známé pasti
 
-- **Zaseklá I2C sběrnice po reflashi:** soft reset (každý upload) může přerušit I2C transakci uprostřed a některý slave (FT3168/QMI8658/XCA9554) pak drží SDA — veškerá I2C komunikace selhává (projev: „XCA9554 init fail", černý displej), dokud se zařízení neodpojí od napájení. Řešení: před `Wire.begin()` provést recovery — 9 pulzů na SCL + STOP condition (viz `i2cBusRecover()` v esp32-amoled-sand) a inicializaci expanderu pár× zopakovat.
+- **Zaseklá I2C sběrnice po reflashi:** soft reset (každý upload) může přerušit I2C transakci uprostřed a některý slave (FT3168/QMI8658/XCA9554) pak drží SDA — veškerá I2C komunikace selhává (projev: „XCA9554 init fail", černý displej), dokud se zařízení neodpojí od napájení. Řešení: před `Wire.begin()` provést recovery — 9 pulzů na SCL + STOP condition (viz `i2cBusRecover()` v `common/amoled_hw.h`) a inicializaci expanderu pár× zopakovat.
+- **Cache adresového okna v Arduino_GFX:** `Arduino_SH8601::writeAddrWindow` pošle CASET/PASET jen při změně okna. Kdo posílá tyto příkazy panelu mimo knihovnu (hvězdy přes vlastní DMA), musí před dalším kreslením přes `gfx` zavolat `gfx->setRotation(0)` — jinak knihovna kreslí do cizího okna (projev: `fillScreen` smaže jen pruh 32 řádků).
+- **Hlavičky s definicemi** (`common/amoled_hw.h`, `common/amoled_touch.h`) smí includovat jen hlavní `.ino`; z modulu aplikace by vznikla dvojí definice (chyba linkeru v launcheru).
 - BOOT tlačítko (GPIO0) je jediné uživatelské tlačítko vyvedené jako běžný GPIO (`INPUT_PULLUP`, stisk = LOW).
 - **Blokující USBSerial (HWCDC):** když na počítači nikdo sériový port nečte, `USBSerial.print/printf` čeká na vyprázdnění USB FIFO s timeoutem — každý výpis zastaví smyčku na desítky až stovky ms. Animace pak vypadá jako ~1 fps a „opraví se", jakmile se otevře sériový monitor (matoucí!). Řešení: hned po `USBSerial.begin()` zavolat `USBSerial.setTxTimeoutMs(0)` — nečtený výstup se zahodí, smyčka neblokuje (zjištěno v esp32-amoled-starfield).
 

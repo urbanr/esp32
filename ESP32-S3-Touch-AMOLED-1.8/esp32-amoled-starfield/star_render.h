@@ -4,6 +4,7 @@
 #include "driver/spi_master.h"
 #include "soc/gpio_reg.h"
 #include "pin_config.h"
+#include "../common/amoled_app.h"
 #include "config.h"
 #include "star_input.h"
 #include "star_field.h"
@@ -15,8 +16,11 @@
 // transakci, 2 ping-pong buffery): zatimco se jeden pruh prenasi,
 // CPU sklada dalsi. Kazdy pruh je samostatny zapis (CASET, PASET,
 // RAMWR, data) - stejna sekvence, jakou posila Arduino_GFX.
-// Arduino_GFX slouzi jen k inicializaci panelu - po renderInit() uz
-// se pres gfx kreslit nesmi (CS prebira SPI).
+// SPI sbernici inicializuje sketch (hwInit() v common/amoled_hw.h,
+// max. transakce AMOLED_SPI_MAX_TRANSFER), renderInit() na ni jednou
+// prida vlastni zarizeni. Od te chvile se pres gfx smi kreslit az
+// po waitPending(0) (starEnd()): fronta prazdna, CS HIGH - jinak by
+// callback dobihajiciho pruhu prepnul CS pod zapisem knihovny.
 // Cely displej se prekresli kazdy snimek, displej nevidi mezistav.
 // ===================================================================
 
@@ -47,23 +51,9 @@ static inline uint16_t rgb565swapped(uint8_t r, uint8_t g, uint8_t b) {
   return (c >> 8) | (c << 8);
 }
 
-// SPI bus displeje - volat PRED gfx->begin(GFX_SKIP_DATABUS_UNDERLAYING_BEGIN)
-static bool renderBusInit() {
-  spi_bus_config_t buscfg = {};
-  buscfg.mosi_io_num = LCD_SDIO0;
-  buscfg.miso_io_num = LCD_SDIO1;
-  buscfg.sclk_io_num = LCD_SCLK;
-  buscfg.quadwp_io_num = LCD_SDIO2;
-  buscfg.quadhd_io_num = LCD_SDIO3;
-  buscfg.data4_io_num = -1;
-  buscfg.data5_io_num = -1;
-  buscfg.data6_io_num = -1;
-  buscfg.data7_io_num = -1;
-  buscfg.max_transfer_sz = STRIPE_BYTES;
-  buscfg.flags = SPICOMMON_BUSFLAG_MASTER | SPICOMMON_BUSFLAG_GPIO_PINS;
-  buscfg.isr_cpu_id = ESP_INTR_CPU_AFFINITY_AUTO;
-  return spi_bus_initialize(SPI2_HOST, &buscfg, SPI_DMA_CH_AUTO) == ESP_OK;
-}
+// SPI bus displeje inicializuje sketch (hwInit()), pruh se do jeho
+// max. transakce musi vejit
+static_assert(STRIPE_BYTES <= AMOLED_SPI_MAX_TRANSFER, "pruh musi byt <= AMOLED_SPI_MAX_TRANSFER (common/amoled_app.h)");
 
 // CS ridime jako GPIO z callbacku ovladace (pred/po kazde transakci) -
 // stejne jako Arduino_GFX; HW CS mel prilis tesne casovani a panel
@@ -73,6 +63,8 @@ static void IRAM_ATTR csHigh(spi_transaction_t *) { REG_WRITE(GPIO_OUT_W1TS_REG,
 
 // vlastni zarizeni pro pixely - volat az po inicializaci panelu
 static bool renderInit() {
+  // zarizeni se prida jednou a zustava i mezi prepnutimi aplikaci
+  if (lcdDev) return true;
   spi_device_interface_config_t devcfg = {};
   devcfg.command_bits = 8;
   devcfg.address_bits = 24;

@@ -2,6 +2,8 @@
 
 Průlet hvězdným polem pro Waveshare ESP32-S3-Touch-AMOLED-1.8. Stejný hardwarový základ jako `../esp32-amoled-sand/` a `../esp32-amoled-bubble-level/` (viz kapitola zařízení v `../../CLAUDE.md`): displej SH8601 přes Arduino_GFX_Library, IMU QMI8658 přes SensorLib, expander XCA9554, logování HWCDC USBSerial, I2C recovery před `Wire.begin()`. Dotyk se nepoužívá. Bez PSRAM.
 
+Kód je rozdělen na **modul** `star_app.h` (`starBegin()` / `starLoop()` / `starEnd()` — bývalý obsah `setup()`/`loop()`) a tenký sketch. Modul používá jak samostatný sketch `esp32-amoled-starfield.ino`, tak launcher `../esp32-amoled-launcher/` (přepínání aplikací dvojklikem; tam je modul vlastní překladovou jednotkou, proto jsou tyto tři funkce jeho jediné ne-`static` symboly). Inicializace hardwaru (USBSerial, I2C recovery, expander, SPI bus displeje, panel, jas `AMOLED_BRIGHTNESS`) je sdílená v `../common/amoled_hw.h` (`hwInit()`), modul vidí jen rozhraní `../common/amoled_app.h`. `starBegin()` znovu inicializuje IMU a pole hvězd (SPI zařízení se přidá jen poprvé), `starEnd()` počká na dokončení DMA (`waitPending(0)`), aby se dál smělo kreslit přes `gfx`.
+
 ## Chování
 
 - Hvězdy jsou body ve **světě** (ne na displeji). Letí vodorovně pevným světovým směrem; ve výchozím stavu **přímo na diváka**. Co hvězda, to bod (velikost viz níže).
@@ -34,7 +36,7 @@ Celý displej je dynamický, fullscreen canvas (330 KB) se bez PSRAM nevejde. Ř
 
 Proč ne `draw16bitRGBBitmap` z Arduino_GFX: knihovna posílá po 1024px transakcích s pollingem (CPU čeká) a přehazuje bajty za běhu — změřeno **~40 ms na snímek** (22 fps) při 40 MHz, 32 ms při 80 MHz. S DMA: **render 14,7 ms, snímek ~19 ms → ~52 fps** při 40 MHz (přenos ~16,5 ms je teoretické minimum QSPI 40 MHz; poslední pruh dobíhá během simulace dalšího snímku). `LCD_QSPI_HZ 80000000` by dal odhadem ~80 fps — nutno ověřit obraz okem.
 
-Vazby na knihovnu: SPI bus inicializuje projekt sám (`renderBusInit()`, větší `max_transfer_sz`), `Arduino_ESP32QSPI` se vytváří s `is_shared_interface = true` (jinak si bus natrvalo zamkne) a `gfx->begin(GFX_SKIP_DATABUS_UNDERLAYING_BEGIN)` jen inicializuje panel a nastaví jas. `renderInit()` pak přidá vlastní zařízení s HW CS na `LCD_CS` — **od té chvíle se přes `gfx` nesmí kreslit** (knihovna řídí CS ručně přes GPIO, které už patří SPI).
+Vazby na knihovnu: SPI bus inicializuje sketch (`hwSpiBusInit()` v `../common/amoled_hw.h`, `max_transfer_sz = AMOLED_SPI_MAX_TRANSFER` = jeden pruh, `star_render.h` to hlídá `static_assert`), `Arduino_ESP32QSPI` se vytváří s `is_shared_interface = true` (jinak si bus natrvalo zamkne) a `gfx->begin(GFX_SKIP_DATABUS_UNDERLAYING_BEGIN)` jen inicializuje panel a nastaví jas. `renderInit()` pak jednou přidá vlastní zařízení (zůstává i mezi přepnutími aplikací), CS řídí jako GPIO z callbacků ovladače — **od té chvíle se přes `gfx` smí kreslit až po `waitPending(0)`** (fronta prázdná, CS HIGH; dělá to `starEnd()`), jinak by callback dobíhajícího pruhu přepnul CS pod zápisem knihovny.
 
 Změřeno (`STAR_COUNT 1800`, ~300 viditelných bodů): projekce ~1,7 ms, simulace + čtení IMU po I2C ~2,6 ms, render 14,7 ms. Počet hvězd fps prakticky neovlivní.
 
@@ -53,11 +55,12 @@ fps 22.6  us sim 2870 proj 885 render 40491  imu 1 calib 1  |a| 0.968 |w| 4.55 a
 
 | Soubor | Obsah |
 |---|---|
-| `esp32-amoled-starfield.ino` | setup/loop, inicializace HW (expander, displej, IMU, I2C recovery), diagnostika |
+| `esp32-amoled-starfield.ino` | tenký sketch: `hwInit()` z `../common/amoled_hw.h` + `starBegin()`/`starLoop()` |
+| `star_app.h` | modul `starBegin()`/`starLoop()`/`starEnd()` (bývalý setup/loop), diagnostika |
 | `config.h` | všechny laditelné parametry |
 | `star_input.h` | čtení QMI8658, kalibrace biasu, fúze gravitace + směru letu, báze pole |
 | `star_field.h` | hvězdy v kouli: spawn, pohyb, barva |
-| `star_render.h` | SPI bus + DMA zařízení, projekce kamerou, jas, pruhový render |
+| `star_render.h` | DMA zařízení na sdíleném SPI busu, projekce kamerou, jas, pruhový render |
 
 ## Parametry v config.h
 
@@ -83,7 +86,6 @@ fps 22.6  us sim 2870 proj 885 render 40491  imu 1 calib 1  |a| 0.968 |w| 4.55 a
 | `ACCEL_MAP_*`, `GYRO_MAP_*` | — | mapování os senzoru na osy displeje |
 | `LCD_QSPI_HZ` | 40 MHz | takt QSPI pro přenos pixelů (80 MHz = rychlejší, ověřit obraz) |
 | `STRIPE_H` | 32 | výška pruhu DMA bufferu (dělí 448, pruh < 32 KB) |
-| `DISPLAY_BRIGHTNESS` | 200 | jas displeje 0–255 |
 | `DEBUG_PERIOD_MS` | 1000 | perioda diagnostiky; 0 = vypnuto |
 
 ## Build

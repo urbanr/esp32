@@ -46,4 +46,5 @@
 #define TILT_X_SIGN           (-1)
 #define TILT_Y_SIGN           (+1)
 
-#define DISPLAY_BRIGHTNESS    200   // 0-255
+// ===== aretace =====
+#define ZERO_BUTTON_PIN       0     // BOOT tlacitko - stisk vezme aktualni naklon jako novou rovinu

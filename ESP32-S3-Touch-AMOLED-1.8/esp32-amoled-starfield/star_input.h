@@ -51,6 +51,7 @@ static float gSignScore = 0;       // korelace zmeny gravitace (akcel) s predikc
 static Vec3 prevGMeas = {0, 1, 0};
 
 static bool inputBeginIMU() {
+  imuOk = false;
   if (!qmi.begin(Wire, QMI8658_L_SLAVE_ADDRESS, IIC_SDA, IIC_SCL)) return false;
   qmi.configAccelerometer(SensorQMI8658::ACC_RANGE_4G,
                           SensorQMI8658::ACC_ODR_250Hz);

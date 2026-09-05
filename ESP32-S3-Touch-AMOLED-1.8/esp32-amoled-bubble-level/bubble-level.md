@@ -20,6 +20,7 @@ Rozměry (výchozí, vše v config.h): bublina poloměr `BUBBLE_RADIUS_PX = 46` 
 - Bublina se vychyluje **proti** směru gravitace v rovině displeje — ke kraji, který jde nahoru (bublina plave).
 - Údaje pro textový výpis: `náklon X = asin(gx/|g|)`, `náklon Y = asin(gy/|g|)` ve stupních, znaménko tak, aby kladné X odpovídalo zvednutému pravému okraji a kladné Y zvednutému hornímu okraji.
 - Surová data z IMU lehce filtrovat (klouzavý průměr / low-pass), aby textový údaj nekmital.
+- **Aretace:** stisk tlačítka BOOT (`ZERO_BUTTON_PIN`, GPIO0) vezme aktuální filtrovaný náklon jako novou rovinu — náklon každé osy se dál měří jako rozdíl úhlů (`asin(gx) − asin(gx₀)`), takže je přesný pro náklon kolem jedné osy a symetrický i při větším náklonu referenční roviny; bublina jde do středu a údaj náklonu ukáže 0. Filtr IMU se po startu nastaví prvním vzorkem a stisk držený už při startu se nepočítá. Posun se nepamatuje přes restart ani přes přepnutí aplikace v launcheru (čistý start).
 
 ## Mapování náklonu na výchylku (nelineární „vyboulené sklo")
 
@@ -53,9 +54,12 @@ Dle pravidel v CLAUDE.md — žádné „smaž → nakresli" přímo na displej:
 
 ## Struktura souborů
 
+Aplikace je rozdělená na modul a sketch: modul `level_app.h` poskytuje `levelBegin()` / `levelLoop()` / `levelEnd()` a používá ho jak samostatný sketch `esp32-amoled-bubble-level.ino`, tak launcher (`../esp32-amoled-launcher/`, kde se aplikace přepínají dvojklikem). Inicializace hardwaru (USBSerial, I2C recovery, expander, SPI sběrnice, displej, jas `AMOLED_BRIGHTNESS`) je sdílená v `../common/amoled_hw.h` a volá ji sketch; modul kreslí jen přes `gfx`. `levelBegin()` = plná inicializace IMU a překreslení scény, canvasy se alokují v `levelBegin()` a uvolňují v `levelEnd()`, aby po přepnutí neblokovaly RAM jiné aplikaci.
+
 | Soubor | Obsah |
 |---|---|
-| `esp32-amoled-bubble-level.ino` | setup/loop, inicializace HW (expander, displej, IMU, I2C recovery), hlavní smyčka |
+| `esp32-amoled-bubble-level.ino` | tenký wrapper: `hwInit()` z `../common/amoled_hw.h`, `levelBegin()` / `levelLoop()` |
+| `level_app.h` | modul aplikace: `levelBegin()` / `levelLoop()` / `levelEnd()`, pohyb bubliny, hlavní smyčka |
 | `config.h` | všechny laditelné parametry (viz níže) |
 | `level_input.h` | čtení QMI8658, filtrace, výpočet θ, směru a náklonů X/Y |
 | `level_render.h` | kreslení bubliny, kružnice, textu; správa canvasů a dirty obdélníku |

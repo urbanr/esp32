@@ -41,4 +41,3 @@
 #define BG_R                  0
 #define BG_G                  0
 #define BG_B                  0
-#define DISPLAY_BRIGHTNESS    200   // 0-255
