@@ -14,3 +14,7 @@
 #ifndef SPRITES_HAVE_TILES
 #define SPRITES_HAVE_TILES 0
 #endif
+#ifndef SPRITES_HAVE_CUPS
+#include "rat_sprites_cups.h"   // pohary KLASIK (ASTRA ma sve vygenerovane)
+#endif
+#include "rat_sprites_extra.h"  // netopyr a ozdoby zdi, spolecne obema sadam

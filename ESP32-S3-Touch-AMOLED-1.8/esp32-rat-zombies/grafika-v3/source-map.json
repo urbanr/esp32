@@ -1,0 +1,2601 @@
+{
+  "version": 3,
+  "new_master_count": 4,
+  "masters_sha256": {
+    "source-reference/D-characters.png": "497c3e843e5d3f19cef150cb946b7578882d6628a5bad1163ef196d4d7a335f0",
+    "source-reference/D-environment.png": "ec1e6cc2b5a756374702e6c9104140b9765bf517a096caa1ce2a1e7767d2436c",
+    "source-reference/D-props.png": "f21a343f53fc801798ae878c9d5fed894a9b2b81e48576a694c9461cffef0903",
+    "source-reference/D-terrain.png": "10055eb3aa40049af1f87e4c430e9d323b78f0392e75ab6234c08e88f732e906"
+  },
+  "sprites": {
+    "rat_furry": {
+      "file": "source-reference/approved-small-rat_D.png",
+      "method": "unchanged user-approved D sprite"
+    },
+    "rat_wood": {
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 460,
+        "top": 0,
+        "width": 385,
+        "height": 250
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "rat_steel": {
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 845,
+        "top": 0,
+        "width": 409,
+        "height": 250
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "zombie_thin_stripes": {
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 0,
+        "top": 250,
+        "width": 390,
+        "height": 334
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "zombie_thin_mechanic": {
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 390,
+        "top": 250,
+        "width": 390,
+        "height": 334
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "zombie_thin_punk": {
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 780,
+        "top": 250,
+        "width": 474,
+        "height": 334
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "zombie_block_worker": {
+      "file": "source-reference/approved-small-zombie_D.png",
+      "method": "unchanged user-approved D sprite"
+    },
+    "zombie_block_denim": {
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 370,
+        "top": 584,
+        "width": 410,
+        "height": 307
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "zombie_block_sport": {
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 780,
+        "top": 584,
+        "width": 474,
+        "height": 307
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "zombie_round_shirt": {
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 0,
+        "top": 891,
+        "width": 380,
+        "height": 363
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "zombie_round_janitor": {
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 380,
+        "top": 891,
+        "width": 410,
+        "height": 363
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "zombie_round_armor": {
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 790,
+        "top": 891,
+        "width": 464,
+        "height": 363
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "building_green": {
+      "file": "source-reference/D-environment.png",
+      "crop": {
+        "left": 0,
+        "top": 0,
+        "width": 325,
+        "height": 408
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "building_red": {
+      "file": "source-reference/D-environment.png",
+      "crop": {
+        "left": 325,
+        "top": 0,
+        "width": 285,
+        "height": 408
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "factory": {
+      "file": "source-reference/D-environment.png",
+      "crop": {
+        "left": 610,
+        "top": 0,
+        "width": 320,
+        "height": 408
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "shack": {
+      "file": "source-reference/D-environment.png",
+      "crop": {
+        "left": 930,
+        "top": 0,
+        "width": 324,
+        "height": 408
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "garage_red": {
+      "file": "source-reference/D-environment.png",
+      "crop": {
+        "left": 0,
+        "top": 408,
+        "width": 325,
+        "height": 296
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "garage_teal": {
+      "file": "source-reference/D-environment.png",
+      "crop": {
+        "left": 325,
+        "top": 408,
+        "width": 308,
+        "height": 296
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "garage_yellow": {
+      "file": "source-reference/D-environment.png",
+      "crop": {
+        "left": 633,
+        "top": 408,
+        "width": 295,
+        "height": 296
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "city_far": {
+      "file": "source-reference/D-environment.png",
+      "crop": {
+        "left": 928,
+        "top": 408,
+        "width": 326,
+        "height": 296
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "halfpipe": {
+      "file": "source-reference/D-environment.png",
+      "crop": {
+        "left": 0,
+        "top": 704,
+        "width": 330,
+        "height": 244
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "ramp": {
+      "file": "source-reference/D-environment.png",
+      "crop": {
+        "left": 330,
+        "top": 704,
+        "width": 320,
+        "height": 244
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "dumpster": {
+      "file": "source-reference/D-environment.png",
+      "crop": {
+        "left": 650,
+        "top": 704,
+        "width": 275,
+        "height": 244
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "container": {
+      "file": "source-reference/D-environment.png",
+      "crop": {
+        "left": 925,
+        "top": 704,
+        "width": 329,
+        "height": 244
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "pipe": {
+      "file": "source-reference/D-environment.png",
+      "crop": {
+        "left": 0,
+        "top": 948,
+        "width": 325,
+        "height": 306
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "log": {
+      "file": "source-reference/D-environment.png",
+      "crop": {
+        "left": 325,
+        "top": 948,
+        "width": 300,
+        "height": 306
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "pallets": {
+      "file": "source-reference/D-environment.png",
+      "crop": {
+        "left": 625,
+        "top": 948,
+        "width": 315,
+        "height": 306
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "streetlamp": {
+      "file": "source-reference/D-environment.png",
+      "crop": {
+        "left": 940,
+        "top": 948,
+        "width": 314,
+        "height": 306
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "coin": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 0,
+        "top": 0,
+        "width": 265,
+        "height": 240
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "pickup_plus": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 265,
+        "top": 0,
+        "width": 240,
+        "height": 240
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "pickup_multiply": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 505,
+        "top": 0,
+        "width": 219,
+        "height": 240
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "fuel_can": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 724,
+        "top": 0,
+        "width": 246,
+        "height": 240
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "engine": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 970,
+        "top": 0,
+        "width": 284,
+        "height": 240
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "wheel": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 0,
+        "top": 240,
+        "width": 265,
+        "height": 240
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "wrecking_ball": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 265,
+        "top": 240,
+        "width": 240,
+        "height": 240
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "trash_bin": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 505,
+        "top": 240,
+        "width": 219,
+        "height": 240
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "tire_stack": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 724,
+        "top": 240,
+        "width": 246,
+        "height": 240
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "crate": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 970,
+        "top": 240,
+        "width": 284,
+        "height": 237
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "dog_brown": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 0,
+        "top": 480,
+        "width": 265,
+        "height": 255
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "dog_spotted": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 265,
+        "top": 480,
+        "width": 240,
+        "height": 257
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "cat_orange": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 505,
+        "top": 480,
+        "width": 219,
+        "height": 262
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "cat_gray": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 724,
+        "top": 480,
+        "width": 246,
+        "height": 300
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "person_worker": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 970,
+        "top": 477,
+        "width": 284,
+        "height": 303
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "person_woman": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 0,
+        "top": 735,
+        "width": 265,
+        "height": 285
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "person_youth": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 265,
+        "top": 737,
+        "width": 240,
+        "height": 283
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "pigeon_up": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 505,
+        "top": 742,
+        "width": 219,
+        "height": 258
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "pigeon_mid": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 724,
+        "top": 780,
+        "width": 246,
+        "height": 220
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "pigeon_down": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 970,
+        "top": 780,
+        "width": 284,
+        "height": 225
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "cloud_0": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 0,
+        "top": 1020,
+        "width": 265,
+        "height": 234
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "cloud_1": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 265,
+        "top": 1020,
+        "width": 240,
+        "height": 234
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "weeds": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 505,
+        "top": 1000,
+        "width": 219,
+        "height": 254
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "cone": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 724,
+        "top": 1000,
+        "width": 246,
+        "height": 254
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "fence": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 970,
+        "top": 1005,
+        "width": 284,
+        "height": 249
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "garage_engine": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 970,
+        "top": 0,
+        "width": 284,
+        "height": 240
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "garage_wheel": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 0,
+        "top": 240,
+        "width": 265,
+        "height": 240
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "garage_fuel_can": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 724,
+        "top": 0,
+        "width": 246,
+        "height": 240
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "mud_strip": {
+      "file": "source-reference/D-terrain.png",
+      "crop": {
+        "left": 30,
+        "top": 70,
+        "width": 875,
+        "height": 195
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "mud_repeat": {
+      "file": "source-reference/D-terrain.png",
+      "crop": {
+        "left": 30,
+        "top": 70,
+        "width": 875,
+        "height": 195
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "concrete_strip": {
+      "file": "source-reference/D-terrain.png",
+      "crop": {
+        "left": 30,
+        "top": 278,
+        "width": 875,
+        "height": 174
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "concrete_repeat": {
+      "file": "source-reference/D-terrain.png",
+      "crop": {
+        "left": 30,
+        "top": 278,
+        "width": 875,
+        "height": 174
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "rubbish": {
+      "file": "source-reference/D-terrain.png",
+      "crop": {
+        "left": 917,
+        "top": 90,
+        "width": 515,
+        "height": 359
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "barrel": {
+      "file": "source-reference/D-terrain.png",
+      "crop": {
+        "left": 1445,
+        "top": 60,
+        "width": 290,
+        "height": 389
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "shack_small": {
+      "file": "source-reference/D-terrain.png",
+      "crop": {
+        "left": 50,
+        "top": 473,
+        "width": 469,
+        "height": 367
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "bush": {
+      "file": "source-reference/D-terrain.png",
+      "crop": {
+        "left": 540,
+        "top": 507,
+        "width": 368,
+        "height": 335
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "stones": {
+      "file": "source-reference/D-terrain.png",
+      "crop": {
+        "left": 950,
+        "top": 548,
+        "width": 420,
+        "height": 293
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "road_sign": {
+      "file": "source-reference/D-terrain.png",
+      "crop": {
+        "left": 1430,
+        "top": 455,
+        "width": 302,
+        "height": 388
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "building_green_bg": {
+      "derived_from": "building_green",
+      "file": "source-reference/D-environment.png",
+      "crop": {
+        "left": 0,
+        "top": 0,
+        "width": 325,
+        "height": 408
+      },
+      "method": "derived background_variant from final v3 sprite"
+    },
+    "building_red_bg": {
+      "derived_from": "building_red",
+      "file": "source-reference/D-environment.png",
+      "crop": {
+        "left": 325,
+        "top": 0,
+        "width": 285,
+        "height": 408
+      },
+      "method": "derived background_variant from final v3 sprite"
+    },
+    "factory_bg": {
+      "derived_from": "factory",
+      "file": "source-reference/D-environment.png",
+      "crop": {
+        "left": 610,
+        "top": 0,
+        "width": 320,
+        "height": 408
+      },
+      "method": "derived background_variant from final v3 sprite"
+    },
+    "shack_bg": {
+      "derived_from": "shack",
+      "file": "source-reference/D-environment.png",
+      "crop": {
+        "left": 930,
+        "top": 0,
+        "width": 324,
+        "height": 408
+      },
+      "method": "derived background_variant from final v3 sprite"
+    },
+    "shack_small_bg": {
+      "derived_from": "shack_small",
+      "file": "source-reference/D-terrain.png",
+      "crop": {
+        "left": 50,
+        "top": 473,
+        "width": 469,
+        "height": 367
+      },
+      "method": "derived background_variant from final v3 sprite"
+    },
+    "city_far_bg": {
+      "derived_from": "city_far",
+      "file": "source-reference/D-environment.png",
+      "crop": {
+        "left": 928,
+        "top": 408,
+        "width": 326,
+        "height": 296
+      },
+      "method": "derived background_variant from final v3 sprite"
+    },
+    "halfpipe_bg": {
+      "derived_from": "halfpipe",
+      "file": "source-reference/D-environment.png",
+      "crop": {
+        "left": 0,
+        "top": 704,
+        "width": 330,
+        "height": 244
+      },
+      "method": "derived background_variant from final v3 sprite"
+    },
+    "fence_bg": {
+      "derived_from": "fence",
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 970,
+        "top": 1005,
+        "width": 284,
+        "height": 249
+      },
+      "method": "derived background_variant from final v3 sprite"
+    },
+    "person_worker_bg": {
+      "derived_from": "person_worker",
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 970,
+        "top": 477,
+        "width": 284,
+        "height": 303
+      },
+      "method": "derived background_variant from final v3 sprite"
+    },
+    "person_woman_bg": {
+      "derived_from": "person_woman",
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 0,
+        "top": 735,
+        "width": 265,
+        "height": 285
+      },
+      "method": "derived background_variant from final v3 sprite"
+    },
+    "person_youth_bg": {
+      "derived_from": "person_youth",
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 265,
+        "top": 737,
+        "width": 240,
+        "height": 283
+      },
+      "method": "derived background_variant from final v3 sprite"
+    },
+    "dog_brown_bg": {
+      "derived_from": "dog_brown",
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 0,
+        "top": 480,
+        "width": 265,
+        "height": 255
+      },
+      "method": "derived background_variant from final v3 sprite"
+    },
+    "dog_spotted_bg": {
+      "derived_from": "dog_spotted",
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 265,
+        "top": 480,
+        "width": 240,
+        "height": 257
+      },
+      "method": "derived background_variant from final v3 sprite"
+    },
+    "cat_orange_bg": {
+      "derived_from": "cat_orange",
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 505,
+        "top": 480,
+        "width": 219,
+        "height": 262
+      },
+      "method": "derived background_variant from final v3 sprite"
+    },
+    "cat_gray_bg": {
+      "derived_from": "cat_gray",
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 724,
+        "top": 480,
+        "width": 246,
+        "height": 300
+      },
+      "method": "derived background_variant from final v3 sprite"
+    },
+    "zombie_thin_stripes_head": {
+      "derived_from": "zombie_thin_stripes",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 0,
+        "top": 250,
+        "width": 390,
+        "height": 334
+      },
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_thin_stripes_torso": {
+      "derived_from": "zombie_thin_stripes",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 0,
+        "top": 250,
+        "width": 390,
+        "height": 334
+      },
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_thin_stripes_arm_front": {
+      "derived_from": "zombie_thin_stripes",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 0,
+        "top": 250,
+        "width": 390,
+        "height": 334
+      },
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_thin_stripes_arm_back": {
+      "derived_from": "zombie_thin_stripes",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 0,
+        "top": 250,
+        "width": 390,
+        "height": 334
+      },
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_thin_stripes_leg_front": {
+      "derived_from": "zombie_thin_stripes",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 0,
+        "top": 250,
+        "width": 390,
+        "height": 334
+      },
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_thin_stripes_leg_back": {
+      "derived_from": "zombie_thin_stripes",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 0,
+        "top": 250,
+        "width": 390,
+        "height": 334
+      },
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_thin_stripes_walk_0": {
+      "derived_from": "zombie_thin_stripes",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 0,
+        "top": 250,
+        "width": 390,
+        "height": 334
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_thin_stripes_walk_1": {
+      "derived_from": "zombie_thin_stripes",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 0,
+        "top": 250,
+        "width": 390,
+        "height": 334
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_thin_stripes_walk_2": {
+      "derived_from": "zombie_thin_stripes",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 0,
+        "top": 250,
+        "width": 390,
+        "height": 334
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_thin_stripes_walk_3": {
+      "derived_from": "zombie_thin_stripes",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 0,
+        "top": 250,
+        "width": 390,
+        "height": 334
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_thin_stripes_walk_4": {
+      "derived_from": "zombie_thin_stripes",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 0,
+        "top": 250,
+        "width": 390,
+        "height": 334
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_thin_stripes_walk_5": {
+      "derived_from": "zombie_thin_stripes",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 0,
+        "top": 250,
+        "width": 390,
+        "height": 334
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_thin_mechanic_head": {
+      "derived_from": "zombie_thin_mechanic",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 390,
+        "top": 250,
+        "width": 390,
+        "height": 334
+      },
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_thin_mechanic_torso": {
+      "derived_from": "zombie_thin_mechanic",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 390,
+        "top": 250,
+        "width": 390,
+        "height": 334
+      },
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_thin_mechanic_arm_front": {
+      "derived_from": "zombie_thin_mechanic",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 390,
+        "top": 250,
+        "width": 390,
+        "height": 334
+      },
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_thin_mechanic_arm_back": {
+      "derived_from": "zombie_thin_mechanic",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 390,
+        "top": 250,
+        "width": 390,
+        "height": 334
+      },
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_thin_mechanic_leg_front": {
+      "derived_from": "zombie_thin_mechanic",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 390,
+        "top": 250,
+        "width": 390,
+        "height": 334
+      },
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_thin_mechanic_leg_back": {
+      "derived_from": "zombie_thin_mechanic",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 390,
+        "top": 250,
+        "width": 390,
+        "height": 334
+      },
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_thin_mechanic_walk_0": {
+      "derived_from": "zombie_thin_mechanic",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 390,
+        "top": 250,
+        "width": 390,
+        "height": 334
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_thin_mechanic_walk_1": {
+      "derived_from": "zombie_thin_mechanic",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 390,
+        "top": 250,
+        "width": 390,
+        "height": 334
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_thin_mechanic_walk_2": {
+      "derived_from": "zombie_thin_mechanic",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 390,
+        "top": 250,
+        "width": 390,
+        "height": 334
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_thin_mechanic_walk_3": {
+      "derived_from": "zombie_thin_mechanic",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 390,
+        "top": 250,
+        "width": 390,
+        "height": 334
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_thin_mechanic_walk_4": {
+      "derived_from": "zombie_thin_mechanic",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 390,
+        "top": 250,
+        "width": 390,
+        "height": 334
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_thin_mechanic_walk_5": {
+      "derived_from": "zombie_thin_mechanic",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 390,
+        "top": 250,
+        "width": 390,
+        "height": 334
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_thin_punk_head": {
+      "derived_from": "zombie_thin_punk",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 780,
+        "top": 250,
+        "width": 474,
+        "height": 334
+      },
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_thin_punk_torso": {
+      "derived_from": "zombie_thin_punk",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 780,
+        "top": 250,
+        "width": 474,
+        "height": 334
+      },
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_thin_punk_arm_front": {
+      "derived_from": "zombie_thin_punk",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 780,
+        "top": 250,
+        "width": 474,
+        "height": 334
+      },
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_thin_punk_arm_back": {
+      "derived_from": "zombie_thin_punk",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 780,
+        "top": 250,
+        "width": 474,
+        "height": 334
+      },
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_thin_punk_leg_front": {
+      "derived_from": "zombie_thin_punk",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 780,
+        "top": 250,
+        "width": 474,
+        "height": 334
+      },
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_thin_punk_leg_back": {
+      "derived_from": "zombie_thin_punk",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 780,
+        "top": 250,
+        "width": 474,
+        "height": 334
+      },
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_thin_punk_walk_0": {
+      "derived_from": "zombie_thin_punk",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 780,
+        "top": 250,
+        "width": 474,
+        "height": 334
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_thin_punk_walk_1": {
+      "derived_from": "zombie_thin_punk",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 780,
+        "top": 250,
+        "width": 474,
+        "height": 334
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_thin_punk_walk_2": {
+      "derived_from": "zombie_thin_punk",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 780,
+        "top": 250,
+        "width": 474,
+        "height": 334
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_thin_punk_walk_3": {
+      "derived_from": "zombie_thin_punk",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 780,
+        "top": 250,
+        "width": 474,
+        "height": 334
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_thin_punk_walk_4": {
+      "derived_from": "zombie_thin_punk",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 780,
+        "top": 250,
+        "width": 474,
+        "height": 334
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_thin_punk_walk_5": {
+      "derived_from": "zombie_thin_punk",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 780,
+        "top": 250,
+        "width": 474,
+        "height": 334
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_block_worker_head": {
+      "derived_from": "zombie_block_worker",
+      "file": "source-reference/approved-small-zombie_D.png",
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_block_worker_torso": {
+      "derived_from": "zombie_block_worker",
+      "file": "source-reference/approved-small-zombie_D.png",
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_block_worker_arm_front": {
+      "derived_from": "zombie_block_worker",
+      "file": "source-reference/approved-small-zombie_D.png",
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_block_worker_arm_back": {
+      "derived_from": "zombie_block_worker",
+      "file": "source-reference/approved-small-zombie_D.png",
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_block_worker_leg_front": {
+      "derived_from": "zombie_block_worker",
+      "file": "source-reference/approved-small-zombie_D.png",
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_block_worker_leg_back": {
+      "derived_from": "zombie_block_worker",
+      "file": "source-reference/approved-small-zombie_D.png",
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_block_worker_walk_0": {
+      "derived_from": "zombie_block_worker",
+      "file": "source-reference/approved-small-zombie_D.png",
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_block_worker_walk_1": {
+      "derived_from": "zombie_block_worker",
+      "file": "source-reference/approved-small-zombie_D.png",
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_block_worker_walk_2": {
+      "derived_from": "zombie_block_worker",
+      "file": "source-reference/approved-small-zombie_D.png",
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_block_worker_walk_3": {
+      "derived_from": "zombie_block_worker",
+      "file": "source-reference/approved-small-zombie_D.png",
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_block_worker_walk_4": {
+      "derived_from": "zombie_block_worker",
+      "file": "source-reference/approved-small-zombie_D.png",
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_block_worker_walk_5": {
+      "derived_from": "zombie_block_worker",
+      "file": "source-reference/approved-small-zombie_D.png",
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_block_denim_head": {
+      "derived_from": "zombie_block_denim",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 370,
+        "top": 584,
+        "width": 410,
+        "height": 307
+      },
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_block_denim_torso": {
+      "derived_from": "zombie_block_denim",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 370,
+        "top": 584,
+        "width": 410,
+        "height": 307
+      },
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_block_denim_arm_front": {
+      "derived_from": "zombie_block_denim",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 370,
+        "top": 584,
+        "width": 410,
+        "height": 307
+      },
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_block_denim_arm_back": {
+      "derived_from": "zombie_block_denim",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 370,
+        "top": 584,
+        "width": 410,
+        "height": 307
+      },
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_block_denim_leg_front": {
+      "derived_from": "zombie_block_denim",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 370,
+        "top": 584,
+        "width": 410,
+        "height": 307
+      },
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_block_denim_leg_back": {
+      "derived_from": "zombie_block_denim",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 370,
+        "top": 584,
+        "width": 410,
+        "height": 307
+      },
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_block_denim_walk_0": {
+      "derived_from": "zombie_block_denim",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 370,
+        "top": 584,
+        "width": 410,
+        "height": 307
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_block_denim_walk_1": {
+      "derived_from": "zombie_block_denim",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 370,
+        "top": 584,
+        "width": 410,
+        "height": 307
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_block_denim_walk_2": {
+      "derived_from": "zombie_block_denim",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 370,
+        "top": 584,
+        "width": 410,
+        "height": 307
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_block_denim_walk_3": {
+      "derived_from": "zombie_block_denim",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 370,
+        "top": 584,
+        "width": 410,
+        "height": 307
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_block_denim_walk_4": {
+      "derived_from": "zombie_block_denim",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 370,
+        "top": 584,
+        "width": 410,
+        "height": 307
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_block_denim_walk_5": {
+      "derived_from": "zombie_block_denim",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 370,
+        "top": 584,
+        "width": 410,
+        "height": 307
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_block_sport_head": {
+      "derived_from": "zombie_block_sport",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 780,
+        "top": 584,
+        "width": 474,
+        "height": 307
+      },
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_block_sport_torso": {
+      "derived_from": "zombie_block_sport",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 780,
+        "top": 584,
+        "width": 474,
+        "height": 307
+      },
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_block_sport_arm_front": {
+      "derived_from": "zombie_block_sport",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 780,
+        "top": 584,
+        "width": 474,
+        "height": 307
+      },
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_block_sport_arm_back": {
+      "derived_from": "zombie_block_sport",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 780,
+        "top": 584,
+        "width": 474,
+        "height": 307
+      },
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_block_sport_leg_front": {
+      "derived_from": "zombie_block_sport",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 780,
+        "top": 584,
+        "width": 474,
+        "height": 307
+      },
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_block_sport_leg_back": {
+      "derived_from": "zombie_block_sport",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 780,
+        "top": 584,
+        "width": 474,
+        "height": 307
+      },
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_block_sport_walk_0": {
+      "derived_from": "zombie_block_sport",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 780,
+        "top": 584,
+        "width": 474,
+        "height": 307
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_block_sport_walk_1": {
+      "derived_from": "zombie_block_sport",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 780,
+        "top": 584,
+        "width": 474,
+        "height": 307
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_block_sport_walk_2": {
+      "derived_from": "zombie_block_sport",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 780,
+        "top": 584,
+        "width": 474,
+        "height": 307
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_block_sport_walk_3": {
+      "derived_from": "zombie_block_sport",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 780,
+        "top": 584,
+        "width": 474,
+        "height": 307
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_block_sport_walk_4": {
+      "derived_from": "zombie_block_sport",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 780,
+        "top": 584,
+        "width": 474,
+        "height": 307
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_block_sport_walk_5": {
+      "derived_from": "zombie_block_sport",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 780,
+        "top": 584,
+        "width": 474,
+        "height": 307
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_round_shirt_head": {
+      "derived_from": "zombie_round_shirt",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 0,
+        "top": 891,
+        "width": 380,
+        "height": 363
+      },
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_round_shirt_torso": {
+      "derived_from": "zombie_round_shirt",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 0,
+        "top": 891,
+        "width": 380,
+        "height": 363
+      },
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_round_shirt_arm_front": {
+      "derived_from": "zombie_round_shirt",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 0,
+        "top": 891,
+        "width": 380,
+        "height": 363
+      },
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_round_shirt_arm_back": {
+      "derived_from": "zombie_round_shirt",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 0,
+        "top": 891,
+        "width": 380,
+        "height": 363
+      },
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_round_shirt_leg_front": {
+      "derived_from": "zombie_round_shirt",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 0,
+        "top": 891,
+        "width": 380,
+        "height": 363
+      },
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_round_shirt_leg_back": {
+      "derived_from": "zombie_round_shirt",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 0,
+        "top": 891,
+        "width": 380,
+        "height": 363
+      },
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_round_shirt_walk_0": {
+      "derived_from": "zombie_round_shirt",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 0,
+        "top": 891,
+        "width": 380,
+        "height": 363
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_round_shirt_walk_1": {
+      "derived_from": "zombie_round_shirt",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 0,
+        "top": 891,
+        "width": 380,
+        "height": 363
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_round_shirt_walk_2": {
+      "derived_from": "zombie_round_shirt",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 0,
+        "top": 891,
+        "width": 380,
+        "height": 363
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_round_shirt_walk_3": {
+      "derived_from": "zombie_round_shirt",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 0,
+        "top": 891,
+        "width": 380,
+        "height": 363
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_round_shirt_walk_4": {
+      "derived_from": "zombie_round_shirt",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 0,
+        "top": 891,
+        "width": 380,
+        "height": 363
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_round_shirt_walk_5": {
+      "derived_from": "zombie_round_shirt",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 0,
+        "top": 891,
+        "width": 380,
+        "height": 363
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_round_janitor_head": {
+      "derived_from": "zombie_round_janitor",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 380,
+        "top": 891,
+        "width": 410,
+        "height": 363
+      },
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_round_janitor_torso": {
+      "derived_from": "zombie_round_janitor",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 380,
+        "top": 891,
+        "width": 410,
+        "height": 363
+      },
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_round_janitor_arm_front": {
+      "derived_from": "zombie_round_janitor",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 380,
+        "top": 891,
+        "width": 410,
+        "height": 363
+      },
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_round_janitor_arm_back": {
+      "derived_from": "zombie_round_janitor",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 380,
+        "top": 891,
+        "width": 410,
+        "height": 363
+      },
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_round_janitor_leg_front": {
+      "derived_from": "zombie_round_janitor",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 380,
+        "top": 891,
+        "width": 410,
+        "height": 363
+      },
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_round_janitor_leg_back": {
+      "derived_from": "zombie_round_janitor",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 380,
+        "top": 891,
+        "width": 410,
+        "height": 363
+      },
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_round_janitor_walk_0": {
+      "derived_from": "zombie_round_janitor",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 380,
+        "top": 891,
+        "width": 410,
+        "height": 363
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_round_janitor_walk_1": {
+      "derived_from": "zombie_round_janitor",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 380,
+        "top": 891,
+        "width": 410,
+        "height": 363
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_round_janitor_walk_2": {
+      "derived_from": "zombie_round_janitor",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 380,
+        "top": 891,
+        "width": 410,
+        "height": 363
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_round_janitor_walk_3": {
+      "derived_from": "zombie_round_janitor",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 380,
+        "top": 891,
+        "width": 410,
+        "height": 363
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_round_janitor_walk_4": {
+      "derived_from": "zombie_round_janitor",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 380,
+        "top": 891,
+        "width": 410,
+        "height": 363
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_round_janitor_walk_5": {
+      "derived_from": "zombie_round_janitor",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 380,
+        "top": 891,
+        "width": 410,
+        "height": 363
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_round_armor_head": {
+      "derived_from": "zombie_round_armor",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 790,
+        "top": 891,
+        "width": 464,
+        "height": 363
+      },
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_round_armor_torso": {
+      "derived_from": "zombie_round_armor",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 790,
+        "top": 891,
+        "width": 464,
+        "height": 363
+      },
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_round_armor_arm_front": {
+      "derived_from": "zombie_round_armor",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 790,
+        "top": 891,
+        "width": 464,
+        "height": 363
+      },
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_round_armor_arm_back": {
+      "derived_from": "zombie_round_armor",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 790,
+        "top": 891,
+        "width": 464,
+        "height": 363
+      },
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_round_armor_leg_front": {
+      "derived_from": "zombie_round_armor",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 790,
+        "top": 891,
+        "width": 464,
+        "height": 363
+      },
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_round_armor_leg_back": {
+      "derived_from": "zombie_round_armor",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 790,
+        "top": 891,
+        "width": 464,
+        "height": 363
+      },
+      "method": "derived body_part from final v3 sprite"
+    },
+    "zombie_round_armor_walk_0": {
+      "derived_from": "zombie_round_armor",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 790,
+        "top": 891,
+        "width": 464,
+        "height": 363
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_round_armor_walk_1": {
+      "derived_from": "zombie_round_armor",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 790,
+        "top": 891,
+        "width": 464,
+        "height": 363
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_round_armor_walk_2": {
+      "derived_from": "zombie_round_armor",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 790,
+        "top": 891,
+        "width": 464,
+        "height": 363
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_round_armor_walk_3": {
+      "derived_from": "zombie_round_armor",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 790,
+        "top": 891,
+        "width": 464,
+        "height": 363
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_round_armor_walk_4": {
+      "derived_from": "zombie_round_armor",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 790,
+        "top": 891,
+        "width": 464,
+        "height": 363
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "zombie_round_armor_walk_5": {
+      "derived_from": "zombie_round_armor",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 790,
+        "top": 891,
+        "width": 464,
+        "height": 363
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "rat_furry_wheel_0": {
+      "derived_from": "rat_furry",
+      "file": "source-reference/approved-small-rat_D.png",
+      "method": "derived vehicle_part from final v3 sprite"
+    },
+    "rat_furry_wheel_1": {
+      "derived_from": "rat_furry",
+      "file": "source-reference/approved-small-rat_D.png",
+      "method": "derived vehicle_part from final v3 sprite"
+    },
+    "rat_furry_body": {
+      "derived_from": "rat_furry",
+      "file": "source-reference/approved-small-rat_D.png",
+      "method": "derived vehicle_part from final v3 sprite"
+    },
+    "rat_furry_body_armed": {
+      "derived_from": "rat_furry",
+      "file": "source-reference/approved-small-rat_D.png",
+      "method": "derived vehicle_part from final v3 sprite"
+    },
+    "rat_furry_drive_0": {
+      "derived_from": "rat_furry",
+      "file": "source-reference/approved-small-rat_D.png",
+      "method": "derived animation from final v3 sprite"
+    },
+    "rat_furry_armed_drive_0": {
+      "derived_from": "rat_furry",
+      "file": "source-reference/approved-small-rat_D.png",
+      "method": "derived animation from final v3 sprite"
+    },
+    "rat_furry_drive_1": {
+      "derived_from": "rat_furry",
+      "file": "source-reference/approved-small-rat_D.png",
+      "method": "derived animation from final v3 sprite"
+    },
+    "rat_furry_armed_drive_1": {
+      "derived_from": "rat_furry",
+      "file": "source-reference/approved-small-rat_D.png",
+      "method": "derived animation from final v3 sprite"
+    },
+    "rat_furry_drive_2": {
+      "derived_from": "rat_furry",
+      "file": "source-reference/approved-small-rat_D.png",
+      "method": "derived animation from final v3 sprite"
+    },
+    "rat_furry_armed_drive_2": {
+      "derived_from": "rat_furry",
+      "file": "source-reference/approved-small-rat_D.png",
+      "method": "derived animation from final v3 sprite"
+    },
+    "rat_furry_drive_3": {
+      "derived_from": "rat_furry",
+      "file": "source-reference/approved-small-rat_D.png",
+      "method": "derived animation from final v3 sprite"
+    },
+    "rat_furry_armed_drive_3": {
+      "derived_from": "rat_furry",
+      "file": "source-reference/approved-small-rat_D.png",
+      "method": "derived animation from final v3 sprite"
+    },
+    "rat_furry_drive_4": {
+      "derived_from": "rat_furry",
+      "file": "source-reference/approved-small-rat_D.png",
+      "method": "derived animation from final v3 sprite"
+    },
+    "rat_furry_armed_drive_4": {
+      "derived_from": "rat_furry",
+      "file": "source-reference/approved-small-rat_D.png",
+      "method": "derived animation from final v3 sprite"
+    },
+    "rat_furry_drive_5": {
+      "derived_from": "rat_furry",
+      "file": "source-reference/approved-small-rat_D.png",
+      "method": "derived animation from final v3 sprite"
+    },
+    "rat_furry_armed_drive_5": {
+      "derived_from": "rat_furry",
+      "file": "source-reference/approved-small-rat_D.png",
+      "method": "derived animation from final v3 sprite"
+    },
+    "rat_wood_wheel_0": {
+      "derived_from": "rat_wood",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 460,
+        "top": 0,
+        "width": 385,
+        "height": 250
+      },
+      "method": "derived vehicle_part from final v3 sprite"
+    },
+    "rat_wood_wheel_1": {
+      "derived_from": "rat_wood",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 460,
+        "top": 0,
+        "width": 385,
+        "height": 250
+      },
+      "method": "derived vehicle_part from final v3 sprite"
+    },
+    "rat_wood_body": {
+      "derived_from": "rat_wood",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 460,
+        "top": 0,
+        "width": 385,
+        "height": 250
+      },
+      "method": "derived vehicle_part from final v3 sprite"
+    },
+    "rat_wood_body_armed": {
+      "derived_from": "rat_wood",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 460,
+        "top": 0,
+        "width": 385,
+        "height": 250
+      },
+      "method": "derived vehicle_part from final v3 sprite"
+    },
+    "rat_wood_drive_0": {
+      "derived_from": "rat_wood",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 460,
+        "top": 0,
+        "width": 385,
+        "height": 250
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "rat_wood_armed_drive_0": {
+      "derived_from": "rat_wood",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 460,
+        "top": 0,
+        "width": 385,
+        "height": 250
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "rat_wood_drive_1": {
+      "derived_from": "rat_wood",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 460,
+        "top": 0,
+        "width": 385,
+        "height": 250
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "rat_wood_armed_drive_1": {
+      "derived_from": "rat_wood",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 460,
+        "top": 0,
+        "width": 385,
+        "height": 250
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "rat_wood_drive_2": {
+      "derived_from": "rat_wood",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 460,
+        "top": 0,
+        "width": 385,
+        "height": 250
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "rat_wood_armed_drive_2": {
+      "derived_from": "rat_wood",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 460,
+        "top": 0,
+        "width": 385,
+        "height": 250
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "rat_wood_drive_3": {
+      "derived_from": "rat_wood",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 460,
+        "top": 0,
+        "width": 385,
+        "height": 250
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "rat_wood_armed_drive_3": {
+      "derived_from": "rat_wood",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 460,
+        "top": 0,
+        "width": 385,
+        "height": 250
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "rat_wood_drive_4": {
+      "derived_from": "rat_wood",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 460,
+        "top": 0,
+        "width": 385,
+        "height": 250
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "rat_wood_armed_drive_4": {
+      "derived_from": "rat_wood",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 460,
+        "top": 0,
+        "width": 385,
+        "height": 250
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "rat_wood_drive_5": {
+      "derived_from": "rat_wood",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 460,
+        "top": 0,
+        "width": 385,
+        "height": 250
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "rat_wood_armed_drive_5": {
+      "derived_from": "rat_wood",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 460,
+        "top": 0,
+        "width": 385,
+        "height": 250
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "rat_steel_wheel_0": {
+      "derived_from": "rat_steel",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 845,
+        "top": 0,
+        "width": 409,
+        "height": 250
+      },
+      "method": "derived vehicle_part from final v3 sprite"
+    },
+    "rat_steel_wheel_1": {
+      "derived_from": "rat_steel",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 845,
+        "top": 0,
+        "width": 409,
+        "height": 250
+      },
+      "method": "derived vehicle_part from final v3 sprite"
+    },
+    "rat_steel_body": {
+      "derived_from": "rat_steel",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 845,
+        "top": 0,
+        "width": 409,
+        "height": 250
+      },
+      "method": "derived vehicle_part from final v3 sprite"
+    },
+    "rat_steel_body_armed": {
+      "derived_from": "rat_steel",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 845,
+        "top": 0,
+        "width": 409,
+        "height": 250
+      },
+      "method": "derived vehicle_part from final v3 sprite"
+    },
+    "rat_steel_drive_0": {
+      "derived_from": "rat_steel",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 845,
+        "top": 0,
+        "width": 409,
+        "height": 250
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "rat_steel_armed_drive_0": {
+      "derived_from": "rat_steel",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 845,
+        "top": 0,
+        "width": 409,
+        "height": 250
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "rat_steel_drive_1": {
+      "derived_from": "rat_steel",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 845,
+        "top": 0,
+        "width": 409,
+        "height": 250
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "rat_steel_armed_drive_1": {
+      "derived_from": "rat_steel",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 845,
+        "top": 0,
+        "width": 409,
+        "height": 250
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "rat_steel_drive_2": {
+      "derived_from": "rat_steel",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 845,
+        "top": 0,
+        "width": 409,
+        "height": 250
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "rat_steel_armed_drive_2": {
+      "derived_from": "rat_steel",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 845,
+        "top": 0,
+        "width": 409,
+        "height": 250
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "rat_steel_drive_3": {
+      "derived_from": "rat_steel",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 845,
+        "top": 0,
+        "width": 409,
+        "height": 250
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "rat_steel_armed_drive_3": {
+      "derived_from": "rat_steel",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 845,
+        "top": 0,
+        "width": 409,
+        "height": 250
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "rat_steel_drive_4": {
+      "derived_from": "rat_steel",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 845,
+        "top": 0,
+        "width": 409,
+        "height": 250
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "rat_steel_armed_drive_4": {
+      "derived_from": "rat_steel",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 845,
+        "top": 0,
+        "width": 409,
+        "height": 250
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "rat_steel_drive_5": {
+      "derived_from": "rat_steel",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 845,
+        "top": 0,
+        "width": 409,
+        "height": 250
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "rat_steel_armed_drive_5": {
+      "derived_from": "rat_steel",
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 845,
+        "top": 0,
+        "width": 409,
+        "height": 250
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "pigeon_fly_0": {
+      "derived_from": "pigeon_up",
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 505,
+        "top": 742,
+        "width": 219,
+        "height": 258
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "pigeon_fly_1": {
+      "derived_from": "pigeon_mid",
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 724,
+        "top": 780,
+        "width": 246,
+        "height": 220
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "pigeon_fly_2": {
+      "derived_from": "pigeon_down",
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 970,
+        "top": 780,
+        "width": 284,
+        "height": 225
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "pigeon_fly_3": {
+      "derived_from": "pigeon_mid",
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 724,
+        "top": 780,
+        "width": 246,
+        "height": 220
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "answer_a": {
+      "method": "native pixel drawing in shared D palette",
+      "image_master": null
+    },
+    "answer_b": {
+      "method": "native pixel drawing in shared D palette",
+      "image_master": null
+    },
+    "answer_c": {
+      "method": "native pixel drawing in shared D palette",
+      "image_master": null
+    },
+    "button_upgrade": {
+      "method": "native pixel drawing in shared D palette",
+      "image_master": null
+    },
+    "math_panel": {
+      "method": "native pixel drawing in shared D palette",
+      "image_master": null
+    },
+    "fuel_gauge_0": {
+      "method": "native pixel drawing in shared D palette",
+      "image_master": null
+    },
+    "fuel_gauge_1": {
+      "method": "native pixel drawing in shared D palette",
+      "image_master": null
+    },
+    "fuel_gauge_2": {
+      "method": "native pixel drawing in shared D palette",
+      "image_master": null
+    },
+    "fuel_gauge_3": {
+      "method": "native pixel drawing in shared D palette",
+      "image_master": null
+    },
+    "fuel_gauge_4": {
+      "method": "native pixel drawing in shared D palette",
+      "image_master": null
+    },
+    "fuel_gauge_5": {
+      "method": "native pixel drawing in shared D palette",
+      "image_master": null
+    },
+    "fuel_gauge_6": {
+      "method": "native pixel drawing in shared D palette",
+      "image_master": null
+    },
+    "fuel_gauge_7": {
+      "method": "native pixel drawing in shared D palette",
+      "image_master": null
+    },
+    "fuel_gauge_8": {
+      "method": "native pixel drawing in shared D palette",
+      "image_master": null
+    },
+    "fuel_gauge_9": {
+      "method": "native pixel drawing in shared D palette",
+      "image_master": null
+    },
+    "fuel_gauge_10": {
+      "method": "native pixel drawing in shared D palette",
+      "image_master": null
+    },
+    "impact_0": {
+      "method": "native pixel drawing in shared D palette",
+      "image_master": null
+    },
+    "dust_0": {
+      "method": "native pixel drawing in shared D palette",
+      "image_master": null
+    },
+    "impact_1": {
+      "method": "native pixel drawing in shared D palette",
+      "image_master": null
+    },
+    "dust_1": {
+      "method": "native pixel drawing in shared D palette",
+      "image_master": null
+    },
+    "impact_2": {
+      "method": "native pixel drawing in shared D palette",
+      "image_master": null
+    },
+    "dust_2": {
+      "method": "native pixel drawing in shared D palette",
+      "image_master": null
+    },
+    "impact_3": {
+      "method": "native pixel drawing in shared D palette",
+      "image_master": null
+    },
+    "dust_3": {
+      "method": "native pixel drawing in shared D palette",
+      "image_master": null
+    },
+    "wrecking_swing_0": {
+      "derived_from": "wrecking_ball",
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 265,
+        "top": 240,
+        "width": 240,
+        "height": 240
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "wrecking_swing_1": {
+      "derived_from": "wrecking_ball",
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 265,
+        "top": 240,
+        "width": 240,
+        "height": 240
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "wrecking_swing_2": {
+      "derived_from": "wrecking_ball",
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 265,
+        "top": 240,
+        "width": 240,
+        "height": 240
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "wrecking_swing_3": {
+      "derived_from": "wrecking_ball",
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 265,
+        "top": 240,
+        "width": 240,
+        "height": 240
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "wrecking_swing_4": {
+      "derived_from": "wrecking_ball",
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 265,
+        "top": 240,
+        "width": 240,
+        "height": 240
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "wrecking_swing_5": {
+      "derived_from": "wrecking_ball",
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 265,
+        "top": 240,
+        "width": 240,
+        "height": 240
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "wrecking_swing_6": {
+      "derived_from": "wrecking_ball",
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 265,
+        "top": 240,
+        "width": 240,
+        "height": 240
+      },
+      "method": "derived animation from final v3 sprite"
+    },
+    "wrecking_swing_7": {
+      "derived_from": "wrecking_ball",
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 265,
+        "top": 240,
+        "width": 240,
+        "height": 240
+      },
+      "method": "derived animation from final v3 sprite"
+    }
+  }
+}

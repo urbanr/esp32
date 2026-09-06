@@ -7,8 +7,9 @@ Toto je souhrn, ze kterého se dá hra znovu vytvořit nebo předat grafikovi. K
 Dětská skákačka (endless runner) pro Waveshare ESP32-S3-Touch-AMOLED-1.8 (AMOLED 368×448 px, dotyk, tlačítko BOOT, reproduktor). Displej se drží **na šířku, BOOT dole**. Krysa běží zleva doprava kanálem (stokou), hráč skáče přes překážky, po policích z trubek se dostává do vyšších pater a sbírá odpadky k jídlu. Grafika dětská, barevná, ve stylu 16bitových skákaček (Prehistorik): syté barvy, tmavé obrysy, jednoduché tvary. Obraz prochází filtrem starého barevného CRT monitoru (scanlines, RGB maska, měkké hrany, vinětace, blikání).
 
 - Ovládání: ťuknutí kamkoli = skok; BOOT = vysoký skok; v úvodu a po konci ťuknutí = nová hra.
-- Pravidla: 3 srdíčka; náraz do překážky nebo pavouka nebo pád do vody ubere srdíčko a krysa je 1,6 s nezranitelná (bliká); bez srdíček KONEC s body a nejlepším výsledkem. Každý sebraný odpadek = 1 bod. Svět zrychluje z 44 na 96 bodů/s (o 1,2 za s).
-- Zvuky (bez hudby): skok, vysoký skok, dopad, sebrání, zásah, šplouchnutí, konec, start; „8bitové" obdélníkové tóny a šum.
+- Pravidla: 3 srdíčka; náraz do překážky, šneka, pavouka nebo kapky nebo pád do vody ubere srdíčko a krysa je 1,6 s nezranitelná (bliká); mýdlová bublina (štít) první zásah pohltí. Bez srdíček KONEC s body a nejlepším výsledkem (ten se pamatuje na SD kartě v `/rat-jumper/best.txt`). Každý sebraný odpadek = 1 bod; každý 10. odpadek je stříbrný pohár (3 body), každý 20. zlatý (10 bodů); zlatý klíč otevře další bedýnku (5 bodů). Svět zrychluje z 44 na 96 bodů/s (o 1,2 za s).
+- Zvuky (bez hudby): skok, vysoký skok, dopad, sebrání, pohár/bedýnka (fanfára), prasknutí bubliny, proud vody, zásah, šplouchnutí, konec, start; „8bitové" obdélníkové tóny a šum.
+- Jen kulisa: netopýr občas prolétne zprava doleva a vlní se; na zdi kulaté okno kanálu, ventil, mříž odpadu.
 
 ## Herní plocha
 
@@ -24,7 +25,7 @@ Logické rozlišení **150 × 123 bodů**, 1 bod = 3×3 px displeje. Souřadnice
 | voda | y 104–122, vlnky na hladině |
 | krysa | levá hrana x 24, šířka 20, výška 12, nohy na y 98 |
 
-Vzory generátoru: překážka na chodníku + odpadek nad ní; díra (16–26 bodů) + odpadek vysoko; police 1. patra (36–61) se 2–3 odpadky, někdy překážka pod ní a police 2. patra (28–45) s rolí toaletního papíru; pavouk na vlákně (délka 22–61, houpe se ±6) + odpadek na chodníku. Mezera mezi vzory 24–52 bodů, násobená poměrem rychlosti.
+Vzory generátoru: překážka na chodníku + odpadek nad ní (za ní ve 35 % bedýnka); díra (16–26 bodů) + odpadek vysoko; police 1. patra (36–61) se 2–3 odpadky, někdy překážka pod ní a police 2. patra (28–45) s rolí toaletního papíru; pavouk na vlákně (délka 22–61, houpe se ±6) + odpadek na chodníku; šnek lezoucí proti kryse (9 bodů/s) + odpadek nad ním; kapající trubka u stropu (pauza 1,3 s, kapka bliká 0,8 s, padá 110 bodů/s) + odpadek na chodníku; tryska s proudem vody až k 2. patru + police 2. patra (30–49) s odpadky hned za ní; široká díra (38–45) s kachničkou uprostřed (horní hrana těla = chodník). Mezera mezi vzory 24–52 bodů, násobená poměrem rychlosti.
 
 ## Paleta (index, název, RGB)
 
@@ -63,6 +64,8 @@ Index 0 je průhledný. Ve spritech se používá znak → barva podle legendy n
 | `X` | C_CRATE_DARK | 112, 76, 36 |
 | `H` | C_CRATE_LIGHT | 212, 162, 92 |
 | `.` | průhledná | – |
+
+Společná legenda pro obě sady (`rat_sprites_extra.h`, znaky, které žádná sada nepoužívá): `A` C_SILVER_LIGHT (250, 250, 245), `B` C_SILVER (200, 205, 215), `D` C_SILVER_DARK (142, 142, 152), `F` C_GOLD_LIGHT (250, 232, 120), `I` C_GOLD (212, 162, 60), `J` C_GOLD_DARK (130, 96, 28), `P` C_BAT (34, 24, 42), `Q` C_BAT_LIGHT (96, 72, 116), `T` C_STONE_DARK, `U` C_STONE, `W` C_STONE_LIGHT, `Y` C_WATER, `i` C_WATER_LIGHT, `Z` C_BLACK, `a` C_PIPE, `d` C_PIPE_DARK, `f` C_PIPE_LIGHT, `h` C_MOSS, `j` C_MOSS_LIGHT, `q` C_CEIL_DARK, `z` C_RED.
 
 Další barvy (pozadí, kreslené procedurálně): C_BRICK (122, 72, 58), C_BRICK2 (104, 60, 50), C_BRICK_DARK (78, 44, 40), C_MORTAR (58, 38, 36), C_CEIL (70, 64, 72), C_CEIL_DARK (44, 40, 48), C_CEIL_LIGHT (98, 92, 100), C_WATER (24, 70, 110), C_WATER_DARK (16, 48, 80), C_WATER_LIGHT (60, 120, 165), C_FOAM (175, 225, 240), C_STONE (128, 130, 120), C_STONE_DARK (86, 88, 82), C_STONE_LIGHT (172, 174, 162), C_MOSS_LIGHT (124, 204, 92), C_TEXT (250, 232, 120), C_TEXT_DARK (122, 102, 40), C_HUD_BG (30, 20, 30)
 
@@ -268,6 +271,29 @@ kKKKKKk
 ..kKk..
 ...k...
 ```
+
+## Doplněk: poháry, bonusy, nové překážky, kulisy
+
+Rozměry v bodech (×3 = px na displeji). Sada ASTRA má tyto sprity z PNG (`astra-extra/png/`), sada KLASIK vlastní ASCII v `rat_sprites_klasik.h`, `rat_sprites_cups.h` a `rat_sprites_extra.h`.
+
+| Sprite | Rozměr | Popis a chování |
+|---|---|---|
+| SPR_CUP_SILVER, SPR_CUP_GOLD | 10×12 (ASTRA), 11×10 / 13×12 (KLASIK) | poháry; každý 10. odpadek stříbrný (3 body), každý 20. zlatý (10 bodů), pohupují se jako odpadky |
+| SPR_KEY | 12×10 | zlatý klíč, sbíraný; v HUD vedle bodů, otevře příští bedýnku |
+| SPR_BUBBLE0/1 | 10×10 | mýdlová bublina, sbíraná, 2 fáze (odlesk), 4 fps, průhledný vnitřek |
+| SPR_SHIELD0/1 | 26×20 | bublina kolem krysy (krysa na offsetu 3,4), kreslí se po kryse, průhledný vnitřek |
+| SPR_DUCK0/1 | 24×14 | gumová kachnička v široké díře, hlava vpravo; horní hrana těla (x 3–13, y 8) je chodník, čára ponoru y 12; 2 fáze |
+| SPR_SNAIL0/1 | 14×9 | šnek na chodníku, leze proti kryse, 2 fáze tykadel (6 fps); překážka |
+| SPR_DRIP_PIPE | 12×12 | trubka visící ze stropu, kapka se připojuje na x 6, y 12 |
+| SPR_DROP_READY / FLASH / FALL | 5×7 | kapka: před pádem střídá READY/FLASH (blikání), pak padá stejným tvarem |
+| SPR_JET_PIPE | 14×8 | tryska stojící na chodníku |
+| SPR_JET_SEG0–3 | 12×8 | segment proudu, opakuje se svisle od trysky k vrcholu, 4 fáze (8 fps) |
+| SPR_JET_TOP0–3 | 16×8 | rozstřik na vrcholu proudu (posun −2 v x vůči segmentu), 4 fáze |
+| SPR_CHEST_CLOSED / OPEN | 14×13 | bedýnka s odměnou na chodníku; s klíčem se otevře (5 bodů) |
+| SPR_BAT0/1 | 15×6 | netopýr, křídla nahoře / dole, jen parada |
+| SPR_WINDOW | 15×14 | kulaté zamřížované okno kanálu na zdi |
+| SPR_VALVE | 9×11 | ventil s kolem na zdi |
+| SPR_GRATE | 12×8 | mříž odpadu ve zdi s mechem |
 
 ## Procedurálně kreslené prvky (bez spritu)
 

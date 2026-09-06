@@ -1,5 +1,9 @@
 import zlib, struct, json, re, sys, os
 PACK=sys.argv[1]; OUT=sys.argv[2]; PALH=sys.argv[3]
+EXTRA=sys.argv[4] if len(sys.argv)>4 else None   # dalsi PNG mimo balicek (astra-extra/: pohary, doplnek)
+def src(f):
+    p=os.path.join(PACK,f)
+    return p if os.path.exists(p) or not EXTRA else os.path.join(EXTRA,f)
 
 def read_png(path):
     d=open(path,'rb').read(); assert d[:8]==b'\x89PNG\r\n\x1a\n'
@@ -50,7 +54,8 @@ def color_index(rgb):
     if bd<=18 and best!=0: return best
     extra.append(rgb); return len(base)+len(extra)-1
 
-pool=[c for c in "kKgGlpwryoOLmMvVtsSRebcCnNxXH0123456789ABDFIJPQTUWYZadfhijqu!#$%&()*+,-/:;<=>?@[]^_`{|}~"]
+RESERVED="ABDFIJPQTUWYZadfhijqz"   # znaky EXTRA_LEGEND (rat_sprites_extra.h), sdilene obema sadami
+pool=[c for c in "kKgGlpwryoOLmMvVtsSRebcCnNxXH0123456789ABDFIJPQTUWYZadfhijqu!#$%&()*+,-/:;<=>?@[]^_`{|}~" if c not in RESERVED]
 chars={}   # idx -> char
 def ch_for(idx):
     if idx not in chars:
@@ -80,9 +85,23 @@ sprites=[('SPR_RAT_RUN0','png/rat_run_0.png'),('SPR_RAT_RUN1','png/rat_run_1.png
  ('TILE_PANEL_INTRO','tiles/panel_intro.png'),('TILE_PANEL_OVER','tiles/panel_game_over.png'),('TILE_THREAD','tiles/spider_thread.png'),
  ('TILE_SPLASH0','tiles/splash_0.png'),('TILE_SPLASH1','tiles/splash_1.png'),('TILE_SPLASH2','tiles/splash_2.png'),('TILE_SPLASH3','tiles/splash_3.png'),
  ('TILE_SPARK0','tiles/pickup_spark_0.png'),('TILE_SPARK1','tiles/pickup_spark_1.png'),('TILE_SPARK2','tiles/pickup_spark_2.png'),('TILE_SPARK3','tiles/pickup_spark_3.png')]
+# pohary (png/cup_silver.png, png/cup_gold.png) jsou volitelne; bez nich se pouziji pohary z rat_sprites_cups.h
+cups=[('SPR_CUP_SILVER','png/cup_silver.png'),('SPR_CUP_GOLD','png/cup_gold.png')]
+have_cups=all(os.path.exists(src(f)) for _,f in cups)
+if have_cups: sprites+=cups
+# doplnek (kanal-doplnek.zip): klic, bublina, kachnicka, snek, kapajici trubka, proud vody, bedynka
+addon=[('SPR_KEY','png/gold_key.png'),('SPR_BUBBLE0','png/bubble_pickup_0.png'),('SPR_BUBBLE1','png/bubble_pickup_1.png'),
+ ('SPR_SHIELD0','png/bubble_shield_0.png'),('SPR_SHIELD1','png/bubble_shield_1.png'),
+ ('SPR_DUCK0','png/rubber_duck_0.png'),('SPR_DUCK1','png/rubber_duck_1.png'),('SPR_SNAIL0','png/snail_0.png'),('SPR_SNAIL1','png/snail_1.png'),
+ ('SPR_DRIP_PIPE','png/drip_pipe.png'),('SPR_DROP_READY','png/drop_ready.png'),('SPR_DROP_FLASH','png/drop_flash.png'),('SPR_DROP_FALL','png/drop_falling.png'),
+ ('SPR_JET_PIPE','png/water_jet_pipe.png'),('SPR_JET_SEG0','png/water_jet_repeat_0.png'),('SPR_JET_SEG1','png/water_jet_repeat_1.png'),('SPR_JET_SEG2','png/water_jet_repeat_2.png'),('SPR_JET_SEG3','png/water_jet_repeat_3.png'),
+ ('SPR_JET_TOP0','png/water_jet_top_0.png'),('SPR_JET_TOP1','png/water_jet_top_1.png'),('SPR_JET_TOP2','png/water_jet_top_2.png'),('SPR_JET_TOP3','png/water_jet_top_3.png'),
+ ('SPR_CHEST_CLOSED','png/reward_chest_closed.png'),('SPR_CHEST_OPEN','png/reward_chest_open.png')]
+have_addon=all(os.path.exists(src(f)) for _,f in addon)
+if have_addon: sprites+=addon
 body=[]
 for name,f in sprites:
-    w,h,rs=to_rows(os.path.join(PACK,f))
+    w,h,rs=to_rows(src(f))
     body.append(f"// {f} {w}x{h}\nSPRITE({name},\n" + ",\n".join('  "'+r+'"' for r in rs) + ")\n")
 hdr=['#pragma once','','#include <Arduino.h>','#include "rat_sprites_def.h"','',
 '// ===================================================================',
@@ -90,7 +109,7 @@ hdr=['#pragma once','','#include <Arduino.h>','#include "rat_sprites_def.h"','',
 '// (ChatGPT Astra). Neupravovat rucne; znaky -> barvy podle ASTRA_LEGEND',
 '// (barvy nad C_COUNT jsou v PALETTE_EXTRA). Obsahuje i dlazdice prostredi.',
 '// ===================================================================','',
-'#define SPRITES_HAVE_TILES 1','',
+'#define SPRITES_HAVE_TILES 1',*(['#define SPRITES_HAVE_CUPS 1'] if have_cups else []),*(['#define SPRITES_HAVE_ADDON 1'] if have_addon else []),'',
 f'#define PALETTE_EXTRA_COUNT {len(extra)}',
 'static const uint8_t PALETTE_EXTRA[PALETTE_EXTRA_COUNT > 0 ? PALETTE_EXTRA_COUNT : 1][3] = {',
 '  ' + ', '.join('{%d, %d, %d}'%c for c in extra) + ('' if extra else '{0, 0, 0}'),

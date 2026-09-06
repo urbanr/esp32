@@ -96,19 +96,66 @@ Dětská skákačka na displeji otočeném **na šířku** (BOOT dole). Krysa b�
 | díra v chodníku | pod ní voda; pád = srdíčko, krysa pak „plave" zpět |
 | police (trubky s mechem) | dvě patra, přistání jen shora |
 | pavouk na vlákně | houpe se ze stropu, dotyk bere srdíčko |
+| šnek | leze po chodníku proti kryse, náraz bere srdíčko |
+| kapající trubka | visí ze stropu; kapka nejdřív zabliká, pak spadne na chodník, zásah bere srdíčko |
+| proud vody z trubky | tryska na chodníku, vynese krysu na polici ve 2. patře |
+| gumová kachnička | plave v široké díře, dá se po ní přeběhnout jako po ostrůvku |
 | plechovka, hruška, papír, role toaletního papíru | odpadky k jídlu, každý 1 bod |
+| stříbrný pohár | každý 10. odpadek, 3 body |
+| zlatý pohár | každý 20. odpadek (střídá se se stříbrným), 10 bodů |
+| zlatý klíč | zobrazí se v HUD; otevře další bedýnku s odměnou za 5 bodů |
+| mýdlová bublina | obalí krysu a ochrání ji před jedním nárazem |
+| kulaté okno, ventil, mříž | ozdoby na zdi, jen kulisa |
+| netopýr | občas prolétne proti směru hry a vlní se; jen pro parádu |
 
 | Pravidla | Hodnota |
 |---|---|
 | srdíčka | 3, po zásahu 1,6 s nezranitelnosti (krysa bliká) |
 | rychlost světa | 44 → 96 bodů/s, roste o 1,2 za sekundu |
-| konec | KONEC, body a nejlepší výsledek od zapnutí |
+| konec | KONEC, body a nejlepší výsledek |
+| nejlepší výsledek | na SD kartě v `/rat-jumper/best.txt`; bez karty jen od zapnutí |
 
-- **Technika:** svět 150×123 bodů (1 bod = 3×3 px) v 8bitovém indexovaném canvasu, vlastní paleta ~50 barev, sprity jako ASCII art přímo v kódu. Dvě sady grafiky přepínané před kompilací (`SPRITE_SET`): KLASIK (ruční, prostředí kreslené kódem) a ASTRA (balíček pixel artu od ChatGPT včetně dlaždic prostředí, výchozí). Generátor náhodně skládá vzory (překážka, díra, police s odpadky, pavouk) s mezerou rostoucí s rychlostí. Fyzika: gravitace, skok jen ze země (s krátkou tolerancí po sjetí z hrany), přistání na policích jen shora.
+- **Technika:** svět 150×123 bodů (1 bod = 3×3 px) v 8bitovém indexovaném canvasu, vlastní paleta ~50 barev, sprity jako ASCII art přímo v kódu. Dvě sady grafiky přepínané před kompilací (`SPRITE_SET`): KLASIK (ruční, prostředí kreslené kódem) a ASTRA (balíčky pixel artu od ChatGPT `kanal-komplet` + `kanal-doplnek` včetně dlaždic prostředí a pohárů, výchozí; PNG mimo základní balíček jsou v `astra-extra/`). Generátor náhodně skládá vzory (překážka a bedýnka, díra, police s odpadky, pavouk, šnek, kapající trubka, proud vody s policí, díra s kachničkou) s mezerou rostoucí s rychlostí. Fyzika: gravitace, skok jen ze země (s krátkou tolerancí po sjetí z hrany), přistání na policích jen shora.
 - **CRT filtr:** obraz je otočený, takže fyzický řádek displeje = logický sloupec hry; každý pruh se skládá napříč. Scanlines, RGB maska (v každém bodu tři proužky R/G/B), volitelná vinětace, blikání; měkký režim (`CRT_SOFT 1`) přidává prosvit sousedních řádků a prolnutí se sousedním sloupcem. Vše v `config.h`.
 - **Výkon:** první verze měla 15 fps (63 ms na skládání pruhů). Zrychlení na ~34 fps přineslo: měření neoříznutého času snímku po fázích (odhalilo, že většina času šla na přípravu sloupců opakovanou 448× místo 150×), předpočítaná tabulka „index palety → hotový RGB565" pro každou kombinaci scanline × maska × vinětace (jedno čtení na pixel místo tří násobení a tří čtení), zpracování pixelů po trojicích jednoho logického bodu a překlad s `-O2` (`build_opt.h`). Strop je přenos do displeje ~16 ms/snímek (~60 fps). Podrobněji v [`CLAUDE.md`](CLAUDE.md), sekce „Výkon a fps".
-- **Zvuk:** sdílený modul `common/amoled_audio.h` (ES8311 + I2S), „8bitové" obdélníkové tóny: skok, vysoký skok, dopad, sebrání, zásah, šplouchnutí, konec, start.
+- **Zvuk:** sdílený modul `common/amoled_audio.h` (ES8311 + I2S), „8bitové" obdélníkové tóny: skok, vysoký skok, dopad, sebrání, pohár a bedýnka (fanfára), prasknutí bubliny, šum proudu vody, zásah, šplouchnutí, konec, start.
+- **SD karta:** nejlepší skóre přes SDMMC (1 bit, piny z `pin_config.h`) v adresáři hry; bez karty hra běží stejně.
 - Specifikace: [`rat-jumper.md`](ESP32-S3-Touch-AMOLED-1.8/esp32-rat-jumper/rat-jumper.md).
+
+### Krysy a zombíci — `esp32-rat-zombies`
+
+Jezdící hra (hratelná, hodnoty se ladí). Krysa na kolech jede po zvlněném terénu zleva doprava, sbírá mince, řeší početní příklady za benzín navíc a projíždí zombíky, kteří ji zpomalují a při dotyku se rozpadnou na hlavu, trup a končetiny. Cíl úseku je garáž, kde se za mince kupují vylepšení tří vlastností; tři garáže = level, po levelu další krysa.
+
+<p>
+<img src="docs/img/rat-zombies-navrh.png" width="460" alt="Návrh grafiky Krysy a zombíci">
+</p>
+
+| Vlastnost (úroveň 1–10) | Co dělá |
+|---|---|
+| motor | maximální rychlost a zrychlení |
+| nádrž | dojezd (benzín ubývá s ujetou dráhou, do kopce víc) |
+| kola | menší odpor: delší dojezd, míň brzdí bahno |
+
+| Na trati | Účinek |
+|---|---|
+| mince | 1 bod; cena vylepšení z úrovně n na n+1 je 10·n bodů |
+| znaménko plus / krát | hra zastaví, příklad s čísly 0–9, odpovědi A/B/C; správně = +10 % nádrže |
+| kanystr | +5 % nádrže |
+| ocelový bourák | na ocase krysy 20 s mlátí zombíky před čumákem, ti nezpomalují |
+| zombíci hubení / hranatí / kulatí | zpomalí o 10 / 18 / 28 bodů/s, rozpadnou se na díly; skokem se dají přeskočit |
+| kláda, potrubí, kontejner, rampa | dá se na ně vyskočit a přejet je |
+
+| Krysa | Odemčení | Výchozí úrovně |
+|---|---|---|
+| chlupatá | od začátku | 1 / 1 / 1 |
+| dřevěná | po levelu 1 | 3 / 3 / 3 |
+| ocelová | po levelu 2 | 5 / 5 / 5 |
+
+- **Ovládání:** držení BOOT = plyn, ťuknutí = výskok, v panelu příkladu ťuknutí do třetiny displeje = odpověď, v garáži `+` pod ikonou = nákup.
+- **Grafika:** balíček `krysy-zombici-amoled-v3` (273 nativních PNG, paleta 48 barev, šestifázová chůze zombíků, díly pro rozpad, tři krysy, kulisy, UI) v `esp32-rat-zombies/grafika-v3/`. Požadované úpravy (modré nebe, tmavší pás pod domy) a chybějící sprity v [`zadani-sprity.md`](ESP32-S3-Touch-AMOLED-1.8/esp32-rat-zombies/zadani-sprity.md).
+- **CRT:** dva režimy skládání: LINKY (měkké vodorovné řádky s prosvitem sousedních řádků a lehkým vodorovným rozmazáním přes tabulky dvojic barev, ~50 fps) a TECKY (tvrdé scanlines, RGB maska, putující pruh, blikání). Swipe dolů vylosuje náhodnou kombinaci, swipe nahoru vrátí oblíbenou `crt-favorite-1`; volba se ukládá na SD kartu. Postup hry se neukládá, jede se vždy od začátku.
+- **Technika:** stejná mřížka 150×123 a přenos po pruzích jako Krysa skokan, sprity generované skriptem z PNG do indexovaných bitmap ve flash (273 spritů, 238 KB), terén jako výšková funkce kreslená po sloupcích z opakovatelného pásu, krysa natočená podle spojnice kol, rozpad zombíka z dílů na pozicích aktuálního snímku chůze, na SD kartě jen nastavení CRT filtru, postup se neukládá.
+- Specifikace: [`rat-zombies.md`](ESP32-S3-Touch-AMOLED-1.8/esp32-rat-zombies/rat-zombies.md).
 
 ### Testovací sketche
 

@@ -98,6 +98,29 @@ static void drawWall() {
   }
 }
 
+// ozdoby na zdi (kulate okno, ventil, mriz), stejna paralaxa jako cihly
+static void drawWallDeco() {
+  const int off = (int)(scrollX * 0.5f);
+  for (int k = (off - WALL_DECO_STEP) / WALL_DECO_STEP; k <= (off + LW) / WALL_DECO_STEP; k++) {
+    if (k < 0) continue;
+    const uint32_t h = hash2(k, 4242);
+    const int x = k * WALL_DECO_STEP + (int)((h >> 4) % (WALL_DECO_STEP - 20)) - off;
+    const int v = (int)((h >> 12) % 6);
+    switch (h % 5) {
+      case 0: case 3: blit(SPR_WINDOW, x, CEIL_H + 5 + v); break;   // mezi stropem a 2. patrem
+      case 1:         blit(SPR_VALVE, x, LANE2_Y + 5 + v); break;   // mezi patry
+      case 2:         blit(SPR_GRATE, x, LANE1_Y + 8 + v); break;   // nad chodnikem
+      default: break;
+    }
+  }
+}
+
+static void drawBat() {
+  if (!batOn) return;
+  const Sprite &s = ((int)(batT * 10) & 1) ? SPR_BAT1 : SPR_BAT0;
+  blit(s, (int)batX - s.w / 2, batY() - s.h / 2);
+}
+
 static void drawCeiling() {
 #if SPRITES_HAVE_TILES
   tileRow(TILE_CEILING, 0, 0, LW, (int)scrollX);   // vcetne krapniku pres okraj stropu
@@ -204,12 +227,44 @@ static void drawRat() {
   if (invuln > 0 && ((int)(anim * 12) & 1)) return;   // blikani po zasahu
   const Sprite &s = !onGround ? SPR_RAT_JUMP : (((int)(anim * 10) & 1) ? SPR_RAT_RUN1 : SPR_RAT_RUN0);
   blit(s, RAT_X, (int)ratY - RAT_H);
+  if (shield) blit(((int)(anim * 4) & 1) ? SPR_SHIELD1 : SPR_SHIELD0, RAT_X - 3, (int)ratY - RAT_H - 4);   // bublina kolem krysy
+}
+
+static void drawAddons() {
+  for (int i = 0; i < MAX_DUCK; i++) {
+    const Duck &d = ducks[i];
+    if (d.alive) blit(((int)(anim * 4) & 1) ? SPR_DUCK1 : SPR_DUCK0, (int)(d.x - scrollX), FLOOR_Y - 8);   // horni hrana tela = chodnik
+  }
+  for (int i = 0; i < MAX_CHEST; i++) {
+    const Chest &c = chests[i];
+    if (c.alive) blit(c.open ? SPR_CHEST_OPEN : SPR_CHEST_CLOSED, (int)(c.x - scrollX), FLOOR_Y - SPR_CHEST_CLOSED.h);
+  }
+  const int jf = (int)(anim * 8) & 3;
+  const Sprite *seg[4] = { &SPR_JET_SEG0, &SPR_JET_SEG1, &SPR_JET_SEG2, &SPR_JET_SEG3 };
+  const Sprite *top[4] = { &SPR_JET_TOP0, &SPR_JET_TOP1, &SPR_JET_TOP2, &SPR_JET_TOP3 };
+  for (int i = 0; i < MAX_JET; i++) {
+    const Jet &j = jets[i];
+    if (!j.alive) continue;
+    const int x = (int)(j.x - scrollX);
+    for (int y = FLOOR_Y - SPR_JET_PIPE.h; y - seg[jf]->h >= j.top; y -= seg[jf]->h) blit(*seg[jf], x + 1, y - seg[jf]->h);
+    blit(*top[jf], x - 1, j.top - top[jf]->h + 2);
+    blit(SPR_JET_PIPE, x, FLOOR_Y - SPR_JET_PIPE.h);
+  }
+  for (int i = 0; i < MAX_DRIP; i++) {
+    const Drip &d = drips[i];
+    if (!d.alive) continue;
+    const int x = (int)(d.x - scrollX);
+    blit(SPR_DRIP_PIPE, x, CEIL_H);
+    if (d.st == DR_BLINK) blit(((int)(d.t * 8) & 1) ? SPR_DROP_FLASH : SPR_DROP_READY, x + 4, CEIL_H + SPR_DRIP_PIPE.h);
+    else if (d.st == DR_FALL) blit(SPR_DROP_FALL, x + 4, (int)d.dropY);
+  }
 }
 
 static void drawHud() {
   for (int i = 0; i < LIVES; i++) blit(i < lives ? SPR_HEART : SPR_HEART_EMPTY, 3 + i * 9, CEIL_H + 2);
   snprintf(txt, sizeof(txt), "%d", score);
   text(LW - 3 - (int)strlen(txt) * 6, CEIL_H + 2, txt, C_TEXT);
+  if (hasKey) blit(SPR_KEY, LW - 6 - (int)strlen(txt) * 6 - SPR_KEY.w, CEIL_H + 1);   // klic v HUD vedle bodu
 }
 
 static void drawOverlayBox(int y, int h) {
@@ -248,9 +303,11 @@ static void drawOver() {
 
 static void drawScene() {
   drawWall();
+  drawWallDeco();
   drawCeiling();
   for (int i = 0; i < MAX_PLAT; i++) if (plats[i].alive) drawPlatform(plats[i]);
   drawFloorAndWater();
+  drawAddons();
   for (int i = 0; i < MAX_OBST; i++) {
     const Obstacle &o = obst[i];
     if (!o.alive) continue;
@@ -264,6 +321,7 @@ static void drawScene() {
     blit(*itemSprite(it.kind), (int)(it.x - scrollX), it.y + bob);
   }
   for (int i = 0; i < MAX_SPIDER; i++) if (spiders[i].alive) drawSpider(spiders[i]);
+  drawBat();
   if (state != ST_TITLE) drawRat();
 #if SPRITES_HAVE_TILES
   if (sparkT > 0) {

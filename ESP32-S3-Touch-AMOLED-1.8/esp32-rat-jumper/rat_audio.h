@@ -8,8 +8,8 @@
 
 // ===================================================================
 // Zvuky hry (synteza v tasku sdileneho modulu ../common/amoled_audio.h):
-// skok, vysoky skok, dopad, sebrani odpadku, zasah, pad do vody,
-// konec hry, start. Zadna hudba.
+// skok, vysoky skok, dopad, sebrani odpadku, pohar (fanfara), zasah,
+// pad do vody, konec hry, start. Zadna hudba.
 // ===================================================================
 
 static volatile uint8_t sndPending = SND_NONE;
@@ -35,6 +35,9 @@ static void fxStart(uint8_t type) {
     case SND_HIT:       secs = 0.35f; break;
     case SND_SPLASH:    secs = 0.45f; break;
     case SND_OVER:      secs = 1.1f; break;
+    case SND_CUP:       secs = 0.45f; break;
+    case SND_POP:       secs = 0.12f; break;
+    case SND_JET:       secs = 0.5f; break;
     default:            secs = 0.5f; break;   // SND_START
   }
   for (int i = 0; i < 4; i++) {
@@ -72,6 +75,13 @@ static float fxSample(Fx &f, float lp) {
       s = square(f, hz) * 0.22f * (u < 0.9f ? 1.0f : (1.0f - u) * 10.0f);
       break;
     }
+    case SND_CUP: {     // fanfara: tri stoupajici tony
+      const float hz = u < 0.3f ? 660 : (u < 0.6f ? 880 : 1320);
+      s = square(f, hz) * 0.22f * (u < 0.8f ? 1.0f : (1.0f - u) * 5.0f);
+      break;
+    }
+    case SND_POP:       s = square(f, 1400 - 900 * u) * 0.2f * (1.0f - u); break;   // prasknuti bubliny
+    case SND_JET:       s = white() * 0.25f * sinf(PI * u) + lp * 1.2f * (1.0f - u); break;   // sum proudu vody
     default:            s = square(f, u < 0.5f ? 660 : 990) * 0.2f; break;   // start
   }
   if (++f.n >= f.len) f.type = SND_NONE;

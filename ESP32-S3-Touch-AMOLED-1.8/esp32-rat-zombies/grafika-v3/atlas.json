@@ -1,0 +1,5201 @@
+{
+  "rat_furry": {
+    "file": "png/rat_furry.png",
+    "w": 42,
+    "h": 21,
+    "anchor": {
+      "x": 21,
+      "y": 20
+    },
+    "category": "rat",
+    "facing": "right",
+    "approved_reference": "exact approved small D",
+    "source": {
+      "file": "source-reference/approved-small-rat_D.png",
+      "method": "unchanged user-approved D sprite"
+    }
+  },
+  "rat_wood": {
+    "file": "png/rat_wood.png",
+    "w": 42,
+    "h": 21,
+    "anchor": {
+      "x": 21,
+      "y": 20
+    },
+    "source": {
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 460,
+        "top": 0,
+        "width": 385,
+        "height": 250
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "rat",
+    "facing": "right"
+  },
+  "rat_steel": {
+    "file": "png/rat_steel.png",
+    "w": 42,
+    "h": 21,
+    "anchor": {
+      "x": 21,
+      "y": 20
+    },
+    "source": {
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 845,
+        "top": 0,
+        "width": 409,
+        "height": 250
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "rat",
+    "facing": "right"
+  },
+  "zombie_thin_stripes": {
+    "file": "png/zombie_thin_stripes.png",
+    "w": 21,
+    "h": 32,
+    "anchor": {
+      "x": 10,
+      "y": 31
+    },
+    "source": {
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 0,
+        "top": 250,
+        "width": 390,
+        "height": 334
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "zombie",
+    "facing": "left"
+  },
+  "zombie_thin_mechanic": {
+    "file": "png/zombie_thin_mechanic.png",
+    "w": 21,
+    "h": 32,
+    "anchor": {
+      "x": 10,
+      "y": 31
+    },
+    "source": {
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 390,
+        "top": 250,
+        "width": 390,
+        "height": 334
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "zombie",
+    "facing": "left"
+  },
+  "zombie_thin_punk": {
+    "file": "png/zombie_thin_punk.png",
+    "w": 21,
+    "h": 32,
+    "anchor": {
+      "x": 10,
+      "y": 31
+    },
+    "source": {
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 780,
+        "top": 250,
+        "width": 474,
+        "height": 334
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "zombie",
+    "facing": "left"
+  },
+  "zombie_block_worker": {
+    "file": "png/zombie_block_worker.png",
+    "w": 25,
+    "h": 36,
+    "anchor": {
+      "x": 12,
+      "y": 35
+    },
+    "category": "zombie",
+    "facing": "left",
+    "approved_reference": "exact approved small D",
+    "source": {
+      "file": "source-reference/approved-small-zombie_D.png",
+      "method": "unchanged user-approved D sprite"
+    }
+  },
+  "zombie_block_denim": {
+    "file": "png/zombie_block_denim.png",
+    "w": 29,
+    "h": 32,
+    "anchor": {
+      "x": 14,
+      "y": 31
+    },
+    "source": {
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 370,
+        "top": 584,
+        "width": 410,
+        "height": 307
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "zombie",
+    "facing": "left"
+  },
+  "zombie_block_sport": {
+    "file": "png/zombie_block_sport.png",
+    "w": 29,
+    "h": 34,
+    "anchor": {
+      "x": 14,
+      "y": 33
+    },
+    "source": {
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 780,
+        "top": 584,
+        "width": 474,
+        "height": 307
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "zombie",
+    "facing": "left"
+  },
+  "zombie_round_shirt": {
+    "file": "png/zombie_round_shirt.png",
+    "w": 34,
+    "h": 37,
+    "anchor": {
+      "x": 17,
+      "y": 36
+    },
+    "source": {
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 0,
+        "top": 891,
+        "width": 380,
+        "height": 363
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "zombie",
+    "facing": "left"
+  },
+  "zombie_round_janitor": {
+    "file": "png/zombie_round_janitor.png",
+    "w": 34,
+    "h": 36,
+    "anchor": {
+      "x": 17,
+      "y": 35
+    },
+    "source": {
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 380,
+        "top": 891,
+        "width": 410,
+        "height": 363
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "zombie",
+    "facing": "left"
+  },
+  "zombie_round_armor": {
+    "file": "png/zombie_round_armor.png",
+    "w": 34,
+    "h": 35,
+    "anchor": {
+      "x": 17,
+      "y": 34
+    },
+    "source": {
+      "file": "source-reference/D-characters.png",
+      "crop": {
+        "left": 790,
+        "top": 891,
+        "width": 464,
+        "height": 363
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "zombie",
+    "facing": "left"
+  },
+  "building_green": {
+    "file": "png/building_green.png",
+    "w": 38,
+    "h": 48,
+    "anchor": {
+      "x": 19,
+      "y": 47
+    },
+    "source": {
+      "file": "source-reference/D-environment.png",
+      "crop": {
+        "left": 0,
+        "top": 0,
+        "width": 325,
+        "height": 408
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "background"
+  },
+  "building_red": {
+    "file": "png/building_red.png",
+    "w": 38,
+    "h": 50,
+    "anchor": {
+      "x": 19,
+      "y": 49
+    },
+    "source": {
+      "file": "source-reference/D-environment.png",
+      "crop": {
+        "left": 325,
+        "top": 0,
+        "width": 285,
+        "height": 408
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "background"
+  },
+  "factory": {
+    "file": "png/factory.png",
+    "w": 48,
+    "h": 49,
+    "anchor": {
+      "x": 24,
+      "y": 48
+    },
+    "source": {
+      "file": "source-reference/D-environment.png",
+      "crop": {
+        "left": 610,
+        "top": 0,
+        "width": 320,
+        "height": 408
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "background"
+  },
+  "shack": {
+    "file": "png/shack.png",
+    "w": 38,
+    "h": 33,
+    "anchor": {
+      "x": 19,
+      "y": 32
+    },
+    "source": {
+      "file": "source-reference/D-environment.png",
+      "crop": {
+        "left": 930,
+        "top": 0,
+        "width": 324,
+        "height": 408
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "background"
+  },
+  "garage_red": {
+    "file": "png/garage_red.png",
+    "w": 41,
+    "h": 29,
+    "anchor": {
+      "x": 20,
+      "y": 28
+    },
+    "source": {
+      "file": "source-reference/D-environment.png",
+      "crop": {
+        "left": 0,
+        "top": 408,
+        "width": 325,
+        "height": 296
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "background"
+  },
+  "garage_teal": {
+    "file": "png/garage_teal.png",
+    "w": 40,
+    "h": 30,
+    "anchor": {
+      "x": 20,
+      "y": 29
+    },
+    "source": {
+      "file": "source-reference/D-environment.png",
+      "crop": {
+        "left": 325,
+        "top": 408,
+        "width": 308,
+        "height": 296
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "background"
+  },
+  "garage_yellow": {
+    "file": "png/garage_yellow.png",
+    "w": 38,
+    "h": 30,
+    "anchor": {
+      "x": 19,
+      "y": 29
+    },
+    "source": {
+      "file": "source-reference/D-environment.png",
+      "crop": {
+        "left": 633,
+        "top": 408,
+        "width": 295,
+        "height": 296
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "background"
+  },
+  "city_far": {
+    "file": "png/city_far.png",
+    "w": 100,
+    "h": 38,
+    "anchor": {
+      "x": 50,
+      "y": 37
+    },
+    "source": {
+      "file": "source-reference/D-environment.png",
+      "crop": {
+        "left": 928,
+        "top": 408,
+        "width": 326,
+        "height": 296
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "background"
+  },
+  "halfpipe": {
+    "file": "png/halfpipe.png",
+    "w": 44,
+    "h": 22,
+    "anchor": {
+      "x": 22,
+      "y": 21
+    },
+    "source": {
+      "file": "source-reference/D-environment.png",
+      "crop": {
+        "left": 0,
+        "top": 704,
+        "width": 330,
+        "height": 244
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "prop"
+  },
+  "ramp": {
+    "file": "png/ramp.png",
+    "w": 28,
+    "h": 13,
+    "anchor": {
+      "x": 14,
+      "y": 12
+    },
+    "source": {
+      "file": "source-reference/D-environment.png",
+      "crop": {
+        "left": 330,
+        "top": 704,
+        "width": 320,
+        "height": 244
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "prop"
+  },
+  "dumpster": {
+    "file": "png/dumpster.png",
+    "w": 23,
+    "h": 20,
+    "anchor": {
+      "x": 11,
+      "y": 19
+    },
+    "source": {
+      "file": "source-reference/D-environment.png",
+      "crop": {
+        "left": 650,
+        "top": 704,
+        "width": 275,
+        "height": 244
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "prop"
+  },
+  "container": {
+    "file": "png/container.png",
+    "w": 38,
+    "h": 24,
+    "anchor": {
+      "x": 19,
+      "y": 23
+    },
+    "source": {
+      "file": "source-reference/D-environment.png",
+      "crop": {
+        "left": 925,
+        "top": 704,
+        "width": 329,
+        "height": 244
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "prop"
+  },
+  "pipe": {
+    "file": "png/pipe.png",
+    "w": 24,
+    "h": 15,
+    "anchor": {
+      "x": 12,
+      "y": 14
+    },
+    "source": {
+      "file": "source-reference/D-environment.png",
+      "crop": {
+        "left": 0,
+        "top": 948,
+        "width": 325,
+        "height": 306
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "prop"
+  },
+  "log": {
+    "file": "png/log.png",
+    "w": 25,
+    "h": 11,
+    "anchor": {
+      "x": 12,
+      "y": 10
+    },
+    "source": {
+      "file": "source-reference/D-environment.png",
+      "crop": {
+        "left": 325,
+        "top": 948,
+        "width": 300,
+        "height": 306
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "prop"
+  },
+  "pallets": {
+    "file": "png/pallets.png",
+    "w": 22,
+    "h": 14,
+    "anchor": {
+      "x": 11,
+      "y": 13
+    },
+    "source": {
+      "file": "source-reference/D-environment.png",
+      "crop": {
+        "left": 625,
+        "top": 948,
+        "width": 315,
+        "height": 306
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "prop"
+  },
+  "streetlamp": {
+    "file": "png/streetlamp.png",
+    "w": 13,
+    "h": 20,
+    "anchor": {
+      "x": 6,
+      "y": 19
+    },
+    "source": {
+      "file": "source-reference/D-environment.png",
+      "crop": {
+        "left": 940,
+        "top": 948,
+        "width": 314,
+        "height": 306
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "prop"
+  },
+  "coin": {
+    "file": "png/coin.png",
+    "w": 9,
+    "h": 9,
+    "anchor": {
+      "x": 4,
+      "y": 8
+    },
+    "source": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 0,
+        "top": 0,
+        "width": 265,
+        "height": 240
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "pickup"
+  },
+  "pickup_plus": {
+    "file": "png/pickup_plus.png",
+    "w": 10,
+    "h": 10,
+    "anchor": {
+      "x": 5,
+      "y": 9
+    },
+    "source": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 265,
+        "top": 0,
+        "width": 240,
+        "height": 240
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "pickup"
+  },
+  "pickup_multiply": {
+    "file": "png/pickup_multiply.png",
+    "w": 10,
+    "h": 10,
+    "anchor": {
+      "x": 5,
+      "y": 9
+    },
+    "source": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 505,
+        "top": 0,
+        "width": 219,
+        "height": 240
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "pickup"
+  },
+  "fuel_can": {
+    "file": "png/fuel_can.png",
+    "w": 11,
+    "h": 13,
+    "anchor": {
+      "x": 5,
+      "y": 12
+    },
+    "source": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 724,
+        "top": 0,
+        "width": 246,
+        "height": 240
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "pickup"
+  },
+  "engine": {
+    "file": "png/engine.png",
+    "w": 14,
+    "h": 12,
+    "anchor": {
+      "x": 7,
+      "y": 11
+    },
+    "source": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 970,
+        "top": 0,
+        "width": 284,
+        "height": 240
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "pickup"
+  },
+  "wheel": {
+    "file": "png/wheel.png",
+    "w": 10,
+    "h": 11,
+    "anchor": {
+      "x": 5,
+      "y": 10
+    },
+    "source": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 0,
+        "top": 240,
+        "width": 265,
+        "height": 240
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "pickup"
+  },
+  "wrecking_ball": {
+    "file": "png/wrecking_ball.png",
+    "w": 10,
+    "h": 14,
+    "anchor": {
+      "x": 5,
+      "y": 13
+    },
+    "source": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 265,
+        "top": 240,
+        "width": 240,
+        "height": 240
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "pickup"
+  },
+  "trash_bin": {
+    "file": "png/trash_bin.png",
+    "w": 12,
+    "h": 16,
+    "anchor": {
+      "x": 6,
+      "y": 15
+    },
+    "source": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 505,
+        "top": 240,
+        "width": 219,
+        "height": 240
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "prop"
+  },
+  "tire_stack": {
+    "file": "png/tire_stack.png",
+    "w": 12,
+    "h": 14,
+    "anchor": {
+      "x": 6,
+      "y": 13
+    },
+    "source": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 724,
+        "top": 240,
+        "width": 246,
+        "height": 240
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "prop"
+  },
+  "crate": {
+    "file": "png/crate.png",
+    "w": 14,
+    "h": 14,
+    "anchor": {
+      "x": 7,
+      "y": 13
+    },
+    "source": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 970,
+        "top": 240,
+        "width": 284,
+        "height": 237
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "prop"
+  },
+  "dog_brown": {
+    "file": "png/dog_brown.png",
+    "w": 17,
+    "h": 17,
+    "anchor": {
+      "x": 8,
+      "y": 16
+    },
+    "source": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 0,
+        "top": 480,
+        "width": 265,
+        "height": 255
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "life"
+  },
+  "dog_spotted": {
+    "file": "png/dog_spotted.png",
+    "w": 15,
+    "h": 17,
+    "anchor": {
+      "x": 7,
+      "y": 16
+    },
+    "source": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 265,
+        "top": 480,
+        "width": 240,
+        "height": 257
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "life"
+  },
+  "cat_orange": {
+    "file": "png/cat_orange.png",
+    "w": 11,
+    "h": 14,
+    "anchor": {
+      "x": 5,
+      "y": 13
+    },
+    "source": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 505,
+        "top": 480,
+        "width": 219,
+        "height": 262
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "life"
+  },
+  "cat_gray": {
+    "file": "png/cat_gray.png",
+    "w": 11,
+    "h": 14,
+    "anchor": {
+      "x": 5,
+      "y": 13
+    },
+    "source": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 724,
+        "top": 480,
+        "width": 246,
+        "height": 300
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "life"
+  },
+  "person_worker": {
+    "file": "png/person_worker.png",
+    "w": 12,
+    "h": 23,
+    "anchor": {
+      "x": 6,
+      "y": 22
+    },
+    "source": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 970,
+        "top": 477,
+        "width": 284,
+        "height": 303
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "life"
+  },
+  "person_woman": {
+    "file": "png/person_woman.png",
+    "w": 12,
+    "h": 25,
+    "anchor": {
+      "x": 6,
+      "y": 24
+    },
+    "source": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 0,
+        "top": 735,
+        "width": 265,
+        "height": 285
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "life"
+  },
+  "person_youth": {
+    "file": "png/person_youth.png",
+    "w": 12,
+    "h": 26,
+    "anchor": {
+      "x": 6,
+      "y": 25
+    },
+    "source": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 265,
+        "top": 737,
+        "width": 240,
+        "height": 283
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "life"
+  },
+  "pigeon_up": {
+    "file": "png/pigeon_up.png",
+    "w": 11,
+    "h": 14,
+    "anchor": {
+      "x": 5,
+      "y": 13
+    },
+    "source": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 505,
+        "top": 742,
+        "width": 219,
+        "height": 258
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "life"
+  },
+  "pigeon_mid": {
+    "file": "png/pigeon_mid.png",
+    "w": 16,
+    "h": 8,
+    "anchor": {
+      "x": 8,
+      "y": 7
+    },
+    "source": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 724,
+        "top": 780,
+        "width": 246,
+        "height": 220
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "life"
+  },
+  "pigeon_down": {
+    "file": "png/pigeon_down.png",
+    "w": 13,
+    "h": 10,
+    "anchor": {
+      "x": 6,
+      "y": 9
+    },
+    "source": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 970,
+        "top": 780,
+        "width": 284,
+        "height": 225
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "life"
+  },
+  "cloud_0": {
+    "file": "png/cloud_0.png",
+    "w": 18,
+    "h": 13,
+    "anchor": {
+      "x": 9,
+      "y": 12
+    },
+    "source": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 0,
+        "top": 1020,
+        "width": 265,
+        "height": 234
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "prop"
+  },
+  "cloud_1": {
+    "file": "png/cloud_1.png",
+    "w": 25,
+    "h": 13,
+    "anchor": {
+      "x": 12,
+      "y": 12
+    },
+    "source": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 265,
+        "top": 1020,
+        "width": 240,
+        "height": 234
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "prop"
+  },
+  "weeds": {
+    "file": "png/weeds.png",
+    "w": 9,
+    "h": 9,
+    "anchor": {
+      "x": 4,
+      "y": 8
+    },
+    "source": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 505,
+        "top": 1000,
+        "width": 219,
+        "height": 254
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "prop"
+  },
+  "cone": {
+    "file": "png/cone.png",
+    "w": 9,
+    "h": 12,
+    "anchor": {
+      "x": 4,
+      "y": 11
+    },
+    "source": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 724,
+        "top": 1000,
+        "width": 246,
+        "height": 254
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "prop"
+  },
+  "fence": {
+    "file": "png/fence.png",
+    "w": 19,
+    "h": 17,
+    "anchor": {
+      "x": 9,
+      "y": 16
+    },
+    "source": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 970,
+        "top": 1005,
+        "width": 284,
+        "height": 249
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "prop"
+  },
+  "garage_engine": {
+    "file": "png/garage_engine.png",
+    "w": 30,
+    "h": 30,
+    "anchor": {
+      "x": 15,
+      "y": 15
+    },
+    "source": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 970,
+        "top": 0,
+        "width": 284,
+        "height": 240
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "garage_ui",
+    "display_3x": {
+      "w": 90,
+      "h": 90
+    }
+  },
+  "garage_wheel": {
+    "file": "png/garage_wheel.png",
+    "w": 30,
+    "h": 30,
+    "anchor": {
+      "x": 15,
+      "y": 15
+    },
+    "source": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 0,
+        "top": 240,
+        "width": 265,
+        "height": 240
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "garage_ui",
+    "display_3x": {
+      "w": 90,
+      "h": 90
+    }
+  },
+  "garage_fuel_can": {
+    "file": "png/garage_fuel_can.png",
+    "w": 30,
+    "h": 30,
+    "anchor": {
+      "x": 15,
+      "y": 15
+    },
+    "source": {
+      "file": "source-reference/D-props.png",
+      "crop": {
+        "left": 724,
+        "top": 0,
+        "width": 246,
+        "height": 240
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "garage_ui",
+    "display_3x": {
+      "w": 90,
+      "h": 90
+    }
+  },
+  "mud_strip": {
+    "file": "tiles/mud_strip.png",
+    "w": 48,
+    "h": 10,
+    "anchor": {
+      "x": 24,
+      "y": 9
+    },
+    "source": {
+      "file": "source-reference/D-terrain.png",
+      "crop": {
+        "left": 30,
+        "top": 70,
+        "width": 875,
+        "height": 195
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "terrain"
+  },
+  "mud_repeat": {
+    "file": "tiles/mud_repeat.png",
+    "w": 48,
+    "h": 10,
+    "anchor": {
+      "x": 0,
+      "y": 0
+    },
+    "source": {
+      "file": "source-reference/D-terrain.png",
+      "crop": {
+        "left": 30,
+        "top": 70,
+        "width": 875,
+        "height": 195
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "terrain",
+    "repeat": "x",
+    "note": "Identical left/right edge columns; render as terrain skin, slope supplied by game."
+  },
+  "concrete_strip": {
+    "file": "tiles/concrete_strip.png",
+    "w": 48,
+    "h": 9,
+    "anchor": {
+      "x": 24,
+      "y": 8
+    },
+    "source": {
+      "file": "source-reference/D-terrain.png",
+      "crop": {
+        "left": 30,
+        "top": 278,
+        "width": 875,
+        "height": 174
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "terrain"
+  },
+  "concrete_repeat": {
+    "file": "tiles/concrete_repeat.png",
+    "w": 48,
+    "h": 9,
+    "anchor": {
+      "x": 0,
+      "y": 0
+    },
+    "source": {
+      "file": "source-reference/D-terrain.png",
+      "crop": {
+        "left": 30,
+        "top": 278,
+        "width": 875,
+        "height": 174
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "terrain",
+    "repeat": "x",
+    "note": "Identical left/right edge columns; render as terrain skin, slope supplied by game."
+  },
+  "rubbish": {
+    "file": "png/rubbish.png",
+    "w": 23,
+    "h": 15,
+    "anchor": {
+      "x": 11,
+      "y": 14
+    },
+    "source": {
+      "file": "source-reference/D-terrain.png",
+      "crop": {
+        "left": 917,
+        "top": 90,
+        "width": 515,
+        "height": 359
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "prop"
+  },
+  "barrel": {
+    "file": "png/barrel.png",
+    "w": 12,
+    "h": 19,
+    "anchor": {
+      "x": 6,
+      "y": 18
+    },
+    "source": {
+      "file": "source-reference/D-terrain.png",
+      "crop": {
+        "left": 1445,
+        "top": 60,
+        "width": 290,
+        "height": 389
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "prop"
+  },
+  "shack_small": {
+    "file": "png/shack_small.png",
+    "w": 30,
+    "h": 24,
+    "anchor": {
+      "x": 15,
+      "y": 23
+    },
+    "source": {
+      "file": "source-reference/D-terrain.png",
+      "crop": {
+        "left": 50,
+        "top": 473,
+        "width": 469,
+        "height": 367
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "prop"
+  },
+  "bush": {
+    "file": "png/bush.png",
+    "w": 17,
+    "h": 15,
+    "anchor": {
+      "x": 8,
+      "y": 14
+    },
+    "source": {
+      "file": "source-reference/D-terrain.png",
+      "crop": {
+        "left": 540,
+        "top": 507,
+        "width": 368,
+        "height": 335
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "prop"
+  },
+  "stones": {
+    "file": "png/stones.png",
+    "w": 14,
+    "h": 10,
+    "anchor": {
+      "x": 7,
+      "y": 9
+    },
+    "source": {
+      "file": "source-reference/D-terrain.png",
+      "crop": {
+        "left": 950,
+        "top": 548,
+        "width": 420,
+        "height": 293
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "prop"
+  },
+  "road_sign": {
+    "file": "png/road_sign.png",
+    "w": 14,
+    "h": 22,
+    "anchor": {
+      "x": 7,
+      "y": 21
+    },
+    "source": {
+      "file": "source-reference/D-terrain.png",
+      "crop": {
+        "left": 1430,
+        "top": 455,
+        "width": 302,
+        "height": 388
+      },
+      "method": "dark-priority downsample from fresh D master"
+    },
+    "category": "prop"
+  },
+  "building_green_bg": {
+    "file": "png/building_green_bg.png",
+    "w": 38,
+    "h": 48,
+    "anchor": {
+      "x": 19,
+      "y": 47
+    },
+    "category": "background_variant",
+    "note": "Opaque muted palette variant; no partial alpha."
+  },
+  "building_red_bg": {
+    "file": "png/building_red_bg.png",
+    "w": 38,
+    "h": 50,
+    "anchor": {
+      "x": 19,
+      "y": 49
+    },
+    "category": "background_variant",
+    "note": "Opaque muted palette variant; no partial alpha."
+  },
+  "factory_bg": {
+    "file": "png/factory_bg.png",
+    "w": 48,
+    "h": 49,
+    "anchor": {
+      "x": 24,
+      "y": 48
+    },
+    "category": "background_variant",
+    "note": "Opaque muted palette variant; no partial alpha."
+  },
+  "shack_bg": {
+    "file": "png/shack_bg.png",
+    "w": 38,
+    "h": 33,
+    "anchor": {
+      "x": 19,
+      "y": 32
+    },
+    "category": "background_variant",
+    "note": "Opaque muted palette variant; no partial alpha."
+  },
+  "shack_small_bg": {
+    "file": "png/shack_small_bg.png",
+    "w": 30,
+    "h": 24,
+    "anchor": {
+      "x": 15,
+      "y": 23
+    },
+    "category": "background_variant",
+    "note": "Opaque muted palette variant; no partial alpha."
+  },
+  "city_far_bg": {
+    "file": "png/city_far_bg.png",
+    "w": 100,
+    "h": 38,
+    "anchor": {
+      "x": 50,
+      "y": 37
+    },
+    "category": "background_variant",
+    "note": "Opaque muted palette variant; no partial alpha."
+  },
+  "halfpipe_bg": {
+    "file": "png/halfpipe_bg.png",
+    "w": 44,
+    "h": 22,
+    "anchor": {
+      "x": 22,
+      "y": 21
+    },
+    "category": "background_variant",
+    "note": "Opaque muted palette variant; no partial alpha."
+  },
+  "fence_bg": {
+    "file": "png/fence_bg.png",
+    "w": 19,
+    "h": 17,
+    "anchor": {
+      "x": 9,
+      "y": 16
+    },
+    "category": "background_variant",
+    "note": "Opaque muted palette variant; no partial alpha."
+  },
+  "person_worker_bg": {
+    "file": "png/person_worker_bg.png",
+    "w": 12,
+    "h": 23,
+    "anchor": {
+      "x": 6,
+      "y": 22
+    },
+    "category": "background_variant",
+    "note": "Opaque muted palette variant; no partial alpha."
+  },
+  "person_woman_bg": {
+    "file": "png/person_woman_bg.png",
+    "w": 12,
+    "h": 25,
+    "anchor": {
+      "x": 6,
+      "y": 24
+    },
+    "category": "background_variant",
+    "note": "Opaque muted palette variant; no partial alpha."
+  },
+  "person_youth_bg": {
+    "file": "png/person_youth_bg.png",
+    "w": 12,
+    "h": 26,
+    "anchor": {
+      "x": 6,
+      "y": 25
+    },
+    "category": "background_variant",
+    "note": "Opaque muted palette variant; no partial alpha."
+  },
+  "dog_brown_bg": {
+    "file": "png/dog_brown_bg.png",
+    "w": 17,
+    "h": 17,
+    "anchor": {
+      "x": 8,
+      "y": 16
+    },
+    "category": "background_variant",
+    "note": "Opaque muted palette variant; no partial alpha."
+  },
+  "dog_spotted_bg": {
+    "file": "png/dog_spotted_bg.png",
+    "w": 15,
+    "h": 17,
+    "anchor": {
+      "x": 7,
+      "y": 16
+    },
+    "category": "background_variant",
+    "note": "Opaque muted palette variant; no partial alpha."
+  },
+  "cat_orange_bg": {
+    "file": "png/cat_orange_bg.png",
+    "w": 11,
+    "h": 14,
+    "anchor": {
+      "x": 5,
+      "y": 13
+    },
+    "category": "background_variant",
+    "note": "Opaque muted palette variant; no partial alpha."
+  },
+  "cat_gray_bg": {
+    "file": "png/cat_gray_bg.png",
+    "w": 11,
+    "h": 14,
+    "anchor": {
+      "x": 5,
+      "y": 13
+    },
+    "category": "background_variant",
+    "note": "Opaque muted palette variant; no partial alpha."
+  },
+  "zombie_thin_stripes_head": {
+    "file": "parts/zombie_thin_stripes_head.png",
+    "w": 9,
+    "h": 10,
+    "anchor": {
+      "x": 4,
+      "y": 5
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 19,
+      "y": 12
+    }
+  },
+  "zombie_thin_stripes_torso": {
+    "file": "parts/zombie_thin_stripes_torso.png",
+    "w": 7,
+    "h": 12,
+    "anchor": {
+      "x": 3,
+      "y": 6
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 22,
+      "y": 22
+    }
+  },
+  "zombie_thin_stripes_arm_front": {
+    "file": "parts/zombie_thin_stripes_arm_front.png",
+    "w": 13,
+    "h": 4,
+    "anchor": {
+      "x": 6,
+      "y": 2
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 9,
+      "y": 22
+    }
+  },
+  "zombie_thin_stripes_arm_back": {
+    "file": "parts/zombie_thin_stripes_arm_back.png",
+    "w": 3,
+    "h": 11,
+    "anchor": {
+      "x": 1,
+      "y": 5
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 27,
+      "y": 25
+    }
+  },
+  "zombie_thin_stripes_leg_front": {
+    "file": "parts/zombie_thin_stripes_leg_front.png",
+    "w": 6,
+    "h": 10,
+    "anchor": {
+      "x": 3,
+      "y": 5
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 17,
+      "y": 34
+    }
+  },
+  "zombie_thin_stripes_leg_back": {
+    "file": "parts/zombie_thin_stripes_leg_back.png",
+    "w": 7,
+    "h": 10,
+    "anchor": {
+      "x": 3,
+      "y": 5
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 23,
+      "y": 34
+    }
+  },
+  "zombie_thin_stripes_walk_0": {
+    "file": "png/zombie_thin_stripes_walk_0.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 23,
+        "y": 34
+      },
+      "arm_back": {
+        "x": 27,
+        "y": 25
+      },
+      "torso": {
+        "x": 22,
+        "y": 22
+      },
+      "leg_front": {
+        "x": 17,
+        "y": 34
+      },
+      "arm_front": {
+        "x": 9,
+        "y": 22
+      },
+      "head": {
+        "x": 19,
+        "y": 12
+      }
+    }
+  },
+  "zombie_thin_stripes_walk_1": {
+    "file": "png/zombie_thin_stripes_walk_1.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 22,
+        "y": 34
+      },
+      "arm_back": {
+        "x": 28,
+        "y": 24
+      },
+      "torso": {
+        "x": 22,
+        "y": 21
+      },
+      "leg_front": {
+        "x": 18,
+        "y": 33
+      },
+      "arm_front": {
+        "x": 8,
+        "y": 21
+      },
+      "head": {
+        "x": 19,
+        "y": 11
+      }
+    }
+  },
+  "zombie_thin_stripes_walk_2": {
+    "file": "png/zombie_thin_stripes_walk_2.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 22,
+        "y": 34
+      },
+      "arm_back": {
+        "x": 28,
+        "y": 25
+      },
+      "torso": {
+        "x": 22,
+        "y": 22
+      },
+      "leg_front": {
+        "x": 18,
+        "y": 33
+      },
+      "arm_front": {
+        "x": 8,
+        "y": 22
+      },
+      "head": {
+        "x": 19,
+        "y": 12
+      }
+    }
+  },
+  "zombie_thin_stripes_walk_3": {
+    "file": "png/zombie_thin_stripes_walk_3.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 23,
+        "y": 34
+      },
+      "arm_back": {
+        "x": 27,
+        "y": 25
+      },
+      "torso": {
+        "x": 22,
+        "y": 22
+      },
+      "leg_front": {
+        "x": 17,
+        "y": 34
+      },
+      "arm_front": {
+        "x": 9,
+        "y": 22
+      },
+      "head": {
+        "x": 19,
+        "y": 12
+      }
+    }
+  },
+  "zombie_thin_stripes_walk_4": {
+    "file": "png/zombie_thin_stripes_walk_4.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 24,
+        "y": 33
+      },
+      "arm_back": {
+        "x": 26,
+        "y": 24
+      },
+      "torso": {
+        "x": 22,
+        "y": 21
+      },
+      "leg_front": {
+        "x": 16,
+        "y": 34
+      },
+      "arm_front": {
+        "x": 10,
+        "y": 21
+      },
+      "head": {
+        "x": 19,
+        "y": 11
+      }
+    }
+  },
+  "zombie_thin_stripes_walk_5": {
+    "file": "png/zombie_thin_stripes_walk_5.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 24,
+        "y": 33
+      },
+      "arm_back": {
+        "x": 26,
+        "y": 25
+      },
+      "torso": {
+        "x": 22,
+        "y": 22
+      },
+      "leg_front": {
+        "x": 16,
+        "y": 34
+      },
+      "arm_front": {
+        "x": 10,
+        "y": 22
+      },
+      "head": {
+        "x": 19,
+        "y": 12
+      }
+    }
+  },
+  "zombie_thin_mechanic_head": {
+    "file": "parts/zombie_thin_mechanic_head.png",
+    "w": 17,
+    "h": 10,
+    "anchor": {
+      "x": 8,
+      "y": 5
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 12,
+      "y": 12
+    }
+  },
+  "zombie_thin_mechanic_torso": {
+    "file": "parts/zombie_thin_mechanic_torso.png",
+    "w": 9,
+    "h": 12,
+    "anchor": {
+      "x": 4,
+      "y": 6
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 21,
+      "y": 22
+    }
+  },
+  "zombie_thin_mechanic_arm_front": {
+    "file": "parts/zombie_thin_mechanic_arm_front.png",
+    "w": 13,
+    "h": 9,
+    "anchor": {
+      "x": 6,
+      "y": 4
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 9,
+      "y": 22
+    }
+  },
+  "zombie_thin_mechanic_arm_back": {
+    "file": "parts/zombie_thin_mechanic_arm_back.png",
+    "w": 3,
+    "h": 11,
+    "anchor": {
+      "x": 1,
+      "y": 5
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 27,
+      "y": 25
+    }
+  },
+  "zombie_thin_mechanic_leg_front": {
+    "file": "parts/zombie_thin_mechanic_leg_front.png",
+    "w": 5,
+    "h": 10,
+    "anchor": {
+      "x": 2,
+      "y": 5
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 18,
+      "y": 34
+    }
+  },
+  "zombie_thin_mechanic_leg_back": {
+    "file": "parts/zombie_thin_mechanic_leg_back.png",
+    "w": 6,
+    "h": 10,
+    "anchor": {
+      "x": 3,
+      "y": 5
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 23,
+      "y": 34
+    }
+  },
+  "zombie_thin_mechanic_walk_0": {
+    "file": "png/zombie_thin_mechanic_walk_0.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 23,
+        "y": 34
+      },
+      "arm_back": {
+        "x": 27,
+        "y": 25
+      },
+      "torso": {
+        "x": 21,
+        "y": 22
+      },
+      "leg_front": {
+        "x": 18,
+        "y": 34
+      },
+      "arm_front": {
+        "x": 9,
+        "y": 22
+      },
+      "head": {
+        "x": 12,
+        "y": 12
+      }
+    }
+  },
+  "zombie_thin_mechanic_walk_1": {
+    "file": "png/zombie_thin_mechanic_walk_1.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 22,
+        "y": 34
+      },
+      "arm_back": {
+        "x": 28,
+        "y": 24
+      },
+      "torso": {
+        "x": 21,
+        "y": 21
+      },
+      "leg_front": {
+        "x": 19,
+        "y": 33
+      },
+      "arm_front": {
+        "x": 8,
+        "y": 21
+      },
+      "head": {
+        "x": 12,
+        "y": 11
+      }
+    }
+  },
+  "zombie_thin_mechanic_walk_2": {
+    "file": "png/zombie_thin_mechanic_walk_2.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 22,
+        "y": 34
+      },
+      "arm_back": {
+        "x": 28,
+        "y": 25
+      },
+      "torso": {
+        "x": 21,
+        "y": 22
+      },
+      "leg_front": {
+        "x": 19,
+        "y": 33
+      },
+      "arm_front": {
+        "x": 8,
+        "y": 22
+      },
+      "head": {
+        "x": 12,
+        "y": 12
+      }
+    }
+  },
+  "zombie_thin_mechanic_walk_3": {
+    "file": "png/zombie_thin_mechanic_walk_3.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 23,
+        "y": 34
+      },
+      "arm_back": {
+        "x": 27,
+        "y": 25
+      },
+      "torso": {
+        "x": 21,
+        "y": 22
+      },
+      "leg_front": {
+        "x": 18,
+        "y": 34
+      },
+      "arm_front": {
+        "x": 9,
+        "y": 22
+      },
+      "head": {
+        "x": 12,
+        "y": 12
+      }
+    }
+  },
+  "zombie_thin_mechanic_walk_4": {
+    "file": "png/zombie_thin_mechanic_walk_4.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 24,
+        "y": 33
+      },
+      "arm_back": {
+        "x": 26,
+        "y": 24
+      },
+      "torso": {
+        "x": 21,
+        "y": 21
+      },
+      "leg_front": {
+        "x": 17,
+        "y": 34
+      },
+      "arm_front": {
+        "x": 10,
+        "y": 21
+      },
+      "head": {
+        "x": 12,
+        "y": 11
+      }
+    }
+  },
+  "zombie_thin_mechanic_walk_5": {
+    "file": "png/zombie_thin_mechanic_walk_5.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 24,
+        "y": 33
+      },
+      "arm_back": {
+        "x": 26,
+        "y": 25
+      },
+      "torso": {
+        "x": 21,
+        "y": 22
+      },
+      "leg_front": {
+        "x": 17,
+        "y": 34
+      },
+      "arm_front": {
+        "x": 10,
+        "y": 22
+      },
+      "head": {
+        "x": 12,
+        "y": 12
+      }
+    }
+  },
+  "zombie_thin_punk_head": {
+    "file": "parts/zombie_thin_punk_head.png",
+    "w": 9,
+    "h": 10,
+    "anchor": {
+      "x": 4,
+      "y": 5
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 19,
+      "y": 12
+    }
+  },
+  "zombie_thin_punk_torso": {
+    "file": "parts/zombie_thin_punk_torso.png",
+    "w": 8,
+    "h": 12,
+    "anchor": {
+      "x": 4,
+      "y": 6
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 21,
+      "y": 22
+    }
+  },
+  "zombie_thin_punk_arm_front": {
+    "file": "parts/zombie_thin_punk_arm_front.png",
+    "w": 13,
+    "h": 9,
+    "anchor": {
+      "x": 6,
+      "y": 4
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 9,
+      "y": 22
+    }
+  },
+  "zombie_thin_punk_arm_back": {
+    "file": "parts/zombie_thin_punk_arm_back.png",
+    "w": 3,
+    "h": 10,
+    "anchor": {
+      "x": 1,
+      "y": 5
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 27,
+      "y": 25
+    }
+  },
+  "zombie_thin_punk_leg_front": {
+    "file": "parts/zombie_thin_punk_leg_front.png",
+    "w": 6,
+    "h": 10,
+    "anchor": {
+      "x": 3,
+      "y": 5
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 17,
+      "y": 34
+    }
+  },
+  "zombie_thin_punk_leg_back": {
+    "file": "parts/zombie_thin_punk_leg_back.png",
+    "w": 6,
+    "h": 10,
+    "anchor": {
+      "x": 3,
+      "y": 5
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 23,
+      "y": 34
+    }
+  },
+  "zombie_thin_punk_walk_0": {
+    "file": "png/zombie_thin_punk_walk_0.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 23,
+        "y": 34
+      },
+      "arm_back": {
+        "x": 27,
+        "y": 25
+      },
+      "torso": {
+        "x": 21,
+        "y": 22
+      },
+      "leg_front": {
+        "x": 17,
+        "y": 34
+      },
+      "arm_front": {
+        "x": 9,
+        "y": 22
+      },
+      "head": {
+        "x": 19,
+        "y": 12
+      }
+    }
+  },
+  "zombie_thin_punk_walk_1": {
+    "file": "png/zombie_thin_punk_walk_1.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 22,
+        "y": 34
+      },
+      "arm_back": {
+        "x": 28,
+        "y": 24
+      },
+      "torso": {
+        "x": 21,
+        "y": 21
+      },
+      "leg_front": {
+        "x": 18,
+        "y": 33
+      },
+      "arm_front": {
+        "x": 8,
+        "y": 21
+      },
+      "head": {
+        "x": 19,
+        "y": 11
+      }
+    }
+  },
+  "zombie_thin_punk_walk_2": {
+    "file": "png/zombie_thin_punk_walk_2.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 22,
+        "y": 34
+      },
+      "arm_back": {
+        "x": 28,
+        "y": 25
+      },
+      "torso": {
+        "x": 21,
+        "y": 22
+      },
+      "leg_front": {
+        "x": 18,
+        "y": 33
+      },
+      "arm_front": {
+        "x": 8,
+        "y": 22
+      },
+      "head": {
+        "x": 19,
+        "y": 12
+      }
+    }
+  },
+  "zombie_thin_punk_walk_3": {
+    "file": "png/zombie_thin_punk_walk_3.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 23,
+        "y": 34
+      },
+      "arm_back": {
+        "x": 27,
+        "y": 25
+      },
+      "torso": {
+        "x": 21,
+        "y": 22
+      },
+      "leg_front": {
+        "x": 17,
+        "y": 34
+      },
+      "arm_front": {
+        "x": 9,
+        "y": 22
+      },
+      "head": {
+        "x": 19,
+        "y": 12
+      }
+    }
+  },
+  "zombie_thin_punk_walk_4": {
+    "file": "png/zombie_thin_punk_walk_4.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 24,
+        "y": 33
+      },
+      "arm_back": {
+        "x": 26,
+        "y": 24
+      },
+      "torso": {
+        "x": 21,
+        "y": 21
+      },
+      "leg_front": {
+        "x": 16,
+        "y": 34
+      },
+      "arm_front": {
+        "x": 10,
+        "y": 21
+      },
+      "head": {
+        "x": 19,
+        "y": 11
+      }
+    }
+  },
+  "zombie_thin_punk_walk_5": {
+    "file": "png/zombie_thin_punk_walk_5.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 24,
+        "y": 33
+      },
+      "arm_back": {
+        "x": 26,
+        "y": 25
+      },
+      "torso": {
+        "x": 21,
+        "y": 22
+      },
+      "leg_front": {
+        "x": 16,
+        "y": 34
+      },
+      "arm_front": {
+        "x": 10,
+        "y": 22
+      },
+      "head": {
+        "x": 19,
+        "y": 12
+      }
+    }
+  },
+  "zombie_block_worker_head": {
+    "file": "parts/zombie_block_worker_head.png",
+    "w": 14,
+    "h": 9,
+    "anchor": {
+      "x": 7,
+      "y": 4
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 17,
+      "y": 8
+    }
+  },
+  "zombie_block_worker_torso": {
+    "file": "parts/zombie_block_worker_torso.png",
+    "w": 17,
+    "h": 18,
+    "anchor": {
+      "x": 8,
+      "y": 9
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 15,
+      "y": 17
+    }
+  },
+  "zombie_block_worker_arm_front": {
+    "file": "parts/zombie_block_worker_arm_front.png",
+    "w": 8,
+    "h": 6,
+    "anchor": {
+      "x": 4,
+      "y": 3
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 7,
+      "y": 18
+    }
+  },
+  "zombie_block_worker_arm_back": {
+    "file": "parts/zombie_block_worker_arm_back.png",
+    "w": 2,
+    "h": 19,
+    "anchor": {
+      "x": 1,
+      "y": 9
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 30,
+      "y": 18
+    }
+  },
+  "zombie_block_worker_leg_front": {
+    "file": "parts/zombie_block_worker_leg_front.png",
+    "w": 10,
+    "h": 9,
+    "anchor": {
+      "x": 5,
+      "y": 4
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 13,
+      "y": 35
+    }
+  },
+  "zombie_block_worker_leg_back": {
+    "file": "parts/zombie_block_worker_leg_back.png",
+    "w": 8,
+    "h": 9,
+    "anchor": {
+      "x": 4,
+      "y": 4
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 23,
+      "y": 35
+    }
+  },
+  "zombie_block_worker_walk_0": {
+    "file": "png/zombie_block_worker_walk_0.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 23,
+        "y": 35
+      },
+      "arm_back": {
+        "x": 30,
+        "y": 18
+      },
+      "torso": {
+        "x": 15,
+        "y": 17
+      },
+      "leg_front": {
+        "x": 13,
+        "y": 35
+      },
+      "arm_front": {
+        "x": 7,
+        "y": 18
+      },
+      "head": {
+        "x": 17,
+        "y": 8
+      }
+    }
+  },
+  "zombie_block_worker_walk_1": {
+    "file": "png/zombie_block_worker_walk_1.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 22,
+        "y": 35
+      },
+      "arm_back": {
+        "x": 31,
+        "y": 17
+      },
+      "torso": {
+        "x": 15,
+        "y": 16
+      },
+      "leg_front": {
+        "x": 14,
+        "y": 34
+      },
+      "arm_front": {
+        "x": 6,
+        "y": 17
+      },
+      "head": {
+        "x": 17,
+        "y": 7
+      }
+    }
+  },
+  "zombie_block_worker_walk_2": {
+    "file": "png/zombie_block_worker_walk_2.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 22,
+        "y": 35
+      },
+      "arm_back": {
+        "x": 31,
+        "y": 18
+      },
+      "torso": {
+        "x": 15,
+        "y": 17
+      },
+      "leg_front": {
+        "x": 14,
+        "y": 34
+      },
+      "arm_front": {
+        "x": 6,
+        "y": 18
+      },
+      "head": {
+        "x": 17,
+        "y": 8
+      }
+    }
+  },
+  "zombie_block_worker_walk_3": {
+    "file": "png/zombie_block_worker_walk_3.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 23,
+        "y": 35
+      },
+      "arm_back": {
+        "x": 30,
+        "y": 18
+      },
+      "torso": {
+        "x": 15,
+        "y": 17
+      },
+      "leg_front": {
+        "x": 13,
+        "y": 35
+      },
+      "arm_front": {
+        "x": 7,
+        "y": 18
+      },
+      "head": {
+        "x": 17,
+        "y": 8
+      }
+    }
+  },
+  "zombie_block_worker_walk_4": {
+    "file": "png/zombie_block_worker_walk_4.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 24,
+        "y": 34
+      },
+      "arm_back": {
+        "x": 29,
+        "y": 17
+      },
+      "torso": {
+        "x": 15,
+        "y": 16
+      },
+      "leg_front": {
+        "x": 12,
+        "y": 35
+      },
+      "arm_front": {
+        "x": 8,
+        "y": 17
+      },
+      "head": {
+        "x": 17,
+        "y": 7
+      }
+    }
+  },
+  "zombie_block_worker_walk_5": {
+    "file": "png/zombie_block_worker_walk_5.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 24,
+        "y": 34
+      },
+      "arm_back": {
+        "x": 29,
+        "y": 18
+      },
+      "torso": {
+        "x": 15,
+        "y": 17
+      },
+      "leg_front": {
+        "x": 12,
+        "y": 35
+      },
+      "arm_front": {
+        "x": 8,
+        "y": 18
+      },
+      "head": {
+        "x": 17,
+        "y": 8
+      }
+    }
+  },
+  "zombie_block_denim_head": {
+    "file": "parts/zombie_block_denim_head.png",
+    "w": 17,
+    "h": 8,
+    "anchor": {
+      "x": 8,
+      "y": 4
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 16,
+      "y": 12
+    }
+  },
+  "zombie_block_denim_torso": {
+    "file": "parts/zombie_block_denim_torso.png",
+    "w": 19,
+    "h": 16,
+    "anchor": {
+      "x": 9,
+      "y": 8
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 14,
+      "y": 20
+    }
+  },
+  "zombie_block_denim_arm_front": {
+    "file": "parts/zombie_block_denim_arm_front.png",
+    "w": 9,
+    "h": 5,
+    "anchor": {
+      "x": 4,
+      "y": 2
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 5,
+      "y": 21
+    }
+  },
+  "zombie_block_denim_arm_back": {
+    "file": "parts/zombie_block_denim_arm_back.png",
+    "w": 3,
+    "h": 17,
+    "anchor": {
+      "x": 1,
+      "y": 8
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 31,
+      "y": 21
+    }
+  },
+  "zombie_block_denim_leg_front": {
+    "file": "parts/zombie_block_denim_leg_front.png",
+    "w": 9,
+    "h": 8,
+    "anchor": {
+      "x": 4,
+      "y": 4
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 14,
+      "y": 36
+    }
+  },
+  "zombie_block_denim_leg_back": {
+    "file": "parts/zombie_block_denim_leg_back.png",
+    "w": 9,
+    "h": 8,
+    "anchor": {
+      "x": 4,
+      "y": 4
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 23,
+      "y": 36
+    }
+  },
+  "zombie_block_denim_walk_0": {
+    "file": "png/zombie_block_denim_walk_0.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 23,
+        "y": 36
+      },
+      "arm_back": {
+        "x": 31,
+        "y": 21
+      },
+      "torso": {
+        "x": 14,
+        "y": 20
+      },
+      "leg_front": {
+        "x": 14,
+        "y": 36
+      },
+      "arm_front": {
+        "x": 5,
+        "y": 21
+      },
+      "head": {
+        "x": 16,
+        "y": 12
+      }
+    }
+  },
+  "zombie_block_denim_walk_1": {
+    "file": "png/zombie_block_denim_walk_1.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 22,
+        "y": 36
+      },
+      "arm_back": {
+        "x": 32,
+        "y": 20
+      },
+      "torso": {
+        "x": 14,
+        "y": 19
+      },
+      "leg_front": {
+        "x": 15,
+        "y": 35
+      },
+      "arm_front": {
+        "x": 4,
+        "y": 20
+      },
+      "head": {
+        "x": 16,
+        "y": 11
+      }
+    }
+  },
+  "zombie_block_denim_walk_2": {
+    "file": "png/zombie_block_denim_walk_2.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 22,
+        "y": 36
+      },
+      "arm_back": {
+        "x": 32,
+        "y": 21
+      },
+      "torso": {
+        "x": 14,
+        "y": 20
+      },
+      "leg_front": {
+        "x": 15,
+        "y": 35
+      },
+      "arm_front": {
+        "x": 4,
+        "y": 21
+      },
+      "head": {
+        "x": 16,
+        "y": 12
+      }
+    }
+  },
+  "zombie_block_denim_walk_3": {
+    "file": "png/zombie_block_denim_walk_3.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 23,
+        "y": 36
+      },
+      "arm_back": {
+        "x": 31,
+        "y": 21
+      },
+      "torso": {
+        "x": 14,
+        "y": 20
+      },
+      "leg_front": {
+        "x": 14,
+        "y": 36
+      },
+      "arm_front": {
+        "x": 5,
+        "y": 21
+      },
+      "head": {
+        "x": 16,
+        "y": 12
+      }
+    }
+  },
+  "zombie_block_denim_walk_4": {
+    "file": "png/zombie_block_denim_walk_4.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 24,
+        "y": 35
+      },
+      "arm_back": {
+        "x": 30,
+        "y": 20
+      },
+      "torso": {
+        "x": 14,
+        "y": 19
+      },
+      "leg_front": {
+        "x": 13,
+        "y": 36
+      },
+      "arm_front": {
+        "x": 6,
+        "y": 20
+      },
+      "head": {
+        "x": 16,
+        "y": 11
+      }
+    }
+  },
+  "zombie_block_denim_walk_5": {
+    "file": "png/zombie_block_denim_walk_5.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 24,
+        "y": 35
+      },
+      "arm_back": {
+        "x": 30,
+        "y": 21
+      },
+      "torso": {
+        "x": 14,
+        "y": 20
+      },
+      "leg_front": {
+        "x": 13,
+        "y": 36
+      },
+      "arm_front": {
+        "x": 6,
+        "y": 21
+      },
+      "head": {
+        "x": 16,
+        "y": 12
+      }
+    }
+  },
+  "zombie_block_sport_head": {
+    "file": "parts/zombie_block_sport_head.png",
+    "w": 17,
+    "h": 8,
+    "anchor": {
+      "x": 8,
+      "y": 4
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 16,
+      "y": 10
+    }
+  },
+  "zombie_block_sport_torso": {
+    "file": "parts/zombie_block_sport_torso.png",
+    "w": 19,
+    "h": 17,
+    "anchor": {
+      "x": 9,
+      "y": 8
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 14,
+      "y": 18
+    }
+  },
+  "zombie_block_sport_arm_front": {
+    "file": "parts/zombie_block_sport_arm_front.png",
+    "w": 9,
+    "h": 5,
+    "anchor": {
+      "x": 4,
+      "y": 2
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 5,
+      "y": 19
+    }
+  },
+  "zombie_block_sport_arm_back": {
+    "file": "parts/zombie_block_sport_arm_back.png",
+    "w": 3,
+    "h": 17,
+    "anchor": {
+      "x": 1,
+      "y": 8
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 31,
+      "y": 20
+    }
+  },
+  "zombie_block_sport_leg_front": {
+    "file": "parts/zombie_block_sport_leg_front.png",
+    "w": 8,
+    "h": 8,
+    "anchor": {
+      "x": 4,
+      "y": 4
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 15,
+      "y": 35
+    }
+  },
+  "zombie_block_sport_leg_back": {
+    "file": "parts/zombie_block_sport_leg_back.png",
+    "w": 10,
+    "h": 8,
+    "anchor": {
+      "x": 5,
+      "y": 4
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 23,
+      "y": 35
+    }
+  },
+  "zombie_block_sport_walk_0": {
+    "file": "png/zombie_block_sport_walk_0.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 23,
+        "y": 35
+      },
+      "arm_back": {
+        "x": 31,
+        "y": 20
+      },
+      "torso": {
+        "x": 14,
+        "y": 18
+      },
+      "leg_front": {
+        "x": 15,
+        "y": 35
+      },
+      "arm_front": {
+        "x": 5,
+        "y": 19
+      },
+      "head": {
+        "x": 16,
+        "y": 10
+      }
+    }
+  },
+  "zombie_block_sport_walk_1": {
+    "file": "png/zombie_block_sport_walk_1.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 22,
+        "y": 35
+      },
+      "arm_back": {
+        "x": 32,
+        "y": 19
+      },
+      "torso": {
+        "x": 14,
+        "y": 17
+      },
+      "leg_front": {
+        "x": 16,
+        "y": 34
+      },
+      "arm_front": {
+        "x": 4,
+        "y": 18
+      },
+      "head": {
+        "x": 16,
+        "y": 9
+      }
+    }
+  },
+  "zombie_block_sport_walk_2": {
+    "file": "png/zombie_block_sport_walk_2.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 22,
+        "y": 35
+      },
+      "arm_back": {
+        "x": 32,
+        "y": 20
+      },
+      "torso": {
+        "x": 14,
+        "y": 18
+      },
+      "leg_front": {
+        "x": 16,
+        "y": 34
+      },
+      "arm_front": {
+        "x": 4,
+        "y": 19
+      },
+      "head": {
+        "x": 16,
+        "y": 10
+      }
+    }
+  },
+  "zombie_block_sport_walk_3": {
+    "file": "png/zombie_block_sport_walk_3.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 23,
+        "y": 35
+      },
+      "arm_back": {
+        "x": 31,
+        "y": 20
+      },
+      "torso": {
+        "x": 14,
+        "y": 18
+      },
+      "leg_front": {
+        "x": 15,
+        "y": 35
+      },
+      "arm_front": {
+        "x": 5,
+        "y": 19
+      },
+      "head": {
+        "x": 16,
+        "y": 10
+      }
+    }
+  },
+  "zombie_block_sport_walk_4": {
+    "file": "png/zombie_block_sport_walk_4.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 24,
+        "y": 34
+      },
+      "arm_back": {
+        "x": 30,
+        "y": 19
+      },
+      "torso": {
+        "x": 14,
+        "y": 17
+      },
+      "leg_front": {
+        "x": 14,
+        "y": 35
+      },
+      "arm_front": {
+        "x": 6,
+        "y": 18
+      },
+      "head": {
+        "x": 16,
+        "y": 9
+      }
+    }
+  },
+  "zombie_block_sport_walk_5": {
+    "file": "png/zombie_block_sport_walk_5.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 24,
+        "y": 34
+      },
+      "arm_back": {
+        "x": 30,
+        "y": 20
+      },
+      "torso": {
+        "x": 14,
+        "y": 18
+      },
+      "leg_front": {
+        "x": 14,
+        "y": 35
+      },
+      "arm_front": {
+        "x": 6,
+        "y": 19
+      },
+      "head": {
+        "x": 16,
+        "y": 10
+      }
+    }
+  },
+  "zombie_round_shirt_head": {
+    "file": "parts/zombie_round_shirt_head.png",
+    "w": 28,
+    "h": 9,
+    "anchor": {
+      "x": 14,
+      "y": 4
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 5,
+      "y": 7
+    }
+  },
+  "zombie_round_shirt_torso": {
+    "file": "parts/zombie_round_shirt_torso.png",
+    "w": 27,
+    "h": 23,
+    "anchor": {
+      "x": 13,
+      "y": 11
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 9,
+      "y": 16
+    }
+  },
+  "zombie_round_shirt_arm_front": {
+    "file": "parts/zombie_round_shirt_arm_front.png",
+    "w": 10,
+    "h": 12,
+    "anchor": {
+      "x": 5,
+      "y": 6
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 3,
+      "y": 16
+    }
+  },
+  "zombie_round_shirt_arm_back": {
+    "file": "parts/zombie_round_shirt_arm_back.png",
+    "w": 6,
+    "h": 17,
+    "anchor": {
+      "x": 3,
+      "y": 8
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 31,
+      "y": 21
+    }
+  },
+  "zombie_round_shirt_leg_front": {
+    "file": "parts/zombie_round_shirt_leg_front.png",
+    "w": 8,
+    "h": 5,
+    "anchor": {
+      "x": 4,
+      "y": 2
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 13,
+      "y": 39
+    }
+  },
+  "zombie_round_shirt_leg_back": {
+    "file": "parts/zombie_round_shirt_leg_back.png",
+    "w": 7,
+    "h": 5,
+    "anchor": {
+      "x": 3,
+      "y": 2
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 24,
+      "y": 39
+    }
+  },
+  "zombie_round_shirt_walk_0": {
+    "file": "png/zombie_round_shirt_walk_0.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 24,
+        "y": 39
+      },
+      "arm_back": {
+        "x": 31,
+        "y": 21
+      },
+      "torso": {
+        "x": 9,
+        "y": 16
+      },
+      "leg_front": {
+        "x": 13,
+        "y": 39
+      },
+      "arm_front": {
+        "x": 3,
+        "y": 16
+      },
+      "head": {
+        "x": 5,
+        "y": 7
+      }
+    }
+  },
+  "zombie_round_shirt_walk_1": {
+    "file": "png/zombie_round_shirt_walk_1.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 23,
+        "y": 39
+      },
+      "arm_back": {
+        "x": 32,
+        "y": 20
+      },
+      "torso": {
+        "x": 9,
+        "y": 15
+      },
+      "leg_front": {
+        "x": 14,
+        "y": 38
+      },
+      "arm_front": {
+        "x": 2,
+        "y": 15
+      },
+      "head": {
+        "x": 5,
+        "y": 6
+      }
+    }
+  },
+  "zombie_round_shirt_walk_2": {
+    "file": "png/zombie_round_shirt_walk_2.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 23,
+        "y": 39
+      },
+      "arm_back": {
+        "x": 32,
+        "y": 21
+      },
+      "torso": {
+        "x": 9,
+        "y": 16
+      },
+      "leg_front": {
+        "x": 14,
+        "y": 38
+      },
+      "arm_front": {
+        "x": 2,
+        "y": 16
+      },
+      "head": {
+        "x": 5,
+        "y": 7
+      }
+    }
+  },
+  "zombie_round_shirt_walk_3": {
+    "file": "png/zombie_round_shirt_walk_3.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 24,
+        "y": 39
+      },
+      "arm_back": {
+        "x": 31,
+        "y": 21
+      },
+      "torso": {
+        "x": 9,
+        "y": 16
+      },
+      "leg_front": {
+        "x": 13,
+        "y": 39
+      },
+      "arm_front": {
+        "x": 3,
+        "y": 16
+      },
+      "head": {
+        "x": 5,
+        "y": 7
+      }
+    }
+  },
+  "zombie_round_shirt_walk_4": {
+    "file": "png/zombie_round_shirt_walk_4.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 25,
+        "y": 38
+      },
+      "arm_back": {
+        "x": 30,
+        "y": 20
+      },
+      "torso": {
+        "x": 9,
+        "y": 15
+      },
+      "leg_front": {
+        "x": 12,
+        "y": 39
+      },
+      "arm_front": {
+        "x": 4,
+        "y": 15
+      },
+      "head": {
+        "x": 5,
+        "y": 6
+      }
+    }
+  },
+  "zombie_round_shirt_walk_5": {
+    "file": "png/zombie_round_shirt_walk_5.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 25,
+        "y": 38
+      },
+      "arm_back": {
+        "x": 30,
+        "y": 21
+      },
+      "torso": {
+        "x": 9,
+        "y": 16
+      },
+      "leg_front": {
+        "x": 12,
+        "y": 39
+      },
+      "arm_front": {
+        "x": 4,
+        "y": 16
+      },
+      "head": {
+        "x": 5,
+        "y": 7
+      }
+    }
+  },
+  "zombie_round_janitor_head": {
+    "file": "parts/zombie_round_janitor_head.png",
+    "w": 30,
+    "h": 9,
+    "anchor": {
+      "x": 15,
+      "y": 4
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 4,
+      "y": 8
+    }
+  },
+  "zombie_round_janitor_torso": {
+    "file": "parts/zombie_round_janitor_torso.png",
+    "w": 26,
+    "h": 22,
+    "anchor": {
+      "x": 13,
+      "y": 11
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 10,
+      "y": 17
+    }
+  },
+  "zombie_round_janitor_arm_front": {
+    "file": "parts/zombie_round_janitor_arm_front.png",
+    "w": 10,
+    "h": 12,
+    "anchor": {
+      "x": 5,
+      "y": 6
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 3,
+      "y": 17
+    }
+  },
+  "zombie_round_janitor_arm_back": {
+    "file": "parts/zombie_round_janitor_arm_back.png",
+    "w": 6,
+    "h": 17,
+    "anchor": {
+      "x": 3,
+      "y": 8
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 31,
+      "y": 21
+    }
+  },
+  "zombie_round_janitor_leg_front": {
+    "file": "parts/zombie_round_janitor_leg_front.png",
+    "w": 9,
+    "h": 5,
+    "anchor": {
+      "x": 4,
+      "y": 2
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 13,
+      "y": 39
+    }
+  },
+  "zombie_round_janitor_leg_back": {
+    "file": "parts/zombie_round_janitor_leg_back.png",
+    "w": 10,
+    "h": 5,
+    "anchor": {
+      "x": 5,
+      "y": 2
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 22,
+      "y": 39
+    }
+  },
+  "zombie_round_janitor_walk_0": {
+    "file": "png/zombie_round_janitor_walk_0.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 22,
+        "y": 39
+      },
+      "arm_back": {
+        "x": 31,
+        "y": 21
+      },
+      "torso": {
+        "x": 10,
+        "y": 17
+      },
+      "leg_front": {
+        "x": 13,
+        "y": 39
+      },
+      "arm_front": {
+        "x": 3,
+        "y": 17
+      },
+      "head": {
+        "x": 4,
+        "y": 8
+      }
+    }
+  },
+  "zombie_round_janitor_walk_1": {
+    "file": "png/zombie_round_janitor_walk_1.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 21,
+        "y": 39
+      },
+      "arm_back": {
+        "x": 32,
+        "y": 20
+      },
+      "torso": {
+        "x": 10,
+        "y": 16
+      },
+      "leg_front": {
+        "x": 14,
+        "y": 38
+      },
+      "arm_front": {
+        "x": 2,
+        "y": 16
+      },
+      "head": {
+        "x": 4,
+        "y": 7
+      }
+    }
+  },
+  "zombie_round_janitor_walk_2": {
+    "file": "png/zombie_round_janitor_walk_2.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 21,
+        "y": 39
+      },
+      "arm_back": {
+        "x": 32,
+        "y": 21
+      },
+      "torso": {
+        "x": 10,
+        "y": 17
+      },
+      "leg_front": {
+        "x": 14,
+        "y": 38
+      },
+      "arm_front": {
+        "x": 2,
+        "y": 17
+      },
+      "head": {
+        "x": 4,
+        "y": 8
+      }
+    }
+  },
+  "zombie_round_janitor_walk_3": {
+    "file": "png/zombie_round_janitor_walk_3.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 22,
+        "y": 39
+      },
+      "arm_back": {
+        "x": 31,
+        "y": 21
+      },
+      "torso": {
+        "x": 10,
+        "y": 17
+      },
+      "leg_front": {
+        "x": 13,
+        "y": 39
+      },
+      "arm_front": {
+        "x": 3,
+        "y": 17
+      },
+      "head": {
+        "x": 4,
+        "y": 8
+      }
+    }
+  },
+  "zombie_round_janitor_walk_4": {
+    "file": "png/zombie_round_janitor_walk_4.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 23,
+        "y": 38
+      },
+      "arm_back": {
+        "x": 30,
+        "y": 20
+      },
+      "torso": {
+        "x": 10,
+        "y": 16
+      },
+      "leg_front": {
+        "x": 12,
+        "y": 39
+      },
+      "arm_front": {
+        "x": 4,
+        "y": 16
+      },
+      "head": {
+        "x": 4,
+        "y": 7
+      }
+    }
+  },
+  "zombie_round_janitor_walk_5": {
+    "file": "png/zombie_round_janitor_walk_5.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 23,
+        "y": 38
+      },
+      "arm_back": {
+        "x": 30,
+        "y": 21
+      },
+      "torso": {
+        "x": 10,
+        "y": 17
+      },
+      "leg_front": {
+        "x": 12,
+        "y": 39
+      },
+      "arm_front": {
+        "x": 4,
+        "y": 17
+      },
+      "head": {
+        "x": 4,
+        "y": 8
+      }
+    }
+  },
+  "zombie_round_armor_head": {
+    "file": "parts/zombie_round_armor_head.png",
+    "w": 30,
+    "h": 9,
+    "anchor": {
+      "x": 15,
+      "y": 4
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 4,
+      "y": 9
+    }
+  },
+  "zombie_round_armor_torso": {
+    "file": "parts/zombie_round_armor_torso.png",
+    "w": 27,
+    "h": 22,
+    "anchor": {
+      "x": 13,
+      "y": 11
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 10,
+      "y": 18
+    }
+  },
+  "zombie_round_armor_arm_front": {
+    "file": "parts/zombie_round_armor_arm_front.png",
+    "w": 10,
+    "h": 11,
+    "anchor": {
+      "x": 5,
+      "y": 5
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 3,
+      "y": 18
+    }
+  },
+  "zombie_round_armor_arm_back": {
+    "file": "parts/zombie_round_armor_arm_back.png",
+    "w": 6,
+    "h": 15,
+    "anchor": {
+      "x": 3,
+      "y": 7
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 31,
+      "y": 22
+    }
+  },
+  "zombie_round_armor_leg_front": {
+    "file": "parts/zombie_round_armor_leg_front.png",
+    "w": 7,
+    "h": 4,
+    "anchor": {
+      "x": 3,
+      "y": 2
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 14,
+      "y": 40
+    }
+  },
+  "zombie_round_armor_leg_back": {
+    "file": "parts/zombie_round_armor_leg_back.png",
+    "w": 7,
+    "h": 4,
+    "anchor": {
+      "x": 3,
+      "y": 2
+    },
+    "category": "body_part",
+    "rest_offset": {
+      "x": 24,
+      "y": 40
+    }
+  },
+  "zombie_round_armor_walk_0": {
+    "file": "png/zombie_round_armor_walk_0.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 24,
+        "y": 40
+      },
+      "arm_back": {
+        "x": 31,
+        "y": 22
+      },
+      "torso": {
+        "x": 10,
+        "y": 18
+      },
+      "leg_front": {
+        "x": 14,
+        "y": 40
+      },
+      "arm_front": {
+        "x": 3,
+        "y": 18
+      },
+      "head": {
+        "x": 4,
+        "y": 9
+      }
+    }
+  },
+  "zombie_round_armor_walk_1": {
+    "file": "png/zombie_round_armor_walk_1.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 23,
+        "y": 40
+      },
+      "arm_back": {
+        "x": 32,
+        "y": 21
+      },
+      "torso": {
+        "x": 10,
+        "y": 17
+      },
+      "leg_front": {
+        "x": 15,
+        "y": 39
+      },
+      "arm_front": {
+        "x": 2,
+        "y": 17
+      },
+      "head": {
+        "x": 4,
+        "y": 8
+      }
+    }
+  },
+  "zombie_round_armor_walk_2": {
+    "file": "png/zombie_round_armor_walk_2.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 23,
+        "y": 40
+      },
+      "arm_back": {
+        "x": 32,
+        "y": 22
+      },
+      "torso": {
+        "x": 10,
+        "y": 18
+      },
+      "leg_front": {
+        "x": 15,
+        "y": 39
+      },
+      "arm_front": {
+        "x": 2,
+        "y": 18
+      },
+      "head": {
+        "x": 4,
+        "y": 9
+      }
+    }
+  },
+  "zombie_round_armor_walk_3": {
+    "file": "png/zombie_round_armor_walk_3.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 24,
+        "y": 40
+      },
+      "arm_back": {
+        "x": 31,
+        "y": 22
+      },
+      "torso": {
+        "x": 10,
+        "y": 18
+      },
+      "leg_front": {
+        "x": 14,
+        "y": 40
+      },
+      "arm_front": {
+        "x": 3,
+        "y": 18
+      },
+      "head": {
+        "x": 4,
+        "y": 9
+      }
+    }
+  },
+  "zombie_round_armor_walk_4": {
+    "file": "png/zombie_round_armor_walk_4.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 25,
+        "y": 39
+      },
+      "arm_back": {
+        "x": 30,
+        "y": 21
+      },
+      "torso": {
+        "x": 10,
+        "y": 17
+      },
+      "leg_front": {
+        "x": 13,
+        "y": 40
+      },
+      "arm_front": {
+        "x": 4,
+        "y": 17
+      },
+      "head": {
+        "x": 4,
+        "y": 8
+      }
+    }
+  },
+  "zombie_round_armor_walk_5": {
+    "file": "png/zombie_round_armor_walk_5.png",
+    "w": 40,
+    "h": 44,
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "category": "animation",
+    "facing": "left",
+    "part_offsets": {
+      "leg_back": {
+        "x": 25,
+        "y": 39
+      },
+      "arm_back": {
+        "x": 30,
+        "y": 22
+      },
+      "torso": {
+        "x": 10,
+        "y": 18
+      },
+      "leg_front": {
+        "x": 13,
+        "y": 40
+      },
+      "arm_front": {
+        "x": 4,
+        "y": 18
+      },
+      "head": {
+        "x": 4,
+        "y": 9
+      }
+    }
+  },
+  "rat_furry_wheel_0": {
+    "file": "parts/rat_furry_wheel_0.png",
+    "w": 7,
+    "h": 7,
+    "anchor": {
+      "x": 3,
+      "y": 3
+    },
+    "category": "vehicle_part",
+    "rest_offset": {
+      "x": 8,
+      "y": 13
+    },
+    "relative_to": "rat body"
+  },
+  "rat_furry_wheel_1": {
+    "file": "parts/rat_furry_wheel_1.png",
+    "w": 7,
+    "h": 7,
+    "anchor": {
+      "x": 3,
+      "y": 3
+    },
+    "category": "vehicle_part",
+    "rest_offset": {
+      "x": 23,
+      "y": 13
+    },
+    "relative_to": "rat body"
+  },
+  "rat_furry_body": {
+    "file": "parts/rat_furry_body.png",
+    "w": 42,
+    "h": 21,
+    "anchor": {
+      "x": 21,
+      "y": 20
+    },
+    "category": "vehicle_part"
+  },
+  "rat_furry_body_armed": {
+    "file": "parts/rat_furry_body_armed.png",
+    "w": 42,
+    "h": 21,
+    "anchor": {
+      "x": 21,
+      "y": 20
+    },
+    "category": "vehicle_part"
+  },
+  "rat_furry_drive_0": {
+    "file": "png/rat_furry_drive_0.png",
+    "w": 46,
+    "h": 24,
+    "anchor": {
+      "x": 23,
+      "y": 23
+    },
+    "category": "animation",
+    "facing": "right"
+  },
+  "rat_furry_armed_drive_0": {
+    "file": "png/rat_furry_armed_drive_0.png",
+    "w": 46,
+    "h": 24,
+    "anchor": {
+      "x": 23,
+      "y": 23
+    },
+    "category": "animation",
+    "facing": "right"
+  },
+  "rat_furry_drive_1": {
+    "file": "png/rat_furry_drive_1.png",
+    "w": 46,
+    "h": 24,
+    "anchor": {
+      "x": 23,
+      "y": 23
+    },
+    "category": "animation",
+    "facing": "right"
+  },
+  "rat_furry_armed_drive_1": {
+    "file": "png/rat_furry_armed_drive_1.png",
+    "w": 46,
+    "h": 24,
+    "anchor": {
+      "x": 23,
+      "y": 23
+    },
+    "category": "animation",
+    "facing": "right"
+  },
+  "rat_furry_drive_2": {
+    "file": "png/rat_furry_drive_2.png",
+    "w": 46,
+    "h": 24,
+    "anchor": {
+      "x": 23,
+      "y": 23
+    },
+    "category": "animation",
+    "facing": "right"
+  },
+  "rat_furry_armed_drive_2": {
+    "file": "png/rat_furry_armed_drive_2.png",
+    "w": 46,
+    "h": 24,
+    "anchor": {
+      "x": 23,
+      "y": 23
+    },
+    "category": "animation",
+    "facing": "right"
+  },
+  "rat_furry_drive_3": {
+    "file": "png/rat_furry_drive_3.png",
+    "w": 46,
+    "h": 24,
+    "anchor": {
+      "x": 23,
+      "y": 23
+    },
+    "category": "animation",
+    "facing": "right"
+  },
+  "rat_furry_armed_drive_3": {
+    "file": "png/rat_furry_armed_drive_3.png",
+    "w": 46,
+    "h": 24,
+    "anchor": {
+      "x": 23,
+      "y": 23
+    },
+    "category": "animation",
+    "facing": "right"
+  },
+  "rat_furry_drive_4": {
+    "file": "png/rat_furry_drive_4.png",
+    "w": 46,
+    "h": 24,
+    "anchor": {
+      "x": 23,
+      "y": 23
+    },
+    "category": "animation",
+    "facing": "right"
+  },
+  "rat_furry_armed_drive_4": {
+    "file": "png/rat_furry_armed_drive_4.png",
+    "w": 46,
+    "h": 24,
+    "anchor": {
+      "x": 23,
+      "y": 23
+    },
+    "category": "animation",
+    "facing": "right"
+  },
+  "rat_furry_drive_5": {
+    "file": "png/rat_furry_drive_5.png",
+    "w": 46,
+    "h": 24,
+    "anchor": {
+      "x": 23,
+      "y": 23
+    },
+    "category": "animation",
+    "facing": "right"
+  },
+  "rat_furry_armed_drive_5": {
+    "file": "png/rat_furry_armed_drive_5.png",
+    "w": 46,
+    "h": 24,
+    "anchor": {
+      "x": 23,
+      "y": 23
+    },
+    "category": "animation",
+    "facing": "right"
+  },
+  "rat_wood_wheel_0": {
+    "file": "parts/rat_wood_wheel_0.png",
+    "w": 7,
+    "h": 7,
+    "anchor": {
+      "x": 3,
+      "y": 3
+    },
+    "category": "vehicle_part",
+    "rest_offset": {
+      "x": 8,
+      "y": 13
+    },
+    "relative_to": "rat body"
+  },
+  "rat_wood_wheel_1": {
+    "file": "parts/rat_wood_wheel_1.png",
+    "w": 7,
+    "h": 7,
+    "anchor": {
+      "x": 3,
+      "y": 3
+    },
+    "category": "vehicle_part",
+    "rest_offset": {
+      "x": 23,
+      "y": 13
+    },
+    "relative_to": "rat body"
+  },
+  "rat_wood_body": {
+    "file": "parts/rat_wood_body.png",
+    "w": 42,
+    "h": 21,
+    "anchor": {
+      "x": 21,
+      "y": 20
+    },
+    "category": "vehicle_part"
+  },
+  "rat_wood_body_armed": {
+    "file": "parts/rat_wood_body_armed.png",
+    "w": 42,
+    "h": 21,
+    "anchor": {
+      "x": 21,
+      "y": 20
+    },
+    "category": "vehicle_part"
+  },
+  "rat_wood_drive_0": {
+    "file": "png/rat_wood_drive_0.png",
+    "w": 46,
+    "h": 24,
+    "anchor": {
+      "x": 23,
+      "y": 23
+    },
+    "category": "animation",
+    "facing": "right"
+  },
+  "rat_wood_armed_drive_0": {
+    "file": "png/rat_wood_armed_drive_0.png",
+    "w": 46,
+    "h": 24,
+    "anchor": {
+      "x": 23,
+      "y": 23
+    },
+    "category": "animation",
+    "facing": "right"
+  },
+  "rat_wood_drive_1": {
+    "file": "png/rat_wood_drive_1.png",
+    "w": 46,
+    "h": 24,
+    "anchor": {
+      "x": 23,
+      "y": 23
+    },
+    "category": "animation",
+    "facing": "right"
+  },
+  "rat_wood_armed_drive_1": {
+    "file": "png/rat_wood_armed_drive_1.png",
+    "w": 46,
+    "h": 24,
+    "anchor": {
+      "x": 23,
+      "y": 23
+    },
+    "category": "animation",
+    "facing": "right"
+  },
+  "rat_wood_drive_2": {
+    "file": "png/rat_wood_drive_2.png",
+    "w": 46,
+    "h": 24,
+    "anchor": {
+      "x": 23,
+      "y": 23
+    },
+    "category": "animation",
+    "facing": "right"
+  },
+  "rat_wood_armed_drive_2": {
+    "file": "png/rat_wood_armed_drive_2.png",
+    "w": 46,
+    "h": 24,
+    "anchor": {
+      "x": 23,
+      "y": 23
+    },
+    "category": "animation",
+    "facing": "right"
+  },
+  "rat_wood_drive_3": {
+    "file": "png/rat_wood_drive_3.png",
+    "w": 46,
+    "h": 24,
+    "anchor": {
+      "x": 23,
+      "y": 23
+    },
+    "category": "animation",
+    "facing": "right"
+  },
+  "rat_wood_armed_drive_3": {
+    "file": "png/rat_wood_armed_drive_3.png",
+    "w": 46,
+    "h": 24,
+    "anchor": {
+      "x": 23,
+      "y": 23
+    },
+    "category": "animation",
+    "facing": "right"
+  },
+  "rat_wood_drive_4": {
+    "file": "png/rat_wood_drive_4.png",
+    "w": 46,
+    "h": 24,
+    "anchor": {
+      "x": 23,
+      "y": 23
+    },
+    "category": "animation",
+    "facing": "right"
+  },
+  "rat_wood_armed_drive_4": {
+    "file": "png/rat_wood_armed_drive_4.png",
+    "w": 46,
+    "h": 24,
+    "anchor": {
+      "x": 23,
+      "y": 23
+    },
+    "category": "animation",
+    "facing": "right"
+  },
+  "rat_wood_drive_5": {
+    "file": "png/rat_wood_drive_5.png",
+    "w": 46,
+    "h": 24,
+    "anchor": {
+      "x": 23,
+      "y": 23
+    },
+    "category": "animation",
+    "facing": "right"
+  },
+  "rat_wood_armed_drive_5": {
+    "file": "png/rat_wood_armed_drive_5.png",
+    "w": 46,
+    "h": 24,
+    "anchor": {
+      "x": 23,
+      "y": 23
+    },
+    "category": "animation",
+    "facing": "right"
+  },
+  "rat_steel_wheel_0": {
+    "file": "parts/rat_steel_wheel_0.png",
+    "w": 7,
+    "h": 7,
+    "anchor": {
+      "x": 3,
+      "y": 3
+    },
+    "category": "vehicle_part",
+    "rest_offset": {
+      "x": 8,
+      "y": 13
+    },
+    "relative_to": "rat body"
+  },
+  "rat_steel_wheel_1": {
+    "file": "parts/rat_steel_wheel_1.png",
+    "w": 7,
+    "h": 7,
+    "anchor": {
+      "x": 3,
+      "y": 3
+    },
+    "category": "vehicle_part",
+    "rest_offset": {
+      "x": 23,
+      "y": 13
+    },
+    "relative_to": "rat body"
+  },
+  "rat_steel_body": {
+    "file": "parts/rat_steel_body.png",
+    "w": 42,
+    "h": 21,
+    "anchor": {
+      "x": 21,
+      "y": 20
+    },
+    "category": "vehicle_part"
+  },
+  "rat_steel_body_armed": {
+    "file": "parts/rat_steel_body_armed.png",
+    "w": 42,
+    "h": 21,
+    "anchor": {
+      "x": 21,
+      "y": 20
+    },
+    "category": "vehicle_part"
+  },
+  "rat_steel_drive_0": {
+    "file": "png/rat_steel_drive_0.png",
+    "w": 46,
+    "h": 24,
+    "anchor": {
+      "x": 23,
+      "y": 23
+    },
+    "category": "animation",
+    "facing": "right"
+  },
+  "rat_steel_armed_drive_0": {
+    "file": "png/rat_steel_armed_drive_0.png",
+    "w": 46,
+    "h": 24,
+    "anchor": {
+      "x": 23,
+      "y": 23
+    },
+    "category": "animation",
+    "facing": "right"
+  },
+  "rat_steel_drive_1": {
+    "file": "png/rat_steel_drive_1.png",
+    "w": 46,
+    "h": 24,
+    "anchor": {
+      "x": 23,
+      "y": 23
+    },
+    "category": "animation",
+    "facing": "right"
+  },
+  "rat_steel_armed_drive_1": {
+    "file": "png/rat_steel_armed_drive_1.png",
+    "w": 46,
+    "h": 24,
+    "anchor": {
+      "x": 23,
+      "y": 23
+    },
+    "category": "animation",
+    "facing": "right"
+  },
+  "rat_steel_drive_2": {
+    "file": "png/rat_steel_drive_2.png",
+    "w": 46,
+    "h": 24,
+    "anchor": {
+      "x": 23,
+      "y": 23
+    },
+    "category": "animation",
+    "facing": "right"
+  },
+  "rat_steel_armed_drive_2": {
+    "file": "png/rat_steel_armed_drive_2.png",
+    "w": 46,
+    "h": 24,
+    "anchor": {
+      "x": 23,
+      "y": 23
+    },
+    "category": "animation",
+    "facing": "right"
+  },
+  "rat_steel_drive_3": {
+    "file": "png/rat_steel_drive_3.png",
+    "w": 46,
+    "h": 24,
+    "anchor": {
+      "x": 23,
+      "y": 23
+    },
+    "category": "animation",
+    "facing": "right"
+  },
+  "rat_steel_armed_drive_3": {
+    "file": "png/rat_steel_armed_drive_3.png",
+    "w": 46,
+    "h": 24,
+    "anchor": {
+      "x": 23,
+      "y": 23
+    },
+    "category": "animation",
+    "facing": "right"
+  },
+  "rat_steel_drive_4": {
+    "file": "png/rat_steel_drive_4.png",
+    "w": 46,
+    "h": 24,
+    "anchor": {
+      "x": 23,
+      "y": 23
+    },
+    "category": "animation",
+    "facing": "right"
+  },
+  "rat_steel_armed_drive_4": {
+    "file": "png/rat_steel_armed_drive_4.png",
+    "w": 46,
+    "h": 24,
+    "anchor": {
+      "x": 23,
+      "y": 23
+    },
+    "category": "animation",
+    "facing": "right"
+  },
+  "rat_steel_drive_5": {
+    "file": "png/rat_steel_drive_5.png",
+    "w": 46,
+    "h": 24,
+    "anchor": {
+      "x": 23,
+      "y": 23
+    },
+    "category": "animation",
+    "facing": "right"
+  },
+  "rat_steel_armed_drive_5": {
+    "file": "png/rat_steel_armed_drive_5.png",
+    "w": 46,
+    "h": 24,
+    "anchor": {
+      "x": 23,
+      "y": 23
+    },
+    "category": "animation",
+    "facing": "right"
+  },
+  "pigeon_fly_0": {
+    "file": "png/pigeon_fly_0.png",
+    "w": 22,
+    "h": 20,
+    "anchor": {
+      "x": 10,
+      "y": 10
+    },
+    "category": "animation",
+    "facing": "left"
+  },
+  "pigeon_fly_1": {
+    "file": "png/pigeon_fly_1.png",
+    "w": 22,
+    "h": 20,
+    "anchor": {
+      "x": 10,
+      "y": 10
+    },
+    "category": "animation",
+    "facing": "left"
+  },
+  "pigeon_fly_2": {
+    "file": "png/pigeon_fly_2.png",
+    "w": 22,
+    "h": 20,
+    "anchor": {
+      "x": 10,
+      "y": 10
+    },
+    "category": "animation",
+    "facing": "left"
+  },
+  "pigeon_fly_3": {
+    "file": "png/pigeon_fly_3.png",
+    "w": 22,
+    "h": 20,
+    "anchor": {
+      "x": 10,
+      "y": 10
+    },
+    "category": "animation",
+    "facing": "left"
+  },
+  "answer_a": {
+    "file": "png/answer_a.png",
+    "w": 13,
+    "h": 13,
+    "anchor": {
+      "x": 6,
+      "y": 12
+    },
+    "category": "ui"
+  },
+  "answer_b": {
+    "file": "png/answer_b.png",
+    "w": 13,
+    "h": 13,
+    "anchor": {
+      "x": 6,
+      "y": 12
+    },
+    "category": "ui"
+  },
+  "answer_c": {
+    "file": "png/answer_c.png",
+    "w": 13,
+    "h": 13,
+    "anchor": {
+      "x": 6,
+      "y": 12
+    },
+    "category": "ui"
+  },
+  "button_upgrade": {
+    "file": "png/button_upgrade.png",
+    "w": 13,
+    "h": 13,
+    "anchor": {
+      "x": 6,
+      "y": 12
+    },
+    "category": "ui"
+  },
+  "math_panel": {
+    "file": "png/math_panel.png",
+    "w": 100,
+    "h": 40,
+    "anchor": {
+      "x": 50,
+      "y": 39
+    },
+    "category": "ui"
+  },
+  "fuel_gauge_0": {
+    "file": "png/fuel_gauge_0.png",
+    "w": 26,
+    "h": 7,
+    "anchor": {
+      "x": 13,
+      "y": 6
+    },
+    "category": "ui"
+  },
+  "fuel_gauge_1": {
+    "file": "png/fuel_gauge_1.png",
+    "w": 26,
+    "h": 7,
+    "anchor": {
+      "x": 13,
+      "y": 6
+    },
+    "category": "ui"
+  },
+  "fuel_gauge_2": {
+    "file": "png/fuel_gauge_2.png",
+    "w": 26,
+    "h": 7,
+    "anchor": {
+      "x": 13,
+      "y": 6
+    },
+    "category": "ui"
+  },
+  "fuel_gauge_3": {
+    "file": "png/fuel_gauge_3.png",
+    "w": 26,
+    "h": 7,
+    "anchor": {
+      "x": 13,
+      "y": 6
+    },
+    "category": "ui"
+  },
+  "fuel_gauge_4": {
+    "file": "png/fuel_gauge_4.png",
+    "w": 26,
+    "h": 7,
+    "anchor": {
+      "x": 13,
+      "y": 6
+    },
+    "category": "ui"
+  },
+  "fuel_gauge_5": {
+    "file": "png/fuel_gauge_5.png",
+    "w": 26,
+    "h": 7,
+    "anchor": {
+      "x": 13,
+      "y": 6
+    },
+    "category": "ui"
+  },
+  "fuel_gauge_6": {
+    "file": "png/fuel_gauge_6.png",
+    "w": 26,
+    "h": 7,
+    "anchor": {
+      "x": 13,
+      "y": 6
+    },
+    "category": "ui"
+  },
+  "fuel_gauge_7": {
+    "file": "png/fuel_gauge_7.png",
+    "w": 26,
+    "h": 7,
+    "anchor": {
+      "x": 13,
+      "y": 6
+    },
+    "category": "ui"
+  },
+  "fuel_gauge_8": {
+    "file": "png/fuel_gauge_8.png",
+    "w": 26,
+    "h": 7,
+    "anchor": {
+      "x": 13,
+      "y": 6
+    },
+    "category": "ui"
+  },
+  "fuel_gauge_9": {
+    "file": "png/fuel_gauge_9.png",
+    "w": 26,
+    "h": 7,
+    "anchor": {
+      "x": 13,
+      "y": 6
+    },
+    "category": "ui"
+  },
+  "fuel_gauge_10": {
+    "file": "png/fuel_gauge_10.png",
+    "w": 26,
+    "h": 7,
+    "anchor": {
+      "x": 13,
+      "y": 6
+    },
+    "category": "ui"
+  },
+  "impact_0": {
+    "file": "png/impact_0.png",
+    "w": 15,
+    "h": 15,
+    "anchor": {
+      "x": 7,
+      "y": 7
+    },
+    "category": "effect"
+  },
+  "dust_0": {
+    "file": "png/dust_0.png",
+    "w": 18,
+    "h": 12,
+    "anchor": {
+      "x": 9,
+      "y": 11
+    },
+    "category": "effect"
+  },
+  "impact_1": {
+    "file": "png/impact_1.png",
+    "w": 15,
+    "h": 15,
+    "anchor": {
+      "x": 7,
+      "y": 7
+    },
+    "category": "effect"
+  },
+  "dust_1": {
+    "file": "png/dust_1.png",
+    "w": 18,
+    "h": 12,
+    "anchor": {
+      "x": 9,
+      "y": 11
+    },
+    "category": "effect"
+  },
+  "impact_2": {
+    "file": "png/impact_2.png",
+    "w": 15,
+    "h": 15,
+    "anchor": {
+      "x": 7,
+      "y": 7
+    },
+    "category": "effect"
+  },
+  "dust_2": {
+    "file": "png/dust_2.png",
+    "w": 18,
+    "h": 12,
+    "anchor": {
+      "x": 9,
+      "y": 11
+    },
+    "category": "effect"
+  },
+  "impact_3": {
+    "file": "png/impact_3.png",
+    "w": 15,
+    "h": 15,
+    "anchor": {
+      "x": 7,
+      "y": 7
+    },
+    "category": "effect"
+  },
+  "dust_3": {
+    "file": "png/dust_3.png",
+    "w": 18,
+    "h": 12,
+    "anchor": {
+      "x": 9,
+      "y": 11
+    },
+    "category": "effect"
+  },
+  "wrecking_swing_0": {
+    "file": "png/wrecking_swing_0.png",
+    "w": 66,
+    "h": 48,
+    "anchor": {
+      "x": 5,
+      "y": 41
+    },
+    "category": "animation",
+    "ball_center": {
+      "x": 15,
+      "y": 38
+    }
+  },
+  "wrecking_swing_1": {
+    "file": "png/wrecking_swing_1.png",
+    "w": 66,
+    "h": 48,
+    "anchor": {
+      "x": 5,
+      "y": 41
+    },
+    "category": "animation",
+    "ball_center": {
+      "x": 21,
+      "y": 26
+    }
+  },
+  "wrecking_swing_2": {
+    "file": "png/wrecking_swing_2.png",
+    "w": 66,
+    "h": 48,
+    "anchor": {
+      "x": 5,
+      "y": 41
+    },
+    "category": "animation",
+    "ball_center": {
+      "x": 27,
+      "y": 16
+    }
+  },
+  "wrecking_swing_3": {
+    "file": "png/wrecking_swing_3.png",
+    "w": 66,
+    "h": 48,
+    "anchor": {
+      "x": 5,
+      "y": 41
+    },
+    "category": "animation",
+    "ball_center": {
+      "x": 33,
+      "y": 11
+    }
+  },
+  "wrecking_swing_4": {
+    "file": "png/wrecking_swing_4.png",
+    "w": 66,
+    "h": 48,
+    "anchor": {
+      "x": 5,
+      "y": 41
+    },
+    "category": "animation",
+    "ball_center": {
+      "x": 39,
+      "y": 11
+    }
+  },
+  "wrecking_swing_5": {
+    "file": "png/wrecking_swing_5.png",
+    "w": 66,
+    "h": 48,
+    "anchor": {
+      "x": 5,
+      "y": 41
+    },
+    "category": "animation",
+    "ball_center": {
+      "x": 45,
+      "y": 16
+    }
+  },
+  "wrecking_swing_6": {
+    "file": "png/wrecking_swing_6.png",
+    "w": 66,
+    "h": 48,
+    "anchor": {
+      "x": 5,
+      "y": 41
+    },
+    "category": "animation",
+    "ball_center": {
+      "x": 51,
+      "y": 26
+    }
+  },
+  "wrecking_swing_7": {
+    "file": "png/wrecking_swing_7.png",
+    "w": 66,
+    "h": 48,
+    "anchor": {
+      "x": 5,
+      "y": 41
+    },
+    "category": "animation",
+    "ball_center": {
+      "x": 57,
+      "y": 38
+    }
+  }
+}

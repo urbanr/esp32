@@ -10,6 +10,7 @@
 #include "rat_world.h"
 #include "rat_render.h"
 #include "rat_audio.h"
+#include "rat_hiscore.h"
 
 // ===================================================================
 // Modul hry Krysa skokan: ratBegin() / ratLoop() / ratEnd(). Pouziva ho
@@ -56,6 +57,7 @@ bool ratBegin() {
 #if SPRITE_SET == SPRITES_ASTRA
   for (int i = 0; i < ASTRA_LEGEND_COUNT; i++) legend[(int)ASTRA_LEGEND[i].ch] = ASTRA_LEGEND[i].idx;
 #endif
+  for (int i = 0; i < EXTRA_LEGEND_COUNT; i++) legend[(int)EXTRA_LEGEND[i].ch] = EXTRA_LEGEND[i].idx;
   pinMode(0, INPUT_PULLUP);
   btnPrev = (digitalRead(0) == LOW);
   touchPrev = touchDown;
@@ -65,6 +67,10 @@ bool ratBegin() {
   }
   audioOk = ratAudioBegin();
   USBSerial.println(audioOk ? "ES8311 OK" : "ES8311 init fail - bez zvuku");
+  if (hiscoreBegin()) {
+    best = hiscoreLoad();
+    USBSerial.printf("SD karta OK, nejlepsi %d\n", best);
+  } else USBSerial.println("SD karta neni - nejlepsi skore se neuklada");
   worldReset();
   spawnAhead();
   state = ST_TITLE;
@@ -80,6 +86,7 @@ void ratLoop() {
 
   handleInput();
   worldUpdate(dt);
+  if (bestDirty) { bestDirty = false; hiscoreSave(best); }
   if (audioOk) ratAudioPump();
   else pendingSound = SND_NONE;
   const uint32_t t1 = micros();
@@ -92,4 +99,5 @@ void ratLoop() {
 void ratEnd() {
   crtEnd();
   if (audioOk) ratAudioEnd();
+  hiscoreEnd();
 }

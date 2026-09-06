@@ -39,6 +39,24 @@
 // ===== pravidla =====
 #define LIVES                 3
 #define INVULN_S              1.6f   // nezranitelnost po zasahu (blikani)
+#define CUP_EVERY             10     // kazdy n-ty odpadek je pohar: stribrny, kazdy druhy z nich zlaty
+#define CUP_SILVER_PTS        3
+#define CUP_GOLD_PTS          10
+#define CHEST_PTS             5      // bedynka otevrena klicem
+#define KEY_CHANCE            8      // % odpadku, ktere jsou zlaty klic
+#define BUBBLE_CHANCE         7      // % odpadku, ktere jsou mydlova bublina (stit na jeden naraz)
+#define CHEST_CHANCE          35     // % prekazek, za nimiz stoji bedynka
+#define SNAIL_SPEED           9.0f   // snek leze proti kryse (body/s navic k posunu sveta)
+#define DRIP_WAIT_S           1.3f   // kapajici trubka: pauza, blikani kapky, pak pad
+#define DRIP_BLINK_S          0.8f
+#define DROP_SPEED            110.0f // body/s
+#define JET_LIFT              150.0f // rychlost, kterou proud vody vynasi krysu (body/s)
+
+// ===== parada (bez vlivu na hru) =====
+#define BAT_GAP_MIN_S         6.0f   // pauza mezi prelety netopyra
+#define BAT_GAP_MAX_S         16.0f
+#define BAT_SPEED             70.0f  // rychlost netopyra proti smeru hry (navic k posunu sveta), body/s
+#define WALL_DECO_STEP        110    // rozestup ozdob na zdi (kulate okno, ventil, mriz), body paralaxy
 
 // ===== CRT filtr (barevny) =====
 #define CRT_SOFT              0      // 1 = mekky rezim (prosvit radku, prolnuti sloupcu; ~16 fps), 0 = rychly (jen scanlines + maska + vineta)
@@ -51,7 +69,7 @@
 #define CRT_FLICKER           10     // nahodne kolisani jasu snimku (0-255)
 
 // ===== zvuk =====
-#define AUDIO_VOLUME          48     // hlasitost kodeku 0-100
+#define AUDIO_VOLUME          38     // hlasitost kodeku 0-100
 #define AUDIO_MASTER          0.7f
 
 // ===== render =====

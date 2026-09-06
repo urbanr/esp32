@@ -26,6 +26,9 @@ enum : uint8_t {
   C_SLIME, C_SLIME_DARK,
   C_CRATE, C_CRATE_DARK, C_CRATE_LIGHT,
   C_TEXT, C_TEXT_DARK, C_HUD_BG,
+  C_SILVER_LIGHT, C_SILVER, C_SILVER_DARK,
+  C_GOLD_LIGHT, C_GOLD, C_GOLD_DARK,
+  C_BAT, C_BAT_LIGHT,
   C_COUNT
 };
 
@@ -46,6 +49,9 @@ static const uint8_t PALETTE[C_COUNT][3] = {
   {112, 222, 60}, {62, 152, 40},
   {172, 122, 60}, {112, 76, 36}, {212, 162, 92},
   {250, 232, 120}, {122, 102, 40}, {30, 20, 30},
+  {250, 250, 245}, {200, 205, 215}, {142, 142, 152},
+  {250, 232, 120}, {212, 162, 60}, {130, 96, 28},
+  {34, 24, 42}, {96, 72, 116},
 };
 
 // legenda znaku spritu -> index barvy ('.' = pruhledna)

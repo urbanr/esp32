@@ -10,6 +10,8 @@
 // ===================================================================
 
 #define SPRITES_HAVE_TILES 1
+#define SPRITES_HAVE_CUPS 1
+#define SPRITES_HAVE_ADDON 1
 
 #define PALETTE_EXTRA_COUNT 2
 static const uint8_t PALETTE_EXTRA[PALETTE_EXTRA_COUNT > 0 ? PALETTE_EXTRA_COUNT : 1][3] = {
@@ -19,6 +21,8 @@ static const uint8_t PALETTE_EXTRA[PALETTE_EXTRA_COUNT > 0 ? PALETTE_EXTRA_COUNT
 // znak -> index barvy (C_* nebo C_COUNT + k)
 struct LegendEntry { char ch; uint8_t idx; };
 static const LegendEntry ASTRA_LEGEND[] = {
+  { '!', C_GOLD_DARK },
+  { '#', C_FOAM },
   { '0', C_CEIL },
   { '1', C_CEIL_LIGHT },
   { '2', C_PAPER_DARK },
@@ -54,6 +58,7 @@ static const LegendEntry ASTRA_LEGEND[] = {
   { 'r', C_RAT_DARK },
   { 's', C_PIPE_LIGHT },
   { 't', C_BROWN },
+  { 'u', C_GOLD },
   { 'v', C_PEAR_DARK },
   { 'w', C_COUNT + 1 },
   { 'x', C_MORTAR },
@@ -685,3 +690,352 @@ SPRITE(TILE_SPARK3,
   ".......",
   ".......",
   ".......")
+
+// png/cup_silver.png 10x12
+SPRITE(SPR_CUP_SILVER,
+  "..kkkkkk..",
+  "kkklLLGkkk",
+  "k.klLLGk.k",
+  "k.klLLGk.k",
+  ".kklLLGkk.",
+  "..klLGGk..",
+  "...kLGk...",
+  "....kk....",
+  "....lL....",
+  "...klLGk..",
+  "..klLLGGk.",
+  "..kkkkkkk.")
+
+// png/cup_gold.png 10x12
+SPRITE(SPR_CUP_GOLD,
+  "..kkkkkk..",
+  "kkk9uu!kkk",
+  "k.k9uu!k.k",
+  "k.k9uu!k.k",
+  ".kk9uu!kk.",
+  "..k9u!!k..",
+  "...ku!k...",
+  "....kk....",
+  "....9u....",
+  "...k9u!k..",
+  "..k9uu!!k.",
+  "..kkkkkkk.")
+
+// png/gold_key.png 12x10
+SPRITE(SPR_KEY,
+  "..kkk.......",
+  ".k999k......",
+  "k9ukuuk.....",
+  "kuk.kuk.....",
+  "kuukukkk....",
+  ".kuuuuukk...",
+  "..kkk.uukk..",
+  "......kuukk.",
+  ".......kuukk",
+  "........kuu.")
+
+// png/bubble_pickup_0.png 10x10
+SPRITE(SPR_BUBBLE0,
+  "...kkkk...",
+  "..kll66k..",
+  ".kl....6k.",
+  "k6l.....6k",
+  "k6......6k",
+  "k6......6k",
+  "k6......#k",
+  ".k6....#k.",
+  "..k666#k..",
+  "...kkkk...")
+
+// png/bubble_pickup_1.png 10x10
+SPRITE(SPR_BUBBLE1,
+  "...kkkk...",
+  "..kll66k..",
+  ".kl....6k.",
+  "k6l.....6k",
+  "k6......6k",
+  "k6......6k",
+  "k6......Kk",
+  ".k6....Kk.",
+  "..k666Kk..",
+  "...kkkk...")
+
+// png/bubble_shield_0.png 26x20
+SPRITE(SPR_SHIELD0,
+  ".........66666666.........",
+  "......666#.......666......",
+  ".....6.##...........6.....",
+  "...66#ll.............66...",
+  "..6.#l.................6..",
+  "..6#.l.................6..",
+  ".6#.l...................6.",
+  "6.#......................6",
+  "6#.......................6",
+  "6........................6",
+  "6........................6",
+  "6........................6",
+  "6........................6",
+  ".6.....................p6.",
+  "..6...................p6..",
+  "..6..................p.6..",
+  "...66..............pp66...",
+  ".....6...........pp.6.....",
+  "......666........666......",
+  ".........66666666.........")
+
+// png/bubble_shield_1.png 26x20
+SPRITE(SPR_SHIELD1,
+  ".........66666666.........",
+  "......666#.......666......",
+  ".....6.##...........6.....",
+  "...66#ll.............66...",
+  "..6.#l.................6..",
+  "..6#.l.................6..",
+  ".6#.l...................6.",
+  "6.#......................6",
+  "6#.......................6",
+  "6........................6",
+  "6........................6",
+  "6........................6",
+  "6........................6",
+  ".6.....................K6.",
+  "..6...................K6..",
+  "..6..................K.6..",
+  "...66..............KK66...",
+  ".....6...........KK.6.....",
+  "......666........666......",
+  ".........66666666.........")
+
+// png/rubber_duck_0.png 24x14
+SPRITE(SPR_DUCK0,
+  "..............kkkkk.....",
+  ".............kkuuukk....",
+  ".............k9999ukk...",
+  "............ku9999kuk...",
+  "............ku9999kuk...",
+  "............ku99999usssk",
+  ".k.........kkuuuuuuusssk",
+  ".kk........kuuuuuuuuskkk",
+  "kkukkkkkkkkkuuuuuuuuk...",
+  ".kk9uuu99999uuuuuuuuk...",
+  ".kkuuu9uuuuu!!uuuuuuuk..",
+  "..kkuu!!!!!!uuuuuuukk...",
+  "....kuuuuuuuuuuuuukk....",
+  ".....kkkkkkkkkkkkkk.....")
+
+// png/rubber_duck_1.png 24x14
+SPRITE(SPR_DUCK1,
+  "..............kkkkk.....",
+  ".............kkuuukk....",
+  ".............k9999ukk...",
+  "............ku9999kuk...",
+  "............ku9999kuk...",
+  "............ku99999usssk",
+  ".k.........kkuuuuuuusssk",
+  ".kk........kuuuuuuuuskkk",
+  "kkukkkkkkkkkuuuuuuuuk...",
+  ".kku9uu99999uuuuuuuuk...",
+  ".kkuuu9uuuuu!!uuuuuuuk..",
+  "..kkuu!!!!!!uuuuuuukk...",
+  "....kuuuuuuuuuuuuukk....",
+  ".....kkkkkkkkkkkkkk.....")
+
+// png/snail_0.png 14x9
+SPRITE(SPR_SNAIL0,
+  ".........k...k",
+  "...kkkkk..k..k",
+  "..kkSRRkk.k..k",
+  ".kSsRSSRSkk.k.",
+  ".kSSRRSRSkkkk.",
+  ".kSSRRRRSklvk.",
+  "..kkSSSkkkkkvk",
+  "kkvkkkkkvvvmkk",
+  ".kkkkkkkkkkkkk")
+
+// png/snail_1.png 14x9
+SPRITE(SPR_SNAIL1,
+  ".........k...k",
+  "...kkkkk..k..k",
+  "..kkSRRkk.k..k",
+  ".kSsRSSRSkk.k.",
+  ".kSSRRSRSkkkk.",
+  ".kSSRRRRSklvk.",
+  "..kkSSSkkkkkvk",
+  "kkvkkkkkvvmvkk",
+  ".kkkkkkkkkkkkk")
+
+// png/drip_pipe.png 12x12
+SPRITE(SPR_DRIP_PIPE,
+  "...ksSSRk...",
+  "...ksSSRk...",
+  "...ksSSRk...",
+  "...ksSSRk...",
+  "...ksSSRk...",
+  "...ksSSRk...",
+  "...ksSSRk...",
+  ".kkkkkkkkkk.",
+  ".kssssssssk.",
+  ".kSSSSSSSSk.",
+  ".kkk7777kkk.",
+  "...kkkkkk...")
+
+// png/drop_ready.png 5x7
+SPRITE(SPR_DROP_READY,
+  "..k..",
+  "..k..",
+  ".k6k.",
+  ".k#k.",
+  "k#66k",
+  "k666k",
+  ".kkk.")
+
+// png/drop_flash.png 5x7
+SPRITE(SPR_DROP_FLASH,
+  "..k..",
+  "..k..",
+  ".k6k.",
+  ".klk.",
+  "kl66k",
+  "k666k",
+  ".kkk.")
+
+// png/drop_falling.png 5x7
+SPRITE(SPR_DROP_FALL,
+  "..k..",
+  "..k..",
+  ".k6k.",
+  ".k#k.",
+  "k#66k",
+  "k666k",
+  ".kkk.")
+
+// png/water_jet_pipe.png 14x8
+SPRITE(SPR_JET_PIPE,
+  ".kkkkkkkkkkkk.",
+  ".kss777777ssk.",
+  ".kssssssssssk.",
+  ".kkkkkkkkkkkk.",
+  "...ksSSSSSk...",
+  "...ksSSSSSk...",
+  "...ksSSSSSk...",
+  "...ksSSSSSk...")
+
+// png/water_jet_repeat_0.png 12x8
+SPRITE(SPR_JET_SEG0,
+  "...65#5556..",
+  "..6555#556..",
+  "..655#556...",
+  "..6555#556..",
+  "...65#5556..",
+  "..6555#556..",
+  "..655#556...",
+  "..6555#556..")
+
+// png/water_jet_repeat_1.png 12x8
+SPRITE(SPR_JET_SEG1,
+  "..6555#556..",
+  "..655#556...",
+  "..6555#556..",
+  "...65#5556..",
+  "..6555#556..",
+  "..655#556...",
+  "..6555#556..",
+  "...65#5556..")
+
+// png/water_jet_repeat_2.png 12x8
+SPRITE(SPR_JET_SEG2,
+  "..655#556...",
+  "..6555#556..",
+  "...65#5556..",
+  "..6555#556..",
+  "..655#556...",
+  "..6555#556..",
+  "...65#5556..",
+  "..6555#556..")
+
+// png/water_jet_repeat_3.png 12x8
+SPRITE(SPR_JET_SEG3,
+  "..6555#556..",
+  "...65#5556..",
+  "..6555#556..",
+  "..655#556...",
+  "..6555#556..",
+  "...65#5556..",
+  "..6555#556..",
+  "..655#556...")
+
+// png/water_jet_top_0.png 16x8
+SPRITE(SPR_JET_TOP0,
+  ".....6..6.......",
+  ".....6#666...6..",
+  "..6.6#66#666##6.",
+  ".6#66#666###6666",
+  "666##66#66666...",
+  "...6655#55566...",
+  "....655#5556....",
+  "....655#5556....")
+
+// png/water_jet_top_1.png 16x8
+SPRITE(SPR_JET_TOP1,
+  ".....6..6.......",
+  ".....6#666...6..",
+  "..6.6#66#666##6.",
+  ".6#66#666###6666",
+  "666##666#6666...",
+  "...66555#5566...",
+  "....6555#556....",
+  "....6555#556....")
+
+// png/water_jet_top_2.png 16x8
+SPRITE(SPR_JET_TOP2,
+  ".....6..6.......",
+  ".....6#666...6..",
+  "..6.6#66#666##6.",
+  ".6#66#666###6666",
+  "666##66#66666...",
+  "...6655#55566...",
+  "....655#5556....",
+  "....655#5556....")
+
+// png/water_jet_top_3.png 16x8
+SPRITE(SPR_JET_TOP3,
+  ".....6..6.......",
+  ".....6#666...6..",
+  "..6.6#66#666##6.",
+  ".6#66#666###6666",
+  "666##666#6666...",
+  "...66555#5566...",
+  "....6555#556....",
+  "....6555#556....")
+
+// png/reward_chest_closed.png 14x13
+SPRITE(SPR_CHEST_CLOSED,
+  "..............",
+  "...kkkkkkkk...",
+  ".kuukkkkkkuuk.",
+  ".kuueeeeeeuuk.",
+  "kkuueeeeeeuukk",
+  "kkuueeuueeuukk",
+  "kbuubbkubbuubk",
+  "kbuubbuubbuubk",
+  "kbuubbuubbuubk",
+  "kbuubbbbbbuubk",
+  "kcuuccccccuuck",
+  "kbuubbbbbbuubk",
+  "kkkkkkkkkkkkkk")
+
+// png/reward_chest_open.png 14x13
+SPRITE(SPR_CHEST_OPEN,
+  "kkkkkkkkkkkkkk",
+  "kcccccccccccck",
+  "kcccccccccccck",
+  "kcccccccccccck",
+  "kkkk99kkk99kkk",
+  "kww9ww999wwwwk",
+  "kwwwwwwwwwwwwk",
+  "kbuubbbbbbuubk",
+  "kbuubbbbbbuubk",
+  "kbuubbbbbbuubk",
+  "kcuuccccccuuck",
+  "kbuubbbbbbuubk",
+  "kkkkkkkkkkkkkk")
