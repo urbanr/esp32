@@ -127,6 +127,7 @@ Dětská skákačka na displeji otočeném **na šířku** (BOOT dole). Krysa b�
 Jezdící hra (hratelná, hodnoty se ladí). Krysa na kolech jede po zvlněném terénu zleva doprava, sbírá mince, řeší početní příklady za benzín navíc a projíždí zombíky, kteří ji zpomalují a při dotyku se rozpadnou na hlavu, trup a končetiny. Cíl úseku je garáž, kde se za mince kupují vylepšení tří vlastností; tři garáže = level, po levelu další krysa.
 
 <p>
+<img src="docs/img/rat-zombies-foto.png" width="460" alt="Krysy a zombíci na zařízení: chlupatá krysa, mince a zombík, CRT filtr crt-favorite-1">
 <img src="docs/img/rat-zombies-navrh.png" width="460" alt="Návrh grafiky Krysy a zombíci">
 </p>
 
