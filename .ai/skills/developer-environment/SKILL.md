@@ -8,6 +8,31 @@ description: Inspect, diagnose, and recommend a token-efficient local developer 
 Use this skill for local developer tooling, MCP servers, Docker, Graphify, Serena, local full-text search, SQLite FTS5, Python utilities, Codex, Claude Code, and token-efficient coding workflows.
 
 
+## Start of work: retrieval readiness check (do this first)
+
+Before answering any question about this repository - and before reading source files in bulk - report the state of the four retrieval tools in one compact block, then use whichever are available:
+
+    fulltext:  ano/NE (tools/fts.sh, index .fts/fts.db postaven?)
+    serena:    ano/NE (MCP server pripojeny? jinak jen jako doporuceni)
+    ast-grep:  ano/NE (binarka na PATH)
+    graphify:  ano/NE (graphify-out/graph.json existuje?)
+
+Rules for the check:
+- It is read-only. Detect state, never install anything as part of it.
+- Distinguish `missing`, `installed-but-stopped`, `configured-but-unreachable` and `available`; "not on PATH" does not prove a tool is missing when it runs as an MCP server.
+- When a tool is missing, say in one sentence what it would buy for the task at hand and let the user decide. Do not silently work around it.
+- Skip the block only for a trivial single-file lookup where the path is already known.
+- After the block, pick the tool that fits: graphify for relationships and impact, serena for a known symbol, fulltext for exact wording, ast-grep for the shape of code.
+
+Quick detection:
+
+```bash
+[ -f tools/fts.sh ] && [ -f .fts/fts.db ] && echo "fulltext ano" || echo "fulltext NE"
+[ -f graphify-out/graph.json ] && echo "graphify ano" || echo "graphify NE"
+command -v ast-grep >/dev/null && echo "ast-grep ano" || echo "ast-grep NE"
+grep -q '"serena"' .mcp.json 2>/dev/null && echo "serena nakonfigurovana" || echo "serena NE"
+```
+
 ## Project install/remove actions
 
 This skill is self-installing at the project level. The user should not have to run a separate top-level installer.
@@ -43,31 +68,6 @@ bash <this-skill-dir>/scripts/remove-project.sh <project-root>
 Do not remove project-local `tools/fts.sh`, `tools/extract-text.sh`, or `tools/check-dev-env.sh` automatically because they may have project-specific changes. Remove those only when the user explicitly asks.
 
 The top-level distribution directory is not required after the skill has been copied into a project. For installing into another project, use any already-installed/global copy of this skill and let the agent invoke `scripts/install-project.sh` there.
-
-## Start of work: retrieval readiness check (do this first)
-
-Before answering any question about this repository - and before reading source files in bulk - report the state of the four retrieval tools in one compact block, then use whichever are available:
-
-    fulltext:  ano/NE (tools/fts.sh, index .fts/fts.db postaven?)
-    serena:    ano/NE (MCP server pripojeny? jinak jen jako doporuceni)
-    ast-grep:  ano/NE (binarka na PATH)
-    graphify:  ano/NE (graphify-out/graph.json existuje?)
-
-Rules for the check:
-- It is read-only. Detect state, never install anything as part of it.
-- Distinguish `missing`, `installed-but-stopped`, `configured-but-unreachable` and `available`; "not on PATH" does not prove a tool is missing when it runs as an MCP server.
-- When a tool is missing, say in one sentence what it would buy for the task at hand and let the user decide. Do not silently work around it.
-- Skip the block only for a trivial single-file lookup where the path is already known.
-- After the block, pick the tool that fits: graphify for relationships and impact, serena for a known symbol, fulltext for exact wording, ast-grep for the shape of code.
-
-Quick detection:
-
-```bash
-[ -f tools/fts.sh ] && [ -f .fts/fts.db ] && echo "fulltext ano" || echo "fulltext NE"
-[ -f graphify-out/graph.json ] && echo "graphify ano" || echo "graphify NE"
-command -v ast-grep >/dev/null && echo "ast-grep ano" || echo "ast-grep NE"
-grep -q '"serena"' .mcp.json 2>/dev/null && echo "serena nakonfigurovana" || echo "serena NE"
-```
 
 ## Core principles
 
