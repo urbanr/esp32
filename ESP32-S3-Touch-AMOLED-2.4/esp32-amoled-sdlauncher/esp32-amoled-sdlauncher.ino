@@ -52,7 +52,9 @@ static void scanApps() {
     const char *n = strrchr(f.name(), '/');
     n = n ? n + 1 : f.name();
     const size_t len = strlen(n);
-    if (f.isDirectory() || len < 5 || strcasecmp(n + len - 4, ".bin") != 0) { f.close(); continue; }
+    // macOS vedle souboru zaklada stinove kopie "._jmeno.bin"
+    if (f.isDirectory() || len < 5 || strncmp(n, "._", 2) == 0 ||
+        strcasecmp(n + len - 4, ".bin") != 0) { f.close(); continue; }
     snprintf(paths[appCount], sizeof(paths[0]), "/apps/%s", n);
     snprintf(names[appCount], sizeof(names[0]), "%.*s", (int)(len - 4), n);
     sizes[appCount] = f.size();
@@ -60,6 +62,26 @@ static void scanApps() {
     f.close();
   }
   dir.close();
+}
+
+// diagnostika: co je na karte videt, kdyz /apps/*.bin nic nedal
+static void drawCardContent() {
+  gfx->setTextSize(1);
+  gfx->setTextColor(RGB565_LIGHTGREY);
+  gfx->setCursor(MARGIN, LIST_Y);
+  gfx->print("obsah karty:");
+  File root = SD.open("/");
+  int y = LIST_Y + 16;
+  if (!root) { gfx->setCursor(MARGIN, y); gfx->print("koren nejde otevrit"); return; }
+  int n = 0;
+  for (File f = root.openNextFile(); f && n < 16; f = root.openNextFile(), n++) {
+    gfx->setCursor(MARGIN, y);
+    gfx->printf("%s%s", f.name(), f.isDirectory() ? "/  (adresar)" : "");
+    y += 12;
+    f.close();
+  }
+  if (!n) { gfx->setCursor(MARGIN, y); gfx->print("(prazdna)"); }
+  root.close();
 }
 
 static void drawList(int highlight) {
@@ -71,7 +93,7 @@ static void drawList(int highlight) {
   gfx->drawFastHLine(MARGIN, 78, LCD_WIDTH - 2 * MARGIN, RGB565_DARKGREY);
 
   if (!sdOk)        { msg("SD karta nenalezena", RGB565_RED); return; }
-  if (!appCount)    { msg("na karte neni /apps/*.bin", RGB565_RED); return; }
+  if (!appCount)    { msg("na karte neni /apps/*.bin", RGB565_RED); drawCardContent(); return; }
 
   for (int i = 0; i < appCount; i++) {
     const int y = LIST_Y + i * ROW_H;
