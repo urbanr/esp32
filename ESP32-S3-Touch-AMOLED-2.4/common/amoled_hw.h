@@ -72,17 +72,31 @@ static bool exioWrite(uint8_t reg, uint8_t val) {
 // Napajeni panelu se nejdriv vypne a zase zapne: po softwarovem restartu
 // (napr. navrat z aplikace) expander drzi predchozi stav a panel bez
 // tohoto cyklu casto zustane tmavy.
-static bool exioInit() {
-  bool ok = false;
-  for (int t = 0; t < 3 && !ok; t++) {
-    ok = exioWrite(0x03, 0x00) && exioWrite(0x01, 0x00);   // vse vystup, panel vypnuty
-    if (!ok) { i2cBusRecover(); Wire.begin(IIC_SDA, IIC_SCL); Wire.setClock(400000); delay(20); }
-  }
-  if (!ok) return false;
-  delay(60);
-  if (!exioWrite(0x01, 0xFF)) return false;                // panel zapnuty
-  delay(60);
+static bool exioRead(uint8_t reg, uint8_t &val) {
+  Wire.beginTransmission(EXIO_ADDR);
+  Wire.write(reg);
+  if (Wire.endTransmission(false) != 0) return false;
+  if (Wire.requestFrom((int)EXIO_ADDR, 1) != 1) return false;
+  val = Wire.read();
   return true;
+}
+
+bool exioOk = false;
+
+static bool exioInit() {
+  const uint8_t on = 0xFF, off = (uint8_t)~(1 << EXIO_AMOLED_EN);
+  exioOk = false;
+  for (int t = 0; t < 3 && !exioOk; t++) {
+    // saha se jen na AMOLED_EN; ostatni EXIO jsou vstupy od panelu,
+    // dotyku, IMU a RTC, drzet je natvrdo by do nich tlacilo proti
+    exioOk = exioWrite(0x01, off) && exioWrite(0x03, 0x00);
+    if (!exioOk) { i2cBusRecover(); Wire.begin(IIC_SDA, IIC_SCL); Wire.setClock(400000); delay(20); }
+  }
+  if (!exioOk) return false;
+  delay(80);                       // panel bez napajeni
+  exioOk = exioWrite(0x01, on);    // a zase zapnout
+  delay(80);
+  return exioOk;
 }
 
 // vypis adres na I2C (kontrola, co je na desce osazeno)

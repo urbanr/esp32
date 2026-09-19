@@ -129,7 +129,10 @@ Adresář `ESP32-S3-Touch-AMOLED-2.4/` vznikl jako kopie stromu 1.8 pro desku **
 
 - **Panel zůstane tmavý, dokud nejsou EXIO expanderu nastavené jako výstupy v HIGH.** Ověřeno pokusem (sketch, který po restartech cykloval varianty): s piny ponechanými jako vstupy i se všemi v LOW je displej černý, `0x01 = 0xFF` + `0x03 = 0x00` ho rozsvítí. Knihovní příklad `PDQgraphicstest` pro tuto desku expander vůbec nenastavuje.
 - **Vypnutý panel a černý obraz se nepoznají.** Aplikace po startu maže displej na černo, takže špatná inicializace vypadá stejně jako špatné kreslení — na rozlišení toho slouží sketch, který kreslí barevné pruhy a číslo varianty.
-- Pro diagnostiku se hodí I2C sken v `hwInit()`; zdravá deska hlásí `0x20 0x38 0x51 0x6B 0x7E`. Boot log se nedá zachytit (`setTxTimeoutMs(0)` + re-enumerace USB), proto výpisy opakovat ve smyčce.
+- Pro diagnostiku se hodí I2C sken v `hwInit()`; zdravá deska hlásí `0x20 0x38 0x51 0x6B 0x7E`. Boot log se nedá zachytit (`setTxTimeoutMs(0)` + re-enumerace USB), proto výpisy opakovat ve smyčce — proto launcher tepe heartbeatem a `hwHalt()` hlásí chybu dokola.
+- **Po softwarovém restartu (`esp_restart`, tedy i návrat z aplikace) zůstane expander ve stavu, v jakém byl, a panel se sám neprobudí.** `exioInit()` proto napájení panelu vždy nejdřív vypne a po 80 ms zapne. Ověřeno sketchem `esp32-amoled-resettest/`, který po každém restartu přebarví displej — bez cyklu byl po prvním restartu černý.
+- Signál TE na expanderu se **nedá** použít jako důkaz, že panel běží: nemění se, ani když obraz jede.
+- Když se na desce točí sketch, který se sám restartuje, arduino-cli se do ní nedostane („Failed to connect… No serial data received"). Řešení: držet BOOT, odpojit a zapojit USB, pak BOOT pustit.
 
 ### Build a upload
 
