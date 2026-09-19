@@ -50,10 +50,13 @@ static void i2cBusRecover() {
   pinMode(IIC_SCL, INPUT_PULLUP);
 }
 
-// fatalni chyba: vypis a zastaveni
+// fatalni chyba: hlasi se dokola, aby sla zachytit i pozdeji pripojenym
+// seriovym monitorem (po startu se necteny vypis zahazuje)
 static void hwHalt(const char *msg) {
-  USBSerial.println(msg);
-  while (1) delay(1000);
+  while (1) {
+    USBSerial.printf("CHYBA: %s\n", msg);
+    delay(1000);
+  }
 }
 
 // zapis registru expanderu (0x01 = vystupy, 0x03 = smer, 0 = vystup)
@@ -64,12 +67,22 @@ static bool exioWrite(uint8_t reg, uint8_t val) {
   return Wire.endTransmission() == 0;
 }
 
-// vsechny EXIO jako vystupy v HIGH (mezi nimi AMOLED_EN). Overeno
+// Vsechny EXIO jako vystupy v HIGH (mezi nimi AMOLED_EN). Overeno
 // pokusem: s piny jako vstupy nebo se vsemi v LOW zustava panel tmavy.
+// Napajeni panelu se nejdriv vypne a zase zapne: po softwarovem restartu
+// (napr. navrat z aplikace) expander drzi predchozi stav a panel bez
+// tohoto cyklu casto zustane tmavy.
 static bool exioInit() {
-  const bool a = exioWrite(0x01, 0xFF);
-  const bool b = exioWrite(0x03, 0x00);
-  return a && b;
+  bool ok = false;
+  for (int t = 0; t < 3 && !ok; t++) {
+    ok = exioWrite(0x03, 0x00) && exioWrite(0x01, 0x00);   // vse vystup, panel vypnuty
+    if (!ok) { i2cBusRecover(); Wire.begin(IIC_SDA, IIC_SCL); Wire.setClock(400000); delay(20); }
+  }
+  if (!ok) return false;
+  delay(60);
+  if (!exioWrite(0x01, 0xFF)) return false;                // panel zapnuty
+  delay(60);
+  return true;
 }
 
 // vypis adres na I2C (kontrola, co je na desce osazeno)
@@ -121,7 +134,12 @@ static void hwInit() {
   if (!exioInit()) USBSerial.println("expander 0x20 neodpovida - displej nejspis zustane tmavy");
   delay(50);
 
-  if (!hwSpiBusInit()) hwHalt("SPI bus init fail");
+  if (!hwSpiBusInit()) {
+    // po restartu uprostred prenosu muze sbernice zustat obsazena
+    spi_bus_free(SPI2_HOST);
+    delay(50);
+    if (!hwSpiBusInit()) hwHalt("SPI bus init fail");
+  }
   gfx->begin(GFX_SKIP_DATABUS_UNDERLAYING_BEGIN);
   gfx->fillScreen(0x0000);
   gfx->setBrightness(AMOLED_BRIGHTNESS);

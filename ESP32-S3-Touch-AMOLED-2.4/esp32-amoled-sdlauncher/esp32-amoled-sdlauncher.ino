@@ -152,8 +152,17 @@ static void pollCard() {
   drawList();
 }
 
+// pravidelny vypis: podle nej se pozna, ze deska bezi, i kdyz je displej tmavy
+static void heartbeat() {
+  static uint32_t last = 0;
+  if (millis() - last < 3000) return;
+  last = millis();
+  USBSerial.printf("launcher bezi, aplikaci %d, heap %u\n", appCount, (unsigned)ESP.getFreeHeap());
+}
+
 void loop() {
   static bool prev = false;
+  heartbeat();
   pollCard();
   touchRead();
   const bool tap = touchDown && !prev;
