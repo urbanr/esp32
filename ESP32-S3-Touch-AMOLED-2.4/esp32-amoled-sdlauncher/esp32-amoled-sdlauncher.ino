@@ -26,6 +26,15 @@ static char paths[MAX_APPS][64];      // cela cesta na karte
 static uint32_t sizes[MAX_APPS];
 static int appCount = 0;
 
+// posledni tuknuti - kontrola mapovani dotyku na souradnice displeje
+static void drawTouchInfo() {
+  gfx->fillRect(0, LCD_HEIGHT - 24, LCD_WIDTH, 24, RGB565_BLACK);
+  gfx->setTextSize(1);
+  gfx->setTextColor(RGB565_DARKGREY);
+  gfx->setCursor(MARGIN, LCD_HEIGHT - 20);
+  gfx->printf("dotyk %d %d", touchX, touchY);
+}
+
 static void msg(const char *text, uint16_t color) {
   gfx->fillRect(0, LCD_HEIGHT - 60, LCD_WIDTH, 60, RGB565_BLACK);
   gfx->setTextSize(2);
@@ -148,14 +157,30 @@ void setup() {
   drawList(-1);
 }
 
+// karta zasunuta az po startu: zkousime ji otevrit dokola, seznam
+// se sam objevi, jakmile je co ukazat
+static void pollCard() {
+  static uint32_t lastTry = 0;
+  if (sdOk || millis() - lastTry < 1500) return;
+  lastTry = millis();
+  if (!SD.begin(SD_CS, sdSpi)) return;
+  sdOk = true;
+  scanApps();
+  USBSerial.printf("karta zasunuta, aplikaci: %d\n", appCount);
+  drawList(-1);
+}
+
 void loop() {
   static bool prev = false;
+  pollCard();
   touchRead();
   const bool tap = touchDown && !prev;
   prev = touchDown;
-  if (!tap || !appCount) { delay(10); return; }
+  if (!tap) { delay(10); return; }
 
   USBSerial.printf("dotyk %d %d\n", touchX, touchY);
+  drawTouchInfo();
+  if (!appCount) return;
   const int idx = (touchY - LIST_Y) / ROW_H;
   if (idx < 0 || idx >= appCount || touchY < LIST_Y) return;
   drawList(idx);

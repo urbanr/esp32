@@ -7,7 +7,7 @@ Adresář s ESP32 projekty. Každé zařízení má svůj podadresář a svou ka
 | Adresář | Zařízení | Kapitola |
 |---|---|---|
 | `ESP32-S3-Touch-AMOLED-1.8/` | Waveshare ESP32-S3-Touch-AMOLED-1.8 (aplikace: `esp32-amoled-sand/` — spec `sand.md`, `esp32-amoled-starfield/` — spec `starfield.md`, `esp32-amoled-bubble-level/` — spec `bubble-level.md`, `esp32-amoled-launcher/` — spec `launcher.md`, všechny tři v jednom firmwaru; `esp32-amoled-ship-navigator/` — spec `ship-navigator.md`, zatím samostatně; `esp32-rat-jumper/` — spec `rat-jumper.md`, displej na šířku, zatím samostatně; `esp32-rat-zombies/` — spec `rat-zombies.md`, grafika v `grafika-v3/` generovaná do `zomb_gfx.h` skriptem `gen_gfx.py`, displej na šířku, zatím samostatně; sdílený kód `common/` (hardware, dotyk, zvuk ES8311); dále `ESP32-S3-Touch-AMOLED-1.8-test/`, `motoriste-kokoti/`) | níže |
-| `ESP32-S3-Touch-AMOLED-2.4/` | Waveshare ESP32-S3-Touch-AMOLED-2.41 (kopie stromu 1.8; přizpůsoben zatím jen `esp32-rat-jumper/` a `common/`, ostatní aplikace se pro tuto desku nepřekládají) | níže |
+| `ESP32-S3-Touch-AMOLED-2.4/` | Waveshare ESP32-S3-Touch-AMOLED-2.41 (aplikace `esp32-amoled-sand/`, `esp32-amoled-starfield/`, `esp32-amoled-bubble-level/`, `esp32-amoled-ship-navigator/`, `esp32-rat-jumper/`, `esp32-rat-zombies/` — každá je vlastní binárka na SD kartě; `esp32-amoled-sdlauncher/` — spec `sdlauncher.md`, jediný sketch nahrávaný do flash; sdílený kód `common/`, bez zvuku, s vlastním ovladačem IMU) | níže |
 | `128display-test/` | zatím bez kapitoly | — |
 
 ---
@@ -107,7 +107,7 @@ arduino-cli upload  -b esp32:esp32:waveshare_esp32_s3_touch_amoled_18:CDCOnBoot=
 
 ## ESP32-S3-Touch-AMOLED-2.4
 
-Adresář `ESP32-S3-Touch-AMOLED-2.4/` je kopie stromu 1.8 pro desku **Waveshare ESP32-S3-Touch-AMOLED-2.41**. Platí pravidla kapitoly 1.8 (flicker-free kreslení, výkon a fps, sdílení s Arduino IDE), liší se hardware níže. Přizpůsoben je zatím **jen `esp32-rat-jumper/` a `common/`**; ostatní zkopírované aplikace se pro tuto desku nepřekládají (čekají na úpravu).
+Adresář `ESP32-S3-Touch-AMOLED-2.4/` vznikl jako kopie stromu 1.8 pro desku **Waveshare ESP32-S3-Touch-AMOLED-2.41**. Platí pravidla kapitoly 1.8 (flicker-free kreslení, výkon a fps, sdílení s Arduino IDE), liší se hardware níže. Přeneseny jsou všechny aplikace; launcher z 1.8 (jeden firmware se vším) tu nahradil `esp32-amoled-sdlauncher/` s binárkami na SD kartě. Sketche `ESP32-S3-Touch-AMOLED-1.8-test/` a `motoriste-kokoti/` se sem nepřenášely.
 
 ### Rozdíly proti 1.8
 
