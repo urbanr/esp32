@@ -31,7 +31,7 @@ if [ -x "$ROOT/tools/extract-text.sh" ]; then
 fi
 
 python3 - <<'PYEOF'
-import os, sqlite3, sys
+import os, re, sqlite3, sys
 from pathlib import Path
 import signal
 signal.signal(signal.SIGPIPE, signal.SIG_DFL)   # cisty konec pri "| head"
@@ -48,17 +48,65 @@ CREATE TABLE IF NOT EXISTS files(path TEXT PRIMARY KEY, mtime INTEGER);
 CREATE VIRTUAL TABLE IF NOT EXISTS doc USING fts5(path UNINDEXED, body, tokenize='unicode61 remove_diacritics 2');
 """)
 
-EXTS = {".md", ".txt", ".js", ".jsx", ".ts", ".tsx", ".py", ".sh", ".sql",
-        ".yaml", ".yml", ".mermaid", ".proto", ".css", ".html", ".json",
-        ".csv", ".log"}
+# Index musí pokrýt VŠECHNY běžné programovací jazyky, ne jen dokumentaci. Dokud tu
+# chyběly .java/.py/.c/.h/.ts, vypadal index kompletní, ale kód v něm nebyl vůbec.
+EXTS = {
+    # dokumentace a poznámky
+    ".md", ".markdown", ".txt", ".rst", ".adoc",
+    # C / C++ / Arduino / Objective-C
+    ".c", ".h", ".cc", ".cpp", ".cxx", ".hpp", ".hh", ".hxx", ".ino", ".m", ".mm",
+    # JVM
+    ".java", ".kt", ".kts", ".scala", ".groovy", ".gradle",
+    # Python
+    ".py", ".pyi", ".pyx",
+    # JavaScript / TypeScript / Node / React / Angular / Vue / Svelte
+    ".js", ".jsx", ".mjs", ".cjs", ".ts", ".tsx", ".mts", ".cts", ".vue", ".svelte",
+    # .NET
+    ".cs", ".fs", ".fsx", ".vb",
+    # ostatní kompilované
+    ".go", ".rs", ".swift", ".dart", ".zig",
+    # skriptovací
+    ".rb", ".php", ".pl", ".pm", ".lua", ".r", ".ex", ".exs", ".erl", ".jl",
+    # shell a dávky
+    ".sh", ".bash", ".zsh", ".fish", ".ps1", ".bat", ".cmd",
+    # styly a šablony
+    ".css", ".scss", ".sass", ".less", ".html", ".htm", ".jsp", ".twig", ".hbs",
+    # data, konfigurace, schémata
+    ".sql", ".json", ".yaml", ".yml", ".toml", ".ini", ".cfg", ".conf", ".properties",
+    ".proto", ".graphql", ".gql", ".mermaid", ".csv", ".tsv", ".log",
+    # build
+    ".mk", ".cmake", ".bazel", ".bzl", ".tf",
+}
+# Soubory bez přípony, které se indexovat mají (walk je bere podle jména, ne přípony).
+EXTRA_NAMES = {"Makefile", "makefile", "Dockerfile", "Jenkinsfile", "Justfile", "Rakefile", "Gemfile"}
 # .xml záměrně NENÍ v seznamu: strojové exporty (Archi, ArchiMate) bývají v podkladech
 # v desítkách skoro shodných variant a zaplaví výsledky. Přidat, až bude důvod.
 EXCLUDE_DIR_NAMES = {".git", ".fts", ".idea", ".venv", "node_modules", "graphify-out",
-                     "dist", "dist-single", "target", "__pycache__"}
+                     "dist", "dist-single", "target", "__pycache__", "build", "out",
+                     "bin", "obj", "vendor", "Pods", "coverage", "site-packages"}
+# Generované/minifikované soubory: jsou to formálně zdrojáky, ale hledat se v nich nedá.
+EXCLUDE_NAME_PARTS = (".min.js", ".min.css", ".bundle.js", "-lock.json", ".pb.go", "_pb2.py")
 EXCLUDE_REL_PREFIXES = ("komunikace/raw",)          # syrová data - nikdy neindexovat
 EXCLUDE_REL_PARTS = ("/build/out/", "/build/.venv/")  # generované výstupy
 MAX_BYTES = 3_000_000   # OpenAPI specifikace bývají přes 2 MB; přes limit se soubor NEindexuje
 SKIPPED_TOO_BIG = []    # hlásí se na konci - tichý skip je past, viz komentář u výpisu
+
+# Data převedená do zdrojáku (sprite sheety, fonty, obrázky jako pole bajtů) mají příponu
+# zdrojového kódu, ale jsou to tisíce řádků hexu - v indexu jen zaplaví výsledky.
+# Poznají se podle toho, že skoro každý řádek je jen číslo a oddělovač.
+DATA_LINE = re.compile(r"^[\s0-9A-Fa-fxX,\-+.{}\[\]()]+$")
+GENERATED_MIN_BYTES = 20_000   # menší soubor nezaplaví nic, netestuje se
+GENERATED_RATIO = 0.8          # podíl datových řádků, od kterého jde o generovaná data
+SKIPPED_GENERATED = []
+
+def looks_generated(p):
+    try:
+        lines = [l for l in p.read_text(errors="ignore").splitlines()[:400] if l.strip()]
+    except OSError:
+        return False
+    if len(lines) < 40:
+        return False
+    return sum(1 for l in lines if DATA_LINE.match(l)) / len(lines) >= GENERATED_RATIO
 
 def wanted():
     for dirpath, dirnames, filenames in os.walk(ROOT):
@@ -66,15 +114,21 @@ def wanted():
         for fn in filenames:
             p = Path(dirpath) / fn
             rel = p.relative_to(ROOT).as_posix()
-            if p.suffix.lower() not in EXTS:
+            if p.suffix.lower() not in EXTS and fn not in EXTRA_NAMES:
+                continue
+            if any(part in fn for part in EXCLUDE_NAME_PARTS):
                 continue
             if rel.startswith(EXCLUDE_REL_PREFIXES):
                 continue
             if any(part in "/" + rel for part in EXCLUDE_REL_PARTS):
                 continue
             try:
-                if p.stat().st_size > MAX_BYTES:
-                    SKIPPED_TOO_BIG.append((rel, p.stat().st_size))
+                size = p.stat().st_size
+                if size > MAX_BYTES:
+                    SKIPPED_TOO_BIG.append((rel, size))
+                    continue
+                if size > GENERATED_MIN_BYTES and looks_generated(p):
+                    SKIPPED_GENERATED.append((rel, size))
                     continue
             except OSError:
                 continue
@@ -109,6 +163,14 @@ if SKIPPED_TOO_BIG:
     print(f"POZOR: {len(SKIPPED_TOO_BIG)} souboru pres limit {MAX_BYTES:,} B - NEJSOU v indexu:")
     for rel, size in sorted(SKIPPED_TOO_BIG, key=lambda x: -x[1]):
         print(f"  {size:>12,} B  {rel}")
+
+# Generovaná data se vynechávají zamerne, ale tise by to byla stejna past jako u limitu.
+if SKIPPED_GENERATED and CMD == "index":
+    print(f"vynechano {len(SKIPPED_GENERATED)} souboru s generovanymi daty (hex pole, sprite sheety):")
+    for rel, size in sorted(SKIPPED_GENERATED, key=lambda x: -x[1])[:10]:
+        print(f"  {size:>12,} B  {rel}")
+    if len(SKIPPED_GENERATED) > 10:
+        print(f"  ... a dalsich {len(SKIPPED_GENERATED) - 10}")
 
 if CMD == "index":
     print(f"index: {total} souboru ({a} novych, {u} zmenenych, {r} odstranenych)")

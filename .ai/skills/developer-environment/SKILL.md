@@ -1,11 +1,11 @@
 ---
 name: developer-environment
-description: Inspect, diagnose, and recommend a token-efficient local developer environment for Codex and Claude Code. Prefer Docker for persistent services, Graphify for code relationships, Serena for symbol-level navigation/editing, and local SQLite FTS5 plus deterministic scripts for text/document retrieval. Verify before installing and minimize context sent to AI models.
+description: Inspect, diagnose, and recommend a token-efficient local developer environment for Codex and Claude Code. Docker is optional for persistent services, Graphify for code relationships, Serena for symbol-level navigation/editing, and local SQLite FTS5 plus deterministic scripts for text/document retrieval. Verify before installing and minimize context sent to AI models.
 ---
 
 # Developer Environment
 
-Use this skill for local developer tooling, MCP servers, Docker, Graphify, Serena, local full-text search, SQLite FTS5, Python utilities, Codex, Claude Code, and token-efficient coding workflows.
+Use this skill for local developer tooling, MCP servers, optional Docker, Graphify, Serena, local full-text search, SQLite FTS5, Python utilities, Codex, Claude Code, and token-efficient coding workflows.
 
 
 ## Start of work: retrieval readiness check (do this first)
@@ -22,12 +22,18 @@ Rules for the check:
 - Distinguish `missing`, `installed-but-stopped`, `configured-but-unreachable` and `available`; "not on PATH" does not prove a tool is missing when it runs as an MCP server.
 - When a tool is missing, say in one sentence what it would buy for the task at hand and let the user decide. Do not silently work around it.
 - Skip the block only for a trivial single-file lookup where the path is already known.
+- `fulltext: ano` is only true when the index actually covers this project's language. A `.fts/fts.db`
+  that holds only `.md` files while the repo is Java or C is a `NE` with a one-line reason - see
+  "Language coverage" below.
+- Docker is not part of this check. Report it only if the project itself runs a service in it.
 - After the block, pick the tool that fits: graphify for relationships and impact, serena for a known symbol, fulltext for exact wording, ast-grep for the shape of code.
 
 Quick detection:
 
 ```bash
 [ -f tools/fts.sh ] && [ -f .fts/fts.db ] && echo "fulltext ano" || echo "fulltext NE"
+# a hned overit, ze index zna jazyk projektu (priklad pro .java - dosad priponu repa):
+python3 -c "import sqlite3;print(sqlite3.connect('.fts/fts.db').execute(\"select count(*) from files where path like '%.java'\").fetchone()[0],'indexovanych .java')" 2>/dev/null
 [ -f graphify-out/graph.json ] && echo "graphify ano" || echo "graphify NE"
 command -v ast-grep >/dev/null && echo "ast-grep ano" || echo "ast-grep NE"
 grep -q '"serena"' .mcp.json 2>/dev/null && echo "serena nakonfigurovana" || echo "serena NE"
@@ -73,7 +79,7 @@ The top-level distribution directory is not required after the skill has been co
 
 1. Verify before installing anything.
 2. Distinguish `missing`, `installed-but-stopped`, `configured-but-unreachable`, and `available`.
-3. Prefer Docker for persistent services. Do not introduce PM2.
+3. Docker is optional. When it is present and the project needs a persistent service, prefer it. Never make it a prerequisite and do not introduce PM2.
 4. Prefer local deterministic tools before sending raw data to an AI model.
 5. Prefer Graphify/Serena/FTS lookup before opening whole files.
 6. Optimize code for change locality: a normal change should require reading a small number of cohesive symbols/files.
@@ -81,12 +87,17 @@ The top-level distribution directory is not required after the skill has been co
 
 ## Recommended stack
 
-### Persistent runtime
+### Persistent runtime (optional)
 
 - Docker Desktop
 - Docker Compose
 
-Use Docker for long-running MCP/services such as a shared Graphify HTTP MCP used by both Codex and Claude Code.
+**Docker is optional.** Plenty of projects - embedded, CLI, single-repo library work - never need
+it, and Graphify/Serena/FTS all run fine without it. Do not check for it, do not report it as a
+gap, and never propose installing it unless the project actually asks for a long-running service.
+
+When it is already there and a persistent service is genuinely needed (for example a shared
+Graphify HTTP MCP used by both Codex and Claude Code), Docker is the preferred way to run it.
 
 Expected architecture:
 
@@ -151,12 +162,47 @@ tools/fts.sh q '"exact phrase"'
 The helper should:
 - create `.fts/fts.db` automatically;
 - use SQLite FTS5;
+- **index source code of every common language, not just documentation**;
 - incrementally update changed files using metadata such as mtime/hash;
 - delete stale entries when source files disappear;
 - return a small ranked result set with short snippets;
 - avoid generated/build directories;
 - avoid sensitive/raw directories explicitly excluded by the project;
 - report files skipped because of size rather than silently pretending the index is complete.
+
+### Language coverage (check this first)
+
+An index that silently omits the project's own language is worse than no index: it answers
+"nothing found" and the agent falls back to reading whole files. **Before trusting the index,
+confirm the project's own extensions are in the `EXTS` set of `tools/fts.sh`.** The canonical
+set covers at least:
+
+| Area | Extensions |
+|---|---|
+| C / C++ / Arduino / Obj-C | `.c .h .cc .cpp .cxx .hpp .hh .hxx .ino .m .mm` |
+| JVM | `.java .kt .kts .scala .groovy .gradle` |
+| Python | `.py .pyi .pyx` |
+| Node / React / Angular / Vue / Svelte | `.js .jsx .mjs .cjs .ts .tsx .mts .cts .vue .svelte` |
+| .NET | `.cs .fs .fsx .vb` |
+| Go / Rust / Swift / Dart / Zig | `.go .rs .swift .dart .zig` |
+| Scripting | `.rb .php .pl .pm .lua .r .ex .exs .erl .jl` |
+| Shell | `.sh .bash .zsh .fish .ps1 .bat .cmd` |
+| Styles / templates | `.css .scss .sass .less .html .htm .jsp .twig .hbs` |
+| Data / config / schemas | `.sql .json .yaml .yml .toml .ini .cfg .conf .properties .proto .graphql .gql .csv .tsv .log` |
+| Build | `.mk .cmake .bazel .bzl .tf` plus extensionless `Makefile`, `Dockerfile`, `Jenkinsfile` |
+| Docs | `.md .markdown .txt .rst .adoc` |
+
+Two filters keep that breadth from poisoning the results, and both must stay:
+
+- **Generated data in source clothing.** Sprite sheets, fonts and images converted to C arrays
+  are `.h` files made of thousands of hex lines. The helper skips a file over ~20 KB when 80 %+
+  of its first 400 non-empty lines are nothing but numbers and separators, and reports what it
+  skipped. Without this, adding `.h` floods every query with hex.
+- **Minified and lock files.** `.min.js`, `.bundle.js`, `-lock.json`, `.pb.go`, `_pb2.py`, plus
+  build directories (`build`, `out`, `bin`, `obj`, `vendor`, `Pods`, `coverage`).
+
+After widening `EXTS`, delete `.fts/fts.db` and run `tools/fts.sh index` once - the rebuild is
+cheap and the file count before/after is the proof that the language is now covered.
 
 For Czech/Slovak text, prefix queries are often preferable for inflected words.
 
@@ -222,38 +268,13 @@ Before inventing a new script, inspect `tools/`, `scripts/`, and the skill's scr
 
 Keep script output compact and machine-readable where useful. Do not feed 20,000-line logs to the model when a script can return the 30 relevant lines.
 
-## Docker checks
-
-Run safe checks first:
-
-```bash
-command -v docker
-docker --version
-docker compose version
-docker info
-```
-
-Interpretation:
-- Docker binary exists + `docker info` works -> available.
-- Docker binary exists + `docker info` fails -> Docker is installed but Desktop/daemon may be stopped; do not recommend reinstalling yet.
-- Docker binary absent -> installation may be appropriate.
-
-For Graphify containers also inspect:
-
-```bash
-docker compose ps
-docker compose logs --tail=100 <service>
-```
-
-If an MCP endpoint is expected, verify reachability separately. A dead endpoint does not prove the image/package is missing.
-
 ## Graphify
 
 Use Graphify as the persistent broad code-graph layer.
 
 Before emitting exact CLI flags, verify installed version/help or current upstream documentation because commands can change.
 
-For a shared Codex + Claude Code setup, prefer one HTTP MCP instance in Docker bound to loopback unless LAN access is explicitly needed.
+For a shared Codex + Claude Code setup, one HTTP MCP instance in Docker bound to loopback is a good option when Docker is already available; a client-owned STDIO server is an equally valid setup and needs no container.
 
 After source changes, keep the graph fresh using the installed Graphify version's incremental/update workflow. Prefer incremental refresh over full rebuild where supported.
 
@@ -267,6 +288,20 @@ Use Serena for precise symbol-level work:
 - language-server navigation.
 
 Serena may be client-owned via STDIO or containerized if that matches the installed deployment. Verify actual local configuration rather than assuming one transport.
+
+**Right after installing or first running Serena, turn its GUI off.** By default Serena starts a web
+dashboard and opens a browser tab on every launch, which nobody asked for. Set the following in
+`~/.serena/serena_config.yml` and report that it was done:
+
+```yaml
+web_dashboard: false
+web_dashboard_open_on_launch: false
+gui_log_window: false
+```
+
+Back the file up before editing it. The change takes effect on the next start of the Serena MCP
+server. Do not leave the dashboard enabled and merely mention it - a running dashboard and an
+auto-opened browser tab are exactly the kind of unrequested persistent behavior this skill avoids.
 
 When Graphify already identified the relevant class/path, use Serena to retrieve/edit only the required symbols instead of reading entire files.
 
@@ -383,7 +418,7 @@ Read-only inspection is fine proactively.
 Ask before:
 - installing/uninstalling software;
 - editing global Codex/Claude configuration;
-- changing Docker/network exposure;
+- changing Docker/network exposure (when Docker is in use at all);
 - deleting images/containers/indexes;
 - unpacking untrusted archives;
 - changing project-wide persistent behavior not requested by the user.
