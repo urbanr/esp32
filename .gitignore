@@ -1,2 +1,9 @@
 .DS_Store
 .claude/settings.local.json
+
+
+<!-- developer-environment-local-artifacts:start -->
+.fts/
+files/_text/
+<!-- developer-environment-local-artifacts:end -->
+

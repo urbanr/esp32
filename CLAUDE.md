@@ -167,3 +167,12 @@ Větev `amoled-2.4-launcher`. Aplikace nejsou v jednom firmwaru jako na 1.8, ale
 - `FLOOR_Y`, `LANE1_Y`, `LANE2_Y` v `config.h` jsou nově odvozené od `LH` (chodník 25 bodů ode dna), takže rozestupy skoků zůstávají stejné jako na 1.8.
 - `STRIPE_H = 30` (musí dělit 600).
 - Naměřeno **20,8 fps** (1.8: 34 fps) — plocha má 1,64× víc pixelů, čas jde skoro celý do skládání pruhů, čekání na DMA je zanedbatelné (~0,2 ms).
+
+
+<!-- developer-environment-skill:start -->
+## Local developer tooling
+Use the `developer-environment` skill for Docker/Compose, MCP, Graphify, Serena, local SQLite FTS5, document extraction, deterministic local utilities, and token-efficient coding decisions.
+
+Before installing anything, verify whether the tool is missing, installed-but-stopped, configured-but-unreachable, or already available. Prefer Graphify for repository relationships/impact, Serena for symbol-level navigation/editing, and local FTS5 for exact text/config/docs/logs before broad source reads. Keep changes local: small cohesive units, small public APIs, targeted reads/tests, filtered logs, and `git diff` instead of rereading whole files.
+<!-- developer-environment-skill:end -->
+
