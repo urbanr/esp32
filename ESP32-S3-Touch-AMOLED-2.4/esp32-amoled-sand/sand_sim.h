@@ -17,8 +17,11 @@
 #define GRID_H  (LCD_HEIGHT / SAND_SCALE)
 #define GRID_N  (GRID_W * GRID_H)
 
-// vycentrovani hraci plochy pri rozliseni nedelitelnem SAND_SCALE
-#define GRID_X_OFF  ((LCD_WIDTH - GRID_W * SAND_SCALE) / 2)
+// Vycentrovani hraci plochy pri rozliseni nedelitelnem SAND_SCALE.
+// Zaokrouhluje se na sudy pixel: panel RM690B0 zahazuje zapisy
+// zacinajici na lichem x, na 450 px by jinak vysel okraj 3 px a zrnka
+// by nebyla videt (viz CLAUDE.md, kapitola 2.4).
+#define GRID_X_OFF  (((LCD_WIDTH - GRID_W * SAND_SCALE) / 2) & ~1)
 #define GRID_Y_OFF  ((LCD_HEIGHT - GRID_H * SAND_SCALE) / 2)
 
 #define TICK_DT (1.0f / TICK_HZ)
