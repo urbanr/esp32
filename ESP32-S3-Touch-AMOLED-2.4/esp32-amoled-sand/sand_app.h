@@ -56,6 +56,15 @@ void sandLoop() {
     ticked = true;
   }
   if (ticked) renderDirty(gfx);
+
+  static uint32_t lastDbg = 0;
+  if (millis() - lastDbg > 1000) {
+    lastDbg = millis();
+    int zrnka = 0;
+    for (int i = 0; i < GRID_N; i++) if (cellState[i] != CELL_EMPTY) zrnka++;
+    USBSerial.printf("g %+.2f %+.2f mag %.2f aktivni %d boot %d imu %d zrnek %d\n",
+                     inGX, inGY, gravMag, (int)simActive, (int)pouring, (int)imuOk, zrnka);
+  }
 }
 
 void sandEnd() {

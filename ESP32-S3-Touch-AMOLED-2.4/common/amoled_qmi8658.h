@@ -41,12 +41,12 @@ public:
   void enableAccelerometer() { _ctrl7 |= 0x01; write(0x08, _ctrl7); }
   void enableGyroscope()     { _ctrl7 |= 0x02; write(0x08, _ctrl7); }
 
-  // STATUS0: bit0 = nova data akcelerometru, bit1 = gyroskopu
-  bool getDataReady() {
-    uint8_t s = 0;
-    if (!read(0x2E, &s, 1)) return false;
-    return (s & ((_ctrl7 & 0x02) ? 0x03 : 0x01)) != 0;
-  }
+  // Pozor: priznaky nove hodnoty ve STATUS0 se plni jen v rezimu
+  // syncSmpl, ktery nepouzivame - v beznem rezimu zustavaji nulove
+  // a cekani na ne by znamenalo, ze aplikace nedostane data nikdy.
+  // Datove registry drzi vzdy posledni vzorek, takze staci vedet,
+  // ze je senzor zapnuty.
+  bool getDataReady() { return _ctrl7 != 0; }
 
   bool getAccelerometer(float &x, float &y, float &z) { return readVec(0x35, _aScale, x, y, z); }   // v g
   bool getGyroscope(float &x, float &y, float &z)     { return readVec(0x3B, _gScale, x, y, z); }   // ve stupnich/s
