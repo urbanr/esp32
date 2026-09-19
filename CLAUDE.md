@@ -148,6 +148,7 @@ Větev `amoled-2.4-launcher`. Aplikace nejsou v jednom firmwaru jako na 1.8, ale
 - Spouštět kód přímo z karty nejde — ESP32 umí běžet jen z namapované flash, proto to kopírování (~0,5 MB, pár sekund).
 - Výchozí tabulka oddílů desky (`app3M_fat9M_16MB`) už má dva 3MB app sloty, nic vlastního není potřeba.
 - **`build-apps.sh`** přeloží všechny aplikace a složí binárky s českými názvy do `sd-apps/` (mimo git); obsah stačí nakopírovat na kartu do `/apps`.
+- **Karta bez čtečky**: `esp32-amoled-sdusb/` zpřístupní kartu v zařízení jako USB disk (TinyUSB MSC nad raw sektory). Překládá se s `USBMode=default`, nepoužívá `common/` (v OTG režimu si jméno `USBSerial` zabírá jádro). Postup: nahrát tenhle sketch, `diskutil mount` svazek, nakopírovat, `diskutil unmount`, nahrát zpět launcher (FQBN s `CDCOnBoot=cdc`, bez `USBMode`). Po přepnutí USB režimu se mění port (`usbmodem1101` ↔ `1102`) a první pokus o nahrání může selhat — stačí zopakovat.
 
 ### Co bylo potřeba na portech aplikací
 
