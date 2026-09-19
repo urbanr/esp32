@@ -1,0 +1,255 @@
+{
+  "zombie_thin_stripes_walk": {
+    "frames": [
+      "zombie_thin_stripes_walk_0",
+      "zombie_thin_stripes_walk_1",
+      "zombie_thin_stripes_walk_2",
+      "zombie_thin_stripes_walk_3",
+      "zombie_thin_stripes_walk_4",
+      "zombie_thin_stripes_walk_5"
+    ],
+    "fps": 8,
+    "loop": true,
+    "method": "six-frame modular pixel shuffle"
+  },
+  "zombie_thin_mechanic_walk": {
+    "frames": [
+      "zombie_thin_mechanic_walk_0",
+      "zombie_thin_mechanic_walk_1",
+      "zombie_thin_mechanic_walk_2",
+      "zombie_thin_mechanic_walk_3",
+      "zombie_thin_mechanic_walk_4",
+      "zombie_thin_mechanic_walk_5"
+    ],
+    "fps": 8,
+    "loop": true,
+    "method": "six-frame modular pixel shuffle"
+  },
+  "zombie_thin_punk_walk": {
+    "frames": [
+      "zombie_thin_punk_walk_0",
+      "zombie_thin_punk_walk_1",
+      "zombie_thin_punk_walk_2",
+      "zombie_thin_punk_walk_3",
+      "zombie_thin_punk_walk_4",
+      "zombie_thin_punk_walk_5"
+    ],
+    "fps": 8,
+    "loop": true,
+    "method": "six-frame modular pixel shuffle"
+  },
+  "zombie_block_worker_walk": {
+    "frames": [
+      "zombie_block_worker_walk_0",
+      "zombie_block_worker_walk_1",
+      "zombie_block_worker_walk_2",
+      "zombie_block_worker_walk_3",
+      "zombie_block_worker_walk_4",
+      "zombie_block_worker_walk_5"
+    ],
+    "fps": 7,
+    "loop": true,
+    "method": "six-frame modular pixel shuffle"
+  },
+  "zombie_block_denim_walk": {
+    "frames": [
+      "zombie_block_denim_walk_0",
+      "zombie_block_denim_walk_1",
+      "zombie_block_denim_walk_2",
+      "zombie_block_denim_walk_3",
+      "zombie_block_denim_walk_4",
+      "zombie_block_denim_walk_5"
+    ],
+    "fps": 7,
+    "loop": true,
+    "method": "six-frame modular pixel shuffle"
+  },
+  "zombie_block_sport_walk": {
+    "frames": [
+      "zombie_block_sport_walk_0",
+      "zombie_block_sport_walk_1",
+      "zombie_block_sport_walk_2",
+      "zombie_block_sport_walk_3",
+      "zombie_block_sport_walk_4",
+      "zombie_block_sport_walk_5"
+    ],
+    "fps": 7,
+    "loop": true,
+    "method": "six-frame modular pixel shuffle"
+  },
+  "zombie_round_shirt_walk": {
+    "frames": [
+      "zombie_round_shirt_walk_0",
+      "zombie_round_shirt_walk_1",
+      "zombie_round_shirt_walk_2",
+      "zombie_round_shirt_walk_3",
+      "zombie_round_shirt_walk_4",
+      "zombie_round_shirt_walk_5"
+    ],
+    "fps": 6,
+    "loop": true,
+    "method": "six-frame modular pixel shuffle"
+  },
+  "zombie_round_janitor_walk": {
+    "frames": [
+      "zombie_round_janitor_walk_0",
+      "zombie_round_janitor_walk_1",
+      "zombie_round_janitor_walk_2",
+      "zombie_round_janitor_walk_3",
+      "zombie_round_janitor_walk_4",
+      "zombie_round_janitor_walk_5"
+    ],
+    "fps": 6,
+    "loop": true,
+    "method": "six-frame modular pixel shuffle"
+  },
+  "zombie_round_armor_walk": {
+    "frames": [
+      "zombie_round_armor_walk_0",
+      "zombie_round_armor_walk_1",
+      "zombie_round_armor_walk_2",
+      "zombie_round_armor_walk_3",
+      "zombie_round_armor_walk_4",
+      "zombie_round_armor_walk_5"
+    ],
+    "fps": 6,
+    "loop": true,
+    "method": "six-frame modular pixel shuffle"
+  },
+  "rat_furry_drive": {
+    "frames": [
+      "rat_furry_drive_0",
+      "rat_furry_drive_1",
+      "rat_furry_drive_2",
+      "rat_furry_drive_3",
+      "rat_furry_drive_4",
+      "rat_furry_drive_5"
+    ],
+    "fps": 12,
+    "loop": true,
+    "speed_driven": true
+  },
+  "rat_furry_armed_drive": {
+    "frames": [
+      "rat_furry_armed_drive_0",
+      "rat_furry_armed_drive_1",
+      "rat_furry_armed_drive_2",
+      "rat_furry_armed_drive_3",
+      "rat_furry_armed_drive_4",
+      "rat_furry_armed_drive_5"
+    ],
+    "fps": 12,
+    "loop": true,
+    "speed_driven": true,
+    "note": "Normal tail removed; overlay wrecking_swing at rear."
+  },
+  "rat_wood_drive": {
+    "frames": [
+      "rat_wood_drive_0",
+      "rat_wood_drive_1",
+      "rat_wood_drive_2",
+      "rat_wood_drive_3",
+      "rat_wood_drive_4",
+      "rat_wood_drive_5"
+    ],
+    "fps": 12,
+    "loop": true,
+    "speed_driven": true
+  },
+  "rat_wood_armed_drive": {
+    "frames": [
+      "rat_wood_armed_drive_0",
+      "rat_wood_armed_drive_1",
+      "rat_wood_armed_drive_2",
+      "rat_wood_armed_drive_3",
+      "rat_wood_armed_drive_4",
+      "rat_wood_armed_drive_5"
+    ],
+    "fps": 12,
+    "loop": true,
+    "speed_driven": true,
+    "note": "Normal tail removed; overlay wrecking_swing at rear."
+  },
+  "rat_steel_drive": {
+    "frames": [
+      "rat_steel_drive_0",
+      "rat_steel_drive_1",
+      "rat_steel_drive_2",
+      "rat_steel_drive_3",
+      "rat_steel_drive_4",
+      "rat_steel_drive_5"
+    ],
+    "fps": 12,
+    "loop": true,
+    "speed_driven": true
+  },
+  "rat_steel_armed_drive": {
+    "frames": [
+      "rat_steel_armed_drive_0",
+      "rat_steel_armed_drive_1",
+      "rat_steel_armed_drive_2",
+      "rat_steel_armed_drive_3",
+      "rat_steel_armed_drive_4",
+      "rat_steel_armed_drive_5"
+    ],
+    "fps": 12,
+    "loop": true,
+    "speed_driven": true,
+    "note": "Normal tail removed; overlay wrecking_swing at rear."
+  },
+  "pigeon_fly": {
+    "frames": [
+      "pigeon_fly_0",
+      "pigeon_fly_1",
+      "pigeon_fly_2",
+      "pigeon_fly_3"
+    ],
+    "fps": 9,
+    "loop": true
+  },
+  "impact": {
+    "frames": [
+      "impact_0",
+      "impact_1",
+      "impact_2",
+      "impact_3"
+    ],
+    "fps": 15,
+    "loop": false
+  },
+  "dust": {
+    "frames": [
+      "dust_0",
+      "dust_1",
+      "dust_2",
+      "dust_3"
+    ],
+    "fps": 10,
+    "loop": false
+  },
+  "wrecking_swing": {
+    "frames": [
+      "wrecking_swing_0",
+      "wrecking_swing_1",
+      "wrecking_swing_2",
+      "wrecking_swing_3",
+      "wrecking_swing_4",
+      "wrecking_swing_5",
+      "wrecking_swing_6",
+      "wrecking_swing_7"
+    ],
+    "fps": 15,
+    "loop": false,
+    "return_frames": [
+      "wrecking_swing_7",
+      "wrecking_swing_6",
+      "wrecking_swing_5",
+      "wrecking_swing_4",
+      "wrecking_swing_3",
+      "wrecking_swing_2",
+      "wrecking_swing_1",
+      "wrecking_swing_0"
+    ],
+    "note": "Overlay anchored at rat rear; collision follows ball_center, not full sprite rectangle."
+  }
+}

@@ -7,6 +7,7 @@ Adresář s ESP32 projekty. Každé zařízení má svůj podadresář a svou ka
 | Adresář | Zařízení | Kapitola |
 |---|---|---|
 | `ESP32-S3-Touch-AMOLED-1.8/` | Waveshare ESP32-S3-Touch-AMOLED-1.8 (aplikace: `esp32-amoled-sand/` — spec `sand.md`, `esp32-amoled-starfield/` — spec `starfield.md`, `esp32-amoled-bubble-level/` — spec `bubble-level.md`, `esp32-amoled-launcher/` — spec `launcher.md`, všechny tři v jednom firmwaru; `esp32-amoled-ship-navigator/` — spec `ship-navigator.md`, zatím samostatně; `esp32-rat-jumper/` — spec `rat-jumper.md`, displej na šířku, zatím samostatně; `esp32-rat-zombies/` — spec `rat-zombies.md`, grafika v `grafika-v3/` generovaná do `zomb_gfx.h` skriptem `gen_gfx.py`, displej na šířku, zatím samostatně; sdílený kód `common/` (hardware, dotyk, zvuk ES8311); dále `ESP32-S3-Touch-AMOLED-1.8-test/`, `motoriste-kokoti/`) | níže |
+| `ESP32-S3-Touch-AMOLED-2.4/` | Waveshare ESP32-S3-Touch-AMOLED-2.41 (kopie stromu 1.8; přizpůsoben zatím jen `esp32-rat-jumper/` a `common/`, ostatní aplikace se pro tuto desku nepřekládají) | níže |
 | `128display-test/` | zatím bez kapitoly | — |
 
 ---
@@ -101,3 +102,46 @@ arduino-cli upload  -b esp32:esp32:waveshare_esp32_s3_touch_amoled_18:CDCOnBoot=
 - **Verze knihoven určuje uživatel** (experimentuje s nimi v IDE Library Manageru) — neměnit je bez dohody.
 - Pro arduino-cli nezakládat vlastní config s jinými `directories.user` / `directories.data` — rozjely by se světy CLI a IDE.
 - Volby desky (Tools menu vs. FQBN) se mezi IDE a CLI nesdílejí; kanonické hodnoty pro CLI jsou zapsané výše.
+
+---
+
+## ESP32-S3-Touch-AMOLED-2.4
+
+Adresář `ESP32-S3-Touch-AMOLED-2.4/` je kopie stromu 1.8 pro desku **Waveshare ESP32-S3-Touch-AMOLED-2.41**. Platí pravidla kapitoly 1.8 (flicker-free kreslení, výkon a fps, sdílení s Arduino IDE), liší se hardware níže. Přizpůsoben je zatím **jen `esp32-rat-jumper/` a `common/`**; ostatní zkopírované aplikace se pro tuto desku nepřekládají (čekají na úpravu).
+
+### Rozdíly proti 1.8
+
+| | 1.8 | 2.41 |
+|---|---|---|
+| Řadič displeje | SH8601 | **RM690B0** (paměť širší než panel → offset sloupců 16) |
+| Rozlišení | 368×448 | **450×600** |
+| QSPI (CS, SCLK, D0–D3) | 12, 11, 4, 5, 6, 7 | **9, 10, 11, 12, 13, 14**, RESET **21** |
+| I2C (SDA, SCL) | 15, 14 | **47, 48** |
+| Dotyk | FT3168, INT na GPIO21 | **FT6336** (stejné registry, ovladač `Arduino_FT3x68`), RST **3**, INT jen na expanderu → pollování |
+| Zvuk | kodek ES8311 | **není** — `common/amoled_audio.h` je záslepka, `audioBegin()` vrací false |
+| SD karta | SDMMC 1 bit | **SPI** (CS 2, SCLK 4, MOSI 5, MISO 6) na vlastní sběrnici HSPI |
+| Napájení | expander XCA9554 povoluje displej | **BAT_PWR = GPIO16 HIGH** a expander 0x20 přes přímý zápis registrů: `0x03 = 0x00` (vše výstup), `0x01 = 0xFF` (vše HIGH) |
+
+- Piny jsou ve **vlastním `common/pin_config.h`** (1.8 bere stejnojmenný soubor z knihovny `Mylibrary`). Aplikace ho includují jako `"../common/pin_config.h"`, aby se nechytil ten knihovní.
+- Vlastní DMA kreslení (`rat_crt.h`) musí k adresnímu oknu přičíst `LCD_X_OFF` (16), jinak je obraz posunutý.
+
+### Známé pasti
+
+- **Panel zůstane tmavý, dokud nejsou EXIO expanderu nastavené jako výstupy v HIGH.** Ověřeno pokusem (sketch, který po restartech cykloval varianty): s piny ponechanými jako vstupy i se všemi v LOW je displej černý, `0x01 = 0xFF` + `0x03 = 0x00` ho rozsvítí. Knihovní příklad `PDQgraphicstest` pro tuto desku expander vůbec nenastavuje.
+- **Vypnutý panel a černý obraz se nepoznají.** Aplikace po startu maže displej na černo, takže špatná inicializace vypadá stejně jako špatné kreslení — na rozlišení toho slouží sketch, který kreslí barevné pruhy a číslo varianty.
+- Pro diagnostiku se hodí I2C sken v `hwInit()`; zdravá deska hlásí `0x20 0x38 0x51 0x6B 0x7E`. Boot log se nedá zachytit (`setTxTimeoutMs(0)` + re-enumerace USB), proto výpisy opakovat ve smyčce.
+
+### Build a upload
+
+```
+esp32:esp32:waveshare_esp32_s3_touch_amoled_241:CDCOnBoot=cdc,UploadSpeed=115200
+```
+
+Port `/dev/cu.usbmodem1101`, jinak stejné jako u 1.8.
+
+### rat-jumper na 2.41
+
+- Hrací plocha **200×150 bodů** (1.8: 150×123) při stejné velikosti bodu 3×3 px — větší výhled dopředu i nad krysou.
+- `FLOOR_Y`, `LANE1_Y`, `LANE2_Y` v `config.h` jsou nově odvozené od `LH` (chodník 25 bodů ode dna), takže rozestupy skoků zůstávají stejné jako na 1.8.
+- `STRIPE_H = 30` (musí dělit 600).
+- Naměřeno **20,8 fps** (1.8: 34 fps) — plocha má 1,64× víc pixelů, čas jde skoro celý do skládání pruhů, čekání na DMA je zanedbatelné (~0,2 ms).

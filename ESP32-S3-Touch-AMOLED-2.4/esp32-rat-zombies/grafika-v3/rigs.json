@@ -1,0 +1,794 @@
+{
+  "zombie_thin_stripes": {
+    "canvas": {
+      "w": 40,
+      "h": 44
+    },
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "parts": {
+      "head": {
+        "sprite": "zombie_thin_stripes_head",
+        "offset": {
+          "x": 19,
+          "y": 12
+        },
+        "pivot": {
+          "x": 4,
+          "y": 5
+        }
+      },
+      "torso": {
+        "sprite": "zombie_thin_stripes_torso",
+        "offset": {
+          "x": 22,
+          "y": 22
+        },
+        "pivot": {
+          "x": 3,
+          "y": 6
+        }
+      },
+      "arm_front": {
+        "sprite": "zombie_thin_stripes_arm_front",
+        "offset": {
+          "x": 9,
+          "y": 22
+        },
+        "pivot": {
+          "x": 6,
+          "y": 2
+        }
+      },
+      "arm_back": {
+        "sprite": "zombie_thin_stripes_arm_back",
+        "offset": {
+          "x": 27,
+          "y": 25
+        },
+        "pivot": {
+          "x": 1,
+          "y": 5
+        }
+      },
+      "leg_front": {
+        "sprite": "zombie_thin_stripes_leg_front",
+        "offset": {
+          "x": 17,
+          "y": 34
+        },
+        "pivot": {
+          "x": 3,
+          "y": 0
+        }
+      },
+      "leg_back": {
+        "sprite": "zombie_thin_stripes_leg_back",
+        "offset": {
+          "x": 23,
+          "y": 34
+        },
+        "pivot": {
+          "x": 3,
+          "y": 0
+        }
+      }
+    },
+    "draw_order": [
+      "leg_back",
+      "arm_back",
+      "torso",
+      "leg_front",
+      "arm_front",
+      "head"
+    ],
+    "rest_reconstruction": "pixel_exact",
+    "shape": "thin"
+  },
+  "zombie_thin_mechanic": {
+    "canvas": {
+      "w": 40,
+      "h": 44
+    },
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "parts": {
+      "head": {
+        "sprite": "zombie_thin_mechanic_head",
+        "offset": {
+          "x": 12,
+          "y": 12
+        },
+        "pivot": {
+          "x": 8,
+          "y": 5
+        }
+      },
+      "torso": {
+        "sprite": "zombie_thin_mechanic_torso",
+        "offset": {
+          "x": 21,
+          "y": 22
+        },
+        "pivot": {
+          "x": 4,
+          "y": 6
+        }
+      },
+      "arm_front": {
+        "sprite": "zombie_thin_mechanic_arm_front",
+        "offset": {
+          "x": 9,
+          "y": 22
+        },
+        "pivot": {
+          "x": 6,
+          "y": 4
+        }
+      },
+      "arm_back": {
+        "sprite": "zombie_thin_mechanic_arm_back",
+        "offset": {
+          "x": 27,
+          "y": 25
+        },
+        "pivot": {
+          "x": 1,
+          "y": 5
+        }
+      },
+      "leg_front": {
+        "sprite": "zombie_thin_mechanic_leg_front",
+        "offset": {
+          "x": 18,
+          "y": 34
+        },
+        "pivot": {
+          "x": 2,
+          "y": 0
+        }
+      },
+      "leg_back": {
+        "sprite": "zombie_thin_mechanic_leg_back",
+        "offset": {
+          "x": 23,
+          "y": 34
+        },
+        "pivot": {
+          "x": 3,
+          "y": 0
+        }
+      }
+    },
+    "draw_order": [
+      "leg_back",
+      "arm_back",
+      "torso",
+      "leg_front",
+      "arm_front",
+      "head"
+    ],
+    "rest_reconstruction": "pixel_exact",
+    "shape": "thin"
+  },
+  "zombie_thin_punk": {
+    "canvas": {
+      "w": 40,
+      "h": 44
+    },
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "parts": {
+      "head": {
+        "sprite": "zombie_thin_punk_head",
+        "offset": {
+          "x": 19,
+          "y": 12
+        },
+        "pivot": {
+          "x": 4,
+          "y": 5
+        }
+      },
+      "torso": {
+        "sprite": "zombie_thin_punk_torso",
+        "offset": {
+          "x": 21,
+          "y": 22
+        },
+        "pivot": {
+          "x": 4,
+          "y": 6
+        }
+      },
+      "arm_front": {
+        "sprite": "zombie_thin_punk_arm_front",
+        "offset": {
+          "x": 9,
+          "y": 22
+        },
+        "pivot": {
+          "x": 6,
+          "y": 4
+        }
+      },
+      "arm_back": {
+        "sprite": "zombie_thin_punk_arm_back",
+        "offset": {
+          "x": 27,
+          "y": 25
+        },
+        "pivot": {
+          "x": 1,
+          "y": 5
+        }
+      },
+      "leg_front": {
+        "sprite": "zombie_thin_punk_leg_front",
+        "offset": {
+          "x": 17,
+          "y": 34
+        },
+        "pivot": {
+          "x": 3,
+          "y": 0
+        }
+      },
+      "leg_back": {
+        "sprite": "zombie_thin_punk_leg_back",
+        "offset": {
+          "x": 23,
+          "y": 34
+        },
+        "pivot": {
+          "x": 3,
+          "y": 0
+        }
+      }
+    },
+    "draw_order": [
+      "leg_back",
+      "arm_back",
+      "torso",
+      "leg_front",
+      "arm_front",
+      "head"
+    ],
+    "rest_reconstruction": "pixel_exact",
+    "shape": "thin"
+  },
+  "zombie_block_worker": {
+    "canvas": {
+      "w": 40,
+      "h": 44
+    },
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "parts": {
+      "head": {
+        "sprite": "zombie_block_worker_head",
+        "offset": {
+          "x": 17,
+          "y": 8
+        },
+        "pivot": {
+          "x": 7,
+          "y": 4
+        }
+      },
+      "torso": {
+        "sprite": "zombie_block_worker_torso",
+        "offset": {
+          "x": 15,
+          "y": 17
+        },
+        "pivot": {
+          "x": 8,
+          "y": 9
+        }
+      },
+      "arm_front": {
+        "sprite": "zombie_block_worker_arm_front",
+        "offset": {
+          "x": 7,
+          "y": 18
+        },
+        "pivot": {
+          "x": 4,
+          "y": 3
+        }
+      },
+      "arm_back": {
+        "sprite": "zombie_block_worker_arm_back",
+        "offset": {
+          "x": 30,
+          "y": 18
+        },
+        "pivot": {
+          "x": 1,
+          "y": 9
+        }
+      },
+      "leg_front": {
+        "sprite": "zombie_block_worker_leg_front",
+        "offset": {
+          "x": 13,
+          "y": 35
+        },
+        "pivot": {
+          "x": 5,
+          "y": 0
+        }
+      },
+      "leg_back": {
+        "sprite": "zombie_block_worker_leg_back",
+        "offset": {
+          "x": 23,
+          "y": 35
+        },
+        "pivot": {
+          "x": 4,
+          "y": 0
+        }
+      }
+    },
+    "draw_order": [
+      "leg_back",
+      "arm_back",
+      "torso",
+      "leg_front",
+      "arm_front",
+      "head"
+    ],
+    "rest_reconstruction": "pixel_exact",
+    "shape": "block"
+  },
+  "zombie_block_denim": {
+    "canvas": {
+      "w": 40,
+      "h": 44
+    },
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "parts": {
+      "head": {
+        "sprite": "zombie_block_denim_head",
+        "offset": {
+          "x": 16,
+          "y": 12
+        },
+        "pivot": {
+          "x": 8,
+          "y": 4
+        }
+      },
+      "torso": {
+        "sprite": "zombie_block_denim_torso",
+        "offset": {
+          "x": 14,
+          "y": 20
+        },
+        "pivot": {
+          "x": 9,
+          "y": 8
+        }
+      },
+      "arm_front": {
+        "sprite": "zombie_block_denim_arm_front",
+        "offset": {
+          "x": 5,
+          "y": 21
+        },
+        "pivot": {
+          "x": 4,
+          "y": 2
+        }
+      },
+      "arm_back": {
+        "sprite": "zombie_block_denim_arm_back",
+        "offset": {
+          "x": 31,
+          "y": 21
+        },
+        "pivot": {
+          "x": 1,
+          "y": 8
+        }
+      },
+      "leg_front": {
+        "sprite": "zombie_block_denim_leg_front",
+        "offset": {
+          "x": 14,
+          "y": 36
+        },
+        "pivot": {
+          "x": 4,
+          "y": 0
+        }
+      },
+      "leg_back": {
+        "sprite": "zombie_block_denim_leg_back",
+        "offset": {
+          "x": 23,
+          "y": 36
+        },
+        "pivot": {
+          "x": 4,
+          "y": 0
+        }
+      }
+    },
+    "draw_order": [
+      "leg_back",
+      "arm_back",
+      "torso",
+      "leg_front",
+      "arm_front",
+      "head"
+    ],
+    "rest_reconstruction": "pixel_exact",
+    "shape": "block"
+  },
+  "zombie_block_sport": {
+    "canvas": {
+      "w": 40,
+      "h": 44
+    },
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "parts": {
+      "head": {
+        "sprite": "zombie_block_sport_head",
+        "offset": {
+          "x": 16,
+          "y": 10
+        },
+        "pivot": {
+          "x": 8,
+          "y": 4
+        }
+      },
+      "torso": {
+        "sprite": "zombie_block_sport_torso",
+        "offset": {
+          "x": 14,
+          "y": 18
+        },
+        "pivot": {
+          "x": 9,
+          "y": 8
+        }
+      },
+      "arm_front": {
+        "sprite": "zombie_block_sport_arm_front",
+        "offset": {
+          "x": 5,
+          "y": 19
+        },
+        "pivot": {
+          "x": 4,
+          "y": 2
+        }
+      },
+      "arm_back": {
+        "sprite": "zombie_block_sport_arm_back",
+        "offset": {
+          "x": 31,
+          "y": 20
+        },
+        "pivot": {
+          "x": 1,
+          "y": 8
+        }
+      },
+      "leg_front": {
+        "sprite": "zombie_block_sport_leg_front",
+        "offset": {
+          "x": 15,
+          "y": 35
+        },
+        "pivot": {
+          "x": 4,
+          "y": 0
+        }
+      },
+      "leg_back": {
+        "sprite": "zombie_block_sport_leg_back",
+        "offset": {
+          "x": 23,
+          "y": 35
+        },
+        "pivot": {
+          "x": 5,
+          "y": 0
+        }
+      }
+    },
+    "draw_order": [
+      "leg_back",
+      "arm_back",
+      "torso",
+      "leg_front",
+      "arm_front",
+      "head"
+    ],
+    "rest_reconstruction": "pixel_exact",
+    "shape": "block"
+  },
+  "zombie_round_shirt": {
+    "canvas": {
+      "w": 40,
+      "h": 44
+    },
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "parts": {
+      "head": {
+        "sprite": "zombie_round_shirt_head",
+        "offset": {
+          "x": 5,
+          "y": 7
+        },
+        "pivot": {
+          "x": 14,
+          "y": 4
+        }
+      },
+      "torso": {
+        "sprite": "zombie_round_shirt_torso",
+        "offset": {
+          "x": 9,
+          "y": 16
+        },
+        "pivot": {
+          "x": 13,
+          "y": 11
+        }
+      },
+      "arm_front": {
+        "sprite": "zombie_round_shirt_arm_front",
+        "offset": {
+          "x": 3,
+          "y": 16
+        },
+        "pivot": {
+          "x": 5,
+          "y": 6
+        }
+      },
+      "arm_back": {
+        "sprite": "zombie_round_shirt_arm_back",
+        "offset": {
+          "x": 31,
+          "y": 21
+        },
+        "pivot": {
+          "x": 3,
+          "y": 8
+        }
+      },
+      "leg_front": {
+        "sprite": "zombie_round_shirt_leg_front",
+        "offset": {
+          "x": 13,
+          "y": 39
+        },
+        "pivot": {
+          "x": 4,
+          "y": 0
+        }
+      },
+      "leg_back": {
+        "sprite": "zombie_round_shirt_leg_back",
+        "offset": {
+          "x": 24,
+          "y": 39
+        },
+        "pivot": {
+          "x": 3,
+          "y": 0
+        }
+      }
+    },
+    "draw_order": [
+      "leg_back",
+      "arm_back",
+      "torso",
+      "leg_front",
+      "arm_front",
+      "head"
+    ],
+    "rest_reconstruction": "pixel_exact",
+    "shape": "round"
+  },
+  "zombie_round_janitor": {
+    "canvas": {
+      "w": 40,
+      "h": 44
+    },
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "parts": {
+      "head": {
+        "sprite": "zombie_round_janitor_head",
+        "offset": {
+          "x": 4,
+          "y": 8
+        },
+        "pivot": {
+          "x": 15,
+          "y": 4
+        }
+      },
+      "torso": {
+        "sprite": "zombie_round_janitor_torso",
+        "offset": {
+          "x": 10,
+          "y": 17
+        },
+        "pivot": {
+          "x": 13,
+          "y": 11
+        }
+      },
+      "arm_front": {
+        "sprite": "zombie_round_janitor_arm_front",
+        "offset": {
+          "x": 3,
+          "y": 17
+        },
+        "pivot": {
+          "x": 5,
+          "y": 6
+        }
+      },
+      "arm_back": {
+        "sprite": "zombie_round_janitor_arm_back",
+        "offset": {
+          "x": 31,
+          "y": 21
+        },
+        "pivot": {
+          "x": 3,
+          "y": 8
+        }
+      },
+      "leg_front": {
+        "sprite": "zombie_round_janitor_leg_front",
+        "offset": {
+          "x": 13,
+          "y": 39
+        },
+        "pivot": {
+          "x": 4,
+          "y": 0
+        }
+      },
+      "leg_back": {
+        "sprite": "zombie_round_janitor_leg_back",
+        "offset": {
+          "x": 22,
+          "y": 39
+        },
+        "pivot": {
+          "x": 5,
+          "y": 0
+        }
+      }
+    },
+    "draw_order": [
+      "leg_back",
+      "arm_back",
+      "torso",
+      "leg_front",
+      "arm_front",
+      "head"
+    ],
+    "rest_reconstruction": "pixel_exact",
+    "shape": "round"
+  },
+  "zombie_round_armor": {
+    "canvas": {
+      "w": 40,
+      "h": 44
+    },
+    "anchor": {
+      "x": 20,
+      "y": 43
+    },
+    "parts": {
+      "head": {
+        "sprite": "zombie_round_armor_head",
+        "offset": {
+          "x": 4,
+          "y": 9
+        },
+        "pivot": {
+          "x": 15,
+          "y": 4
+        }
+      },
+      "torso": {
+        "sprite": "zombie_round_armor_torso",
+        "offset": {
+          "x": 10,
+          "y": 18
+        },
+        "pivot": {
+          "x": 13,
+          "y": 11
+        }
+      },
+      "arm_front": {
+        "sprite": "zombie_round_armor_arm_front",
+        "offset": {
+          "x": 3,
+          "y": 18
+        },
+        "pivot": {
+          "x": 5,
+          "y": 5
+        }
+      },
+      "arm_back": {
+        "sprite": "zombie_round_armor_arm_back",
+        "offset": {
+          "x": 31,
+          "y": 22
+        },
+        "pivot": {
+          "x": 3,
+          "y": 7
+        }
+      },
+      "leg_front": {
+        "sprite": "zombie_round_armor_leg_front",
+        "offset": {
+          "x": 14,
+          "y": 40
+        },
+        "pivot": {
+          "x": 3,
+          "y": 0
+        }
+      },
+      "leg_back": {
+        "sprite": "zombie_round_armor_leg_back",
+        "offset": {
+          "x": 24,
+          "y": 40
+        },
+        "pivot": {
+          "x": 3,
+          "y": 0
+        }
+      }
+    },
+    "draw_order": [
+      "leg_back",
+      "arm_back",
+      "torso",
+      "leg_front",
+      "arm_front",
+      "head"
+    ],
+    "rest_reconstruction": "pixel_exact",
+    "shape": "round"
+  }
+}

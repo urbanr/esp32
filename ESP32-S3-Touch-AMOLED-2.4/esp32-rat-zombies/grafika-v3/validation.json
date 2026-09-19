@@ -1,0 +1,166 @@
+{
+  "checks": {
+    "png_count": 273,
+    "palette_colors": 48,
+    "alpha_values": [
+      0,
+      255
+    ],
+    "dimensions_match": true,
+    "palette_match": true,
+    "rigs_reconstruct_exactly": 9,
+    "animation_groups": 19,
+    "garage_icons_30x30": true,
+    "tile_seams_match": true,
+    "all_exported_assets_have_provenance": 273,
+    "fresh_D_masters_differ_from_old_masters": 4,
+    "approved_D_sprites_unchanged": 2,
+    "rat_sizes_all_42x21": true,
+    "walk_poses_reconstruct_exactly": 54
+  },
+  "categories": {
+    "rat": 3,
+    "zombie": 9,
+    "background": 8,
+    "prop": 22,
+    "pickup": 7,
+    "life": 10,
+    "garage_ui": 3,
+    "terrain": 4,
+    "background_variant": 15,
+    "body_part": 54,
+    "animation": 102,
+    "vehicle_part": 12,
+    "ui": 16,
+    "effect": 8
+  },
+  "animation_sequences": {
+    "zombie_thin_stripes_walk": {
+      "frame_count": 6,
+      "unique_frames": 5,
+      "fps": 8
+    },
+    "zombie_thin_mechanic_walk": {
+      "frame_count": 6,
+      "unique_frames": 5,
+      "fps": 8
+    },
+    "zombie_thin_punk_walk": {
+      "frame_count": 6,
+      "unique_frames": 5,
+      "fps": 8
+    },
+    "zombie_block_worker_walk": {
+      "frame_count": 6,
+      "unique_frames": 5,
+      "fps": 7
+    },
+    "zombie_block_denim_walk": {
+      "frame_count": 6,
+      "unique_frames": 5,
+      "fps": 7
+    },
+    "zombie_block_sport_walk": {
+      "frame_count": 6,
+      "unique_frames": 5,
+      "fps": 7
+    },
+    "zombie_round_shirt_walk": {
+      "frame_count": 6,
+      "unique_frames": 5,
+      "fps": 6
+    },
+    "zombie_round_janitor_walk": {
+      "frame_count": 6,
+      "unique_frames": 5,
+      "fps": 6
+    },
+    "zombie_round_armor_walk": {
+      "frame_count": 6,
+      "unique_frames": 5,
+      "fps": 6
+    },
+    "rat_furry_drive": {
+      "frame_count": 6,
+      "unique_frames": 6,
+      "fps": 12
+    },
+    "rat_furry_armed_drive": {
+      "frame_count": 6,
+      "unique_frames": 6,
+      "fps": 12
+    },
+    "rat_wood_drive": {
+      "frame_count": 6,
+      "unique_frames": 6,
+      "fps": 12
+    },
+    "rat_wood_armed_drive": {
+      "frame_count": 6,
+      "unique_frames": 6,
+      "fps": 12
+    },
+    "rat_steel_drive": {
+      "frame_count": 6,
+      "unique_frames": 6,
+      "fps": 12
+    },
+    "rat_steel_armed_drive": {
+      "frame_count": 6,
+      "unique_frames": 6,
+      "fps": 12
+    },
+    "pigeon_fly": {
+      "frame_count": 4,
+      "unique_frames": 3,
+      "fps": 9
+    },
+    "impact": {
+      "frame_count": 4,
+      "unique_frames": 4,
+      "fps": 15
+    },
+    "dust": {
+      "frame_count": 4,
+      "unique_frames": 4,
+      "fps": 10
+    },
+    "wrecking_swing": {
+      "frame_count": 8,
+      "unique_frames": 8,
+      "fps": 15
+    }
+  },
+  "storage": {
+    "all_native_rgba_bytes": 954160,
+    "all_indexed_pixel_bytes": 238540,
+    "rgb565_palette_bytes": 98,
+    "packed_sheet": {
+      "w": 256,
+      "h": 1365
+    }
+  },
+  "preview": {
+    "logical": {
+      "w": 150,
+      "h": 123
+    },
+    "display": {
+      "w": 448,
+      "h": 368
+    },
+    "scale": 3,
+    "crop": {
+      "right": 2,
+      "bottom": 1
+    },
+    "gif_frames": 40
+  },
+  "hardware_tested": false,
+  "browser_preview": {
+    "loaded": true,
+    "broken_images": 0,
+    "javascript_errors": 0,
+    "character_selection_and_breakup_checked": true
+  }
+}
