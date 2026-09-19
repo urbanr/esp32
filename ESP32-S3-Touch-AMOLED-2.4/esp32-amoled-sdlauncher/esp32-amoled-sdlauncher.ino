@@ -54,19 +54,35 @@ static void scanApps() {
   if (listY < 20) listY = 20;
 }
 
-// jedna polozka; y je horni hrana radku, text sedi na uctne
+// Panel RM690B0 zahazuje zapisy zacinajici na lichem x, takze kresleni
+// pismen primo na displej (jeden bod = okno sirky 1) nic nenakresli.
+// Vsechen text proto vznika v pameti a na displej jde jednim blokem
+// pres celou sirku - ten zacina na nule a je sirky 450, tedy v poradku.
+static Arduino_Canvas *rowBuf = nullptr;
+
+static void blitRow(int y) {
+  gfx->draw16bitRGBBitmap(0, y, rowBuf->getFramebuffer(), LCD_WIDTH, ROW_H);
+}
+
+// jedna polozka; text sedi na uctne
 static void drawItem(int i, uint16_t color) {
-  gfx->setFont(&FreeSansBold18pt7b);
-  gfx->setTextColor(color);
-  gfx->setCursor(MARGIN, listY + i * ROW_H + 44);
-  gfx->print(names[i]);
+  if (!rowBuf) return;
+  rowBuf->fillScreen(RGB565_BLACK);
+  rowBuf->setFont(&FreeSansBold18pt7b);
+  rowBuf->setTextColor(color);
+  rowBuf->setCursor(MARGIN, 44);
+  rowBuf->print(names[i]);
+  blitRow(listY + i * ROW_H);
 }
 
 static void note(const char *text, uint16_t color) {
-  gfx->setFont(&FreeSans12pt7b);
-  gfx->setTextColor(color);
-  gfx->setCursor(MARGIN, LCD_HEIGHT / 2);
-  gfx->print(text);
+  if (!rowBuf) return;
+  rowBuf->fillScreen(RGB565_BLACK);
+  rowBuf->setFont(&FreeSans12pt7b);
+  rowBuf->setTextColor(color);
+  rowBuf->setCursor(MARGIN, 30);
+  rowBuf->print(text);
+  blitRow(LCD_HEIGHT / 2 - ROW_H / 2);
 }
 
 static void drawList() {
@@ -129,14 +145,22 @@ static void runApp(int idx) {
 
 void setup() {
   hwInit();
+  rowBuf = new Arduino_Canvas(LCD_WIDTH, ROW_H, gfx, 0, 0);
+  if (!rowBuf->begin(GFX_SKIP_OUTPUT_BEGIN)) USBSerial.println("buffer radku se nepodarilo alokovat");
+
+  hwStep = "dotyk";
   if (!touchBegin()) USBSerial.println("FT6336 init fail");
 
+  hwStep = "SD karta";
   sdSpi.begin(SD_SCLK, SD_MISO, SD_MOSI, SD_CS);
   sdOk = SD.begin(SD_CS, sdSpi);
   USBSerial.println(sdOk ? "SD karta OK" : "SD karta neni");
+  hwStep = "cteni /apps";
   if (sdOk) scanApps();
   USBSerial.printf("aplikaci na karte: %d\n", appCount);
+  hwStep = "kresleni seznamu";
   drawList();
+  hwStep = "launcher";
 }
 
 // karta zasunuta az po startu: zkousime ji otevrit dokola, seznam
@@ -157,7 +181,8 @@ static void heartbeat() {
   static uint32_t last = 0;
   if (millis() - last < 3000) return;
   last = millis();
-  USBSerial.printf("launcher bezi, aplikaci %d, heap %u\n", appCount, (unsigned)ESP.getFreeHeap());
+  USBSerial.printf("launcher bezi, aplikaci %d, heap %u, panel %s\n",
+                   appCount, (unsigned)ESP.getFreeHeap(), exioOk ? "zapnuty" : "NEZAPNUTY");
 }
 
 void loop() {

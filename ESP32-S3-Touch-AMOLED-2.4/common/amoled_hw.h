@@ -19,6 +19,17 @@
 
 HWCDC USBSerial;
 
+// Kde je start. Vlastni task to hlasi dokola, takze se pozna, na cem se
+// deska zasekla, i kdyz uz je davno po startu (necteny vypis se zahazuje).
+volatile const char *hwStep = "start";
+
+static void hwStepTask(void *) {
+  while (1) {
+    USBSerial.printf("faze: %s\n", hwStep);
+    vTaskDelay(pdMS_TO_TICKS(1000));
+  }
+}
+
 // is_shared_interface = true: knihovna si sbernici nezamkne natrvalo,
 // drzi ji jen behem zapisu - vlastni DMA zarizeni (rat_crt.h) se k ni dostane
 static Arduino_DataBus *bus = new Arduino_ESP32QSPI(
@@ -67,11 +78,7 @@ static bool exioWrite(uint8_t reg, uint8_t val) {
   return Wire.endTransmission() == 0;
 }
 
-// Vsechny EXIO jako vystupy v HIGH (mezi nimi AMOLED_EN). Overeno
-// pokusem: s piny jako vstupy nebo se vsemi v LOW zustava panel tmavy.
-// Napajeni panelu se nejdriv vypne a zase zapne: po softwarovem restartu
-// (napr. navrat z aplikace) expander drzi predchozi stav a panel bez
-// tohoto cyklu casto zustane tmavy.
+// cteni registru expanderu (0x01 = vystupy, jde precist zpet)
 static bool exioRead(uint8_t reg, uint8_t &val) {
   Wire.beginTransmission(EXIO_ADDR);
   Wire.write(reg);
@@ -83,18 +90,28 @@ static bool exioRead(uint8_t reg, uint8_t &val) {
 
 bool exioOk = false;
 
+// Probuzeni panelu: AMOLED_EN (EXIO1) se vypne a zase zapne - po
+// softwarovem restartu drzi expander predchozi stav a panel by zustal
+// tmavy. Kazdy zapis se overuje zpetnym ctenim: kdyz I2C zlobi (typicky
+// po resetu uprostred transakce), zopakuje se i s recovery. Nesmi
+// skoncit tak, ze panel zustane vypnuty.
+static bool exioSet(uint8_t val) {
+  for (int t = 0; t < 10; t++) {
+    uint8_t back = 0;
+    if (exioWrite(0x03, 0x00) && exioWrite(0x01, val) &&
+        exioRead(0x01, back) && back == val) return true;
+    i2cBusRecover();
+    Wire.begin(IIC_SDA, IIC_SCL);
+    Wire.setClock(400000);
+    delay(20);
+  }
+  return false;
+}
+
 static bool exioInit() {
   const uint8_t on = 0xFF, off = (uint8_t)~(1 << EXIO_AMOLED_EN);
-  exioOk = false;
-  for (int t = 0; t < 3 && !exioOk; t++) {
-    // saha se jen na AMOLED_EN; ostatni EXIO jsou vstupy od panelu,
-    // dotyku, IMU a RTC, drzet je natvrdo by do nich tlacilo proti
-    exioOk = exioWrite(0x01, off) && exioWrite(0x03, 0x00);
-    if (!exioOk) { i2cBusRecover(); Wire.begin(IIC_SDA, IIC_SCL); Wire.setClock(400000); delay(20); }
-  }
-  if (!exioOk) return false;
-  delay(80);                       // panel bez napajeni
-  exioOk = exioWrite(0x01, on);    // a zase zapnout
+  if (exioSet(off)) delay(80);     // vypnuti je jen pokus o cisty start
+  exioOk = exioSet(on);            // tohle uspet musi, jinak je displej tmavy
   delay(80);
   return exioOk;
 }
@@ -136,27 +153,36 @@ static void hwInit() {
   // bez timeoutu: kdyz port na PC nikdo necte, printf by blokoval smycku
   // (~1 fps), takto se necteny vystup zahodi
   USBSerial.setTxTimeoutMs(0);
+  xTaskCreate(hwStepTask, "hwstep", 2048, nullptr, 1, nullptr);
 
+  hwStep = "napajeni";
   pinMode(BAT_PWR, OUTPUT);
   digitalWrite(BAT_PWR, HIGH);
 
+  hwStep = "i2c recovery";
   i2cBusRecover();
   Wire.begin(IIC_SDA, IIC_SCL);
   Wire.setClock(400000);
+  hwStep = "i2c sken";
   i2cScan();
 
-  if (!exioInit()) USBSerial.println("expander 0x20 neodpovida - displej nejspis zustane tmavy");
+  hwStep = "expander";
+  if (!exioInit()) USBSerial.println("expander 0x20: panel se nepodarilo zapnout");
   delay(50);
 
+  hwStep = "spi sbernice";
   if (!hwSpiBusInit()) {
     // po restartu uprostred prenosu muze sbernice zustat obsazena
     spi_bus_free(SPI2_HOST);
     delay(50);
     if (!hwSpiBusInit()) hwHalt("SPI bus init fail");
   }
+  hwStep = "displej";
   gfx->begin(GFX_SKIP_DATABUS_UNDERLAYING_BEGIN);
   gfx->fillScreen(0x0000);
   gfx->setBrightness(AMOLED_BRIGHTNESS);
 
+  hwStep = "boot oddil";
   bootReturnToLauncher();
+  hwStep = "aplikace";
 }
