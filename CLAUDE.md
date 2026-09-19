@@ -139,6 +139,23 @@ esp32:esp32:waveshare_esp32_s3_touch_amoled_241:CDCOnBoot=cdc,UploadSpeed=115200
 
 Port `/dev/cu.usbmodem1101`, jinak stejné jako u 1.8.
 
+### Launcher a aplikace na SD kartě
+
+Větev `amoled-2.4-launcher`. Aplikace nejsou v jednom firmwaru jako na 1.8, ale jako samostatné binárky na SD kartě:
+
+- **`esp32-amoled-sdlauncher/`** sedí v oddílu `ota_0` (nahrává se přes arduino-cli jako jediný). Čte `/apps/*.bin` z karty, vykreslí seznam a ťuknutí spustí aplikaci: zkopíruje binárku do `ota_1` (`esp_ota_write`), přepne na ni boot a restartuje se.
+- **Návrat do launcheru** obstarává `common/amoled_boot.h`: `hwInit()` každé aplikace hned po startu přepne bootovací oddíl zpět na `ota_0`, takže **jakýkoli restart vrátí seznam**. Aplikace o tom nemusí vědět nic dalšího.
+- Spouštět kód přímo z karty nejde — ESP32 umí běžet jen z namapované flash, proto to kopírování (~0,5 MB, pár sekund).
+- Výchozí tabulka oddílů desky (`app3M_fat9M_16MB`) už má dva 3MB app sloty, nic vlastního není potřeba.
+- **`build-apps.sh`** přeloží všechny aplikace a složí binárky s českými názvy do `sd-apps/` (mimo git); obsah stačí nakopírovat na kartu do `/apps`.
+
+### Co bylo potřeba na portech aplikací
+
+- **Knihovna SensorLib se pro tuto desku nepřeloží**: variant desky definuje makro `QSPI_D0` a spol., která kolidují s položkami výčtu v `SensorBHI260AP.hpp` (a Arduino překládá celou knihovnu, i nepoužité soubory). Nahrazena vlastním ovladačem `common/amoled_qmi8658.h` se stejným rozhraním (akcelerometr + gyroskop).
+- Aplikace s vlastním DMA (hvězdy, loď, zombíci, krysa) musí k adresnímu oknu přičíst `LCD_X_OFF` a mít `STRIPE_H = 30`.
+- Ukládání na SD přešlo ze SDMMC na SPI (krysa, zombíci).
+- Každý soubor mimo `common/` musí `pin_config.h` includovat jako `"../common/pin_config.h"`, jinak dostane ten knihovní s rozlišením 368×448.
+
 ### rat-jumper na 2.41
 
 - Hrací plocha **200×150 bodů** (1.8: 150×123) při stejné velikosti bodu 3×3 px — větší výhled dopředu i nad krysou.

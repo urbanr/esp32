@@ -54,5 +54,5 @@
 
 // ===== render =====
 #define LCD_QSPI_HZ           40000000
-#define STRIPE_H              32     // vyska pruhu DMA bufferu (deli LCD_HEIGHT)
+#define STRIPE_H              30     // vyska pruhu DMA bufferu (deli LCD_HEIGHT = 600)
 #define DEBUG_PERIOD_MS       0      // perioda vypisu fps na USBSerial; 0 = vypnuto

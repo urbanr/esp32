@@ -1,8 +1,8 @@
 #pragma once
 
 #include <Wire.h>
-#include "SensorQMI8658.hpp"
-#include "pin_config.h"
+#include "../common/amoled_qmi8658.h"   // misto knihovny SensorLib, viz komentar tam
+#include "../common/pin_config.h"
 #include "config.h"
 
 // ===================================================================

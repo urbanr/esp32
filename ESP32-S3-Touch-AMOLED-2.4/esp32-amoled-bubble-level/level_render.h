@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Arduino_GFX_Library.h"
-#include "pin_config.h"
+#include "../common/pin_config.h"
 #include "config.h"
 
 // ===================================================================

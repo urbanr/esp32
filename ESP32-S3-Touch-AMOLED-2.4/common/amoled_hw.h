@@ -7,6 +7,7 @@
 #include "pin_config.h"
 #include "HWCDC.h"
 #include "amoled_app.h"
+#include "amoled_boot.h"
 
 // ===================================================================
 // Sdilena inicializace hardwaru Waveshare ESP32-S3-Touch-AMOLED-2.41:
@@ -124,4 +125,6 @@ static void hwInit() {
   gfx->begin(GFX_SKIP_DATABUS_UNDERLAYING_BEGIN);
   gfx->fillScreen(0x0000);
   gfx->setBrightness(AMOLED_BRIGHTNESS);
+
+  bootReturnToLauncher();
 }

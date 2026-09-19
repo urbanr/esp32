@@ -78,5 +78,5 @@
 
 // ===== render =====
 #define LCD_QSPI_HZ           40000000
-#define STRIPE_H              32
+#define STRIPE_H              30     // musi delit LCD_HEIGHT (600)
 #define DEBUG_PERIOD_MS       1000

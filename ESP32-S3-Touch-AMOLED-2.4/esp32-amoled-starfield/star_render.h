@@ -3,7 +3,7 @@
 #include <string.h>
 #include "driver/spi_master.h"
 #include "soc/gpio_reg.h"
-#include "pin_config.h"
+#include "../common/pin_config.h"
 #include "../common/amoled_app.h"
 #include "config.h"
 #include "star_input.h"
@@ -171,8 +171,8 @@ static void renderFrame() {
     // predminuleho pruhu i prikazove transakce jsou volne
     waitPending(1);
     composeStripe(stripes[buf], y0);
-    queueCmd(0, 0x2A, 0, LCD_WIDTH - 1, true);          // CASET
-    queueCmd(1, 0x2B, y0, y0 + STRIPE_H - 1, true);     // PASET
+    queueCmd(0, 0x2A, LCD_X_OFF, LCD_X_OFF + LCD_WIDTH - 1, true);          // CASET
+    queueCmd(1, 0x2B, LCD_Y_OFF + y0, LCD_Y_OFF + y0 + STRIPE_H - 1, true);     // PASET
     queueCmd(2, 0x2C, 0, 0, false);                     // RAMWR
     queueStripe(buf);
   }

@@ -1,30 +1,34 @@
 #pragma once
 
 #include <Arduino.h>
-#include <SD_MMC.h>
-#include "../common/amoled_app.h"   // USBSerial, pin_config.h (SDMMC_CLK/CMD/DATA)
+#include <SPI.h>
+#include <SD.h>
+#include "../common/amoled_app.h"     // USBSerial
+#include "../common/pin_config.h"     // SD_CS/SCLK/MOSI/MISO
 
 // ===================================================================
 // Nastaveni na SD karte: /rat-zombies/settings.txt (parametry CRT).
 // Postup hry se zamerne neuklada - hra jede vzdy od zacatku.
-// SDMMC 1 bit; bez karty se nastaveni jen nepamatuje.
+// Karta je na vlastni SPI sbernici (deska 2.41 nema SDMMC vyvedene);
+// bez karty se nastaveni jen nepamatuje.
 // ===================================================================
 
 #define SAVE_DIR  "/rat-zombies"
 #define SETTINGS_FILE SAVE_DIR "/settings.txt"
 
 static bool sdOk = false;
+static SPIClass sdSpi(HSPI);
 
 static bool saveBegin() {
-  SD_MMC.setPins(SDMMC_CLK, SDMMC_CMD, SDMMC_DATA);
-  sdOk = SD_MMC.begin("/sd", true);
+  sdSpi.begin(SD_SCLK, SD_MISO, SD_MOSI, SD_CS);
+  sdOk = SD.begin(SD_CS, sdSpi);
   return sdOk;
 }
 
 // nastaveni CRT: verze 5, rezim, radky horni/dolni, prosvit, rozmazani, maska, blikani, pruh, jiskry, zesileni*100, gama*100
 static bool settingsLoad(int *v, int n, float &gain, float &gamma) {
   if (!sdOk) return false;
-  File f = SD_MMC.open(SETTINGS_FILE, FILE_READ);
+  File f = SD.open(SETTINGS_FILE, FILE_READ);
   if (!f) return false;
   const bool ok = f.parseInt() == 5;
   if (ok) {
@@ -39,8 +43,8 @@ static bool settingsLoad(int *v, int n, float &gain, float &gamma) {
 
 static void settingsStore(const int *v, int n, float gain, float gamma) {
   if (!sdOk) return;
-  SD_MMC.mkdir(SAVE_DIR);
-  File f = SD_MMC.open(SETTINGS_FILE, FILE_WRITE);
+  SD.mkdir(SAVE_DIR);
+  File f = SD.open(SETTINGS_FILE, FILE_WRITE);
   if (!f) return;
   f.print("5");
   for (int i = 0; i < n; i++) f.printf(" %d", v[i]);
@@ -49,6 +53,6 @@ static void settingsStore(const int *v, int n, float gain, float gamma) {
 }
 
 static void saveEnd() {
-  if (sdOk) SD_MMC.end();
+  if (sdOk) SD.end();
   sdOk = false;
 }
