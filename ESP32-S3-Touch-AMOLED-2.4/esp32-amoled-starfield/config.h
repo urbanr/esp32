@@ -31,12 +31,15 @@
 // Akcelerometr -> smer gravitace (g); X/Y prevzato ze sand a bubble-level, Z dopocitano tak, aby
 // slo o stejnou rotaci. Kontrola: zarizeni lezi displejem nahoru -> ACCEL_MAP_GZ musi byt ~ +1.
 // Kdyby vychazelo -1, prohodit na: GZ = (az), GYRO_X = (-(gy)), GYRO_Y = (gx).
-#define ACCEL_MAP_GX(ax, ay, az)  (-(ay))
-#define ACCEL_MAP_GY(ax, ay, az)  (ax)
+// Osy QMI8658 na desce 2.41 (zmereno): displej nahoru -> az = -1,
+// postaveno svisle (USB dole) -> ay = +1, naklon doprava -> ax = +1.
+// Cidlo je proti desce 1.8 otocene o 90 stupnu.
+#define ACCEL_MAP_GX(ax, ay, az)  (ax)
+#define ACCEL_MAP_GY(ax, ay, az)  (ay)
 #define ACCEL_MAP_GZ(ax, ay, az)  (-(az))
 // gyroskop -> uhlova rychlost kolem os displeje (dps), stejna rotace jako u akcelerometru
-#define GYRO_MAP_X(gx, gy, gz)    (gy)
-#define GYRO_MAP_Y(gx, gy, gz)    (-(gx))
+#define GYRO_MAP_X(gx, gy, gz)    (-(gx))
+#define GYRO_MAP_Y(gx, gy, gz)    (-(gy))
 #define GYRO_MAP_Z(gx, gy, gz)    (gz)
 
 // ===== render =====

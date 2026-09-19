@@ -27,8 +27,11 @@
 
 // Mapovani os akcelerometru (v g) na osy displeje: +X doprava, +Y dolu.
 // Pokud pisek pada spatnym smerem, uprav znamenka/prohod osy zde.
-#define ACCEL_MAP_GX(ax, ay, az)  (-(ay))
-#define ACCEL_MAP_GY(ax, ay, az)  (ax)
+// Osy QMI8658 na desce 2.41 (zmereno): displej nahoru -> az = -1,
+// postaveno svisle (USB dole) -> ay = +1, naklon doprava -> ax = +1.
+// Cidlo je proti desce 1.8 otocene o 90 stupnu.
+#define ACCEL_MAP_GX(ax, ay, az)  (ax)
+#define ACCEL_MAP_GY(ax, ay, az)  (ay)
 
 // ===== piskova paleta =====
 #define PALETTE_CONTRAST_PCT  60    // 0-100

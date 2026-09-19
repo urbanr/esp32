@@ -92,9 +92,9 @@ static void drawList() {
   for (int i = 0; i < appCount; i++) drawItem(i, COL_TEXT);
 }
 
+// uplne dole u hrany, at nelezne do posledni polozky
 static void drawProgress(int pct) {
-  const int y = LCD_HEIGHT - 70, w = LCD_WIDTH - 2 * MARGIN;
-  gfx->fillRect(MARGIN, y, w * pct / 100, 6, COL_PICK);
+  gfx->fillRect(0, LCD_HEIGHT - 6, LCD_WIDTH * pct / 100, 6, COL_PICK);
 }
 
 // zkopiruje binarku z karty do oddilu ota_1 a nastavi z nej boot
