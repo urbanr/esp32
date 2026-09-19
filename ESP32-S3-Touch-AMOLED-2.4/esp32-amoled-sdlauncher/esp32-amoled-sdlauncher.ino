@@ -11,37 +11,25 @@
 
 #include "../common/amoled_hw.h"
 #include "../common/amoled_touch.h"
+#include "FreeSansBold18pt7b.h"
+#include "FreeSans12pt7b.h"
 
-#define MAX_APPS   12
-#define ROW_H      56
-#define LIST_Y     110
-#define MARGIN     24
+#define MAX_APPS   8
+#define ROW_H      92        // rozestup polozek (velke pismo, palec)
+#define MARGIN     30
 #define COPY_CHUNK 4096
+
+#define COL_TEXT   RGB565_WHITE
+#define COL_PICK   RGB565_ORANGE    // tuknuta polozka
+#define COL_ERR    RGB565_RED
 
 static SPIClass sdSpi(HSPI);
 static bool sdOk = false;
 
-static char names[MAX_APPS][32];      // nazev bez pripony (na displeji)
+static char names[MAX_APPS][24];      // nazev bez pripony (na displeji)
 static char paths[MAX_APPS][64];      // cela cesta na karte
-static uint32_t sizes[MAX_APPS];
 static int appCount = 0;
-
-// posledni tuknuti - kontrola mapovani dotyku na souradnice displeje
-static void drawTouchInfo() {
-  gfx->fillRect(0, LCD_HEIGHT - 24, LCD_WIDTH, 24, RGB565_BLACK);
-  gfx->setTextSize(1);
-  gfx->setTextColor(RGB565_DARKGREY);
-  gfx->setCursor(MARGIN, LCD_HEIGHT - 20);
-  gfx->printf("dotyk %d %d", touchX, touchY);
-}
-
-static void msg(const char *text, uint16_t color) {
-  gfx->fillRect(0, LCD_HEIGHT - 60, LCD_WIDTH, 60, RGB565_BLACK);
-  gfx->setTextSize(2);
-  gfx->setTextColor(color);
-  gfx->setCursor(MARGIN, LCD_HEIGHT - 44);
-  gfx->print(text);
-}
+static int listY = 0;                 // horni hrana prvni polozky
 
 // nacte /apps/*.bin do tabulky (razeni neresime, staci poradi z FAT)
 static void scanApps() {
@@ -57,78 +45,54 @@ static void scanApps() {
         strcasecmp(n + len - 4, ".bin") != 0) { f.close(); continue; }
     snprintf(paths[appCount], sizeof(paths[0]), "/apps/%s", n);
     snprintf(names[appCount], sizeof(names[0]), "%.*s", (int)(len - 4), n);
-    sizes[appCount] = f.size();
+    for (char *c = names[appCount]; *c; c++) if (*c == '-') *c = ' ';   // hezci nazev
     appCount++;
     f.close();
   }
   dir.close();
+  listY = (LCD_HEIGHT - appCount * ROW_H) / 2 + 10;
+  if (listY < 20) listY = 20;
 }
 
-// diagnostika: co je na karte videt, kdyz /apps/*.bin nic nedal
-static void drawCardContent() {
-  gfx->setTextSize(1);
-  gfx->setTextColor(RGB565_LIGHTGREY);
-  gfx->setCursor(MARGIN, LIST_Y);
-  gfx->print("obsah karty:");
-  File root = SD.open("/");
-  int y = LIST_Y + 16;
-  if (!root) { gfx->setCursor(MARGIN, y); gfx->print("koren nejde otevrit"); return; }
-  int n = 0;
-  for (File f = root.openNextFile(); f && n < 16; f = root.openNextFile(), n++) {
-    gfx->setCursor(MARGIN, y);
-    gfx->printf("%s%s", f.name(), f.isDirectory() ? "/  (adresar)" : "");
-    y += 12;
-    f.close();
-  }
-  if (!n) { gfx->setCursor(MARGIN, y); gfx->print("(prazdna)"); }
-  root.close();
+// jedna polozka; y je horni hrana radku, text sedi na uctne
+static void drawItem(int i, uint16_t color) {
+  gfx->setFont(&FreeSansBold18pt7b);
+  gfx->setTextColor(color);
+  gfx->setCursor(MARGIN, listY + i * ROW_H + 44);
+  gfx->print(names[i]);
 }
 
-static void drawList(int highlight) {
+static void note(const char *text, uint16_t color) {
+  gfx->setFont(&FreeSans12pt7b);
+  gfx->setTextColor(color);
+  gfx->setCursor(MARGIN, LCD_HEIGHT / 2);
+  gfx->print(text);
+}
+
+static void drawList() {
   gfx->fillScreen(RGB565_BLACK);
-  gfx->setTextSize(3);
-  gfx->setTextColor(RGB565_WHITE);
-  gfx->setCursor(MARGIN, 40);
-  gfx->print("APLIKACE");
-  gfx->drawFastHLine(MARGIN, 78, LCD_WIDTH - 2 * MARGIN, RGB565_DARKGREY);
-
-  if (!sdOk)        { msg("SD karta nenalezena", RGB565_RED); return; }
-  if (!appCount)    { msg("na karte neni /apps/*.bin", RGB565_RED); drawCardContent(); return; }
-
-  for (int i = 0; i < appCount; i++) {
-    const int y = LIST_Y + i * ROW_H;
-    const uint16_t bg = (i == highlight) ? RGB565_BLUE : 0x2104;
-    gfx->fillRoundRect(MARGIN, y, LCD_WIDTH - 2 * MARGIN, ROW_H - 10, 6, bg);
-    gfx->setTextSize(2);
-    gfx->setTextColor(RGB565_WHITE);
-    gfx->setCursor(MARGIN + 14, y + 10);
-    gfx->print(names[i]);
-    gfx->setTextSize(1);
-    gfx->setTextColor(RGB565_LIGHTGREY);
-    gfx->setCursor(MARGIN + 14, y + 30);
-    gfx->printf("%u kB", (unsigned)(sizes[i] / 1024));
-  }
-  msg("tukni na aplikaci", RGB565_DARKGREY);
+  if (!sdOk)     { note("bez SD karty", COL_ERR); return; }
+  if (!appCount) { note("na karte neni /apps/*.bin", COL_ERR); return; }
+  for (int i = 0; i < appCount; i++) drawItem(i, COL_TEXT);
 }
 
 static void drawProgress(int pct) {
-  const int y = LCD_HEIGHT - 120, w = LCD_WIDTH - 2 * MARGIN;
-  gfx->drawRect(MARGIN, y, w, 24, RGB565_WHITE);
-  gfx->fillRect(MARGIN + 2, y + 2, (w - 4) * pct / 100, 20, RGB565_GREEN);
+  const int y = LCD_HEIGHT - 70, w = LCD_WIDTH - 2 * MARGIN;
+  gfx->fillRect(MARGIN, y, w * pct / 100, 6, COL_PICK);
 }
 
 // zkopiruje binarku z karty do oddilu ota_1 a nastavi z nej boot
 static bool flashApp(int idx) {
   const esp_partition_t *target = esp_ota_get_next_update_partition(nullptr);
-  if (!target) { msg("volny app oddil neni", RGB565_RED); return false; }
+  if (!target) { note("volny app oddil neni", COL_ERR); return false; }
 
   File f = SD.open(paths[idx], FILE_READ);
-  if (!f) { msg("soubor nejde otevrit", RGB565_RED); return false; }
+  if (!f) { note("soubor nejde otevrit", COL_ERR); return false; }
   const uint32_t total = f.size();
-  if (total == 0 || total > target->size) { f.close(); msg("binarka se do oddilu nevejde", RGB565_RED); return false; }
+  if (total == 0 || total > target->size) { f.close(); note("binarka se nevejde", COL_ERR); return false; }
 
   esp_ota_handle_t h = 0;
-  if (esp_ota_begin(target, total, &h) != ESP_OK) { f.close(); msg("esp_ota_begin selhal", RGB565_RED); return false; }
+  if (esp_ota_begin(target, total, &h) != ESP_OK) { f.close(); note("esp_ota_begin selhal", COL_ERR); return false; }
 
   static uint8_t buf[COPY_CHUNK];
   uint32_t done = 0;
@@ -136,35 +100,31 @@ static bool flashApp(int idx) {
   while (done < total) {
     const int n = f.read(buf, sizeof(buf));
     if (n <= 0) break;
-    if (esp_ota_write(h, buf, n) != ESP_OK) { esp_ota_abort(h); f.close(); msg("zapis do oddilu selhal", RGB565_RED); return false; }
+    if (esp_ota_write(h, buf, n) != ESP_OK) { esp_ota_abort(h); f.close(); note("zapis selhal", COL_ERR); return false; }
     done += n;
     const int pct = (int)(100ULL * done / total);
     if (pct != lastPct) { drawProgress(pct); lastPct = pct; }
   }
   f.close();
 
-  if (done != total)             { esp_ota_abort(h); msg("cteni z karty selhalo", RGB565_RED); return false; }
-  if (esp_ota_end(h) != ESP_OK)  { msg("binarka je poskozena", RGB565_RED); return false; }
-  if (esp_ota_set_boot_partition(target) != ESP_OK) { msg("nastaveni bootu selhalo", RGB565_RED); return false; }
+  if (done != total)            { esp_ota_abort(h); note("cteni z karty selhalo", COL_ERR); return false; }
+  if (esp_ota_end(h) != ESP_OK) { note("binarka je poskozena", COL_ERR); return false; }
+  if (esp_ota_set_boot_partition(target) != ESP_OK) { note("nastaveni bootu selhalo", COL_ERR); return false; }
   return true;
 }
 
+// tuknuta polozka zustane obarvena, ostatni zhasnou; pak se kopiruje
 static void runApp(int idx) {
   gfx->fillScreen(RGB565_BLACK);
-  gfx->setTextSize(3);
-  gfx->setTextColor(RGB565_WHITE);
-  gfx->setCursor(MARGIN, LCD_HEIGHT / 2 - 40);
-  gfx->print(names[idx]);
-  msg("kopiruji z karty...", RGB565_LIGHTGREY);
+  drawItem(idx, COL_PICK);
   USBSerial.printf("spoustim %s\n", paths[idx]);
 
   if (flashApp(idx)) {
-    msg("startuji", RGB565_GREEN);
-    delay(300);
+    delay(200);
     esp_restart();
   }
   delay(2500);
-  drawList(-1);
+  drawList();
 }
 
 void setup() {
@@ -176,7 +136,7 @@ void setup() {
   USBSerial.println(sdOk ? "SD karta OK" : "SD karta neni");
   if (sdOk) scanApps();
   USBSerial.printf("aplikaci na karte: %d\n", appCount);
-  drawList(-1);
+  drawList();
 }
 
 // karta zasunuta az po startu: zkousime ji otevrit dokola, seznam
@@ -189,7 +149,7 @@ static void pollCard() {
   sdOk = true;
   scanApps();
   USBSerial.printf("karta zasunuta, aplikaci: %d\n", appCount);
-  drawList(-1);
+  drawList();
 }
 
 void loop() {
@@ -201,11 +161,10 @@ void loop() {
   if (!tap) { delay(10); return; }
 
   USBSerial.printf("dotyk %d %d\n", touchX, touchY);
-  drawTouchInfo();
   if (!appCount) return;
-  const int idx = (touchY - LIST_Y) / ROW_H;
-  if (idx < 0 || idx >= appCount || touchY < LIST_Y) return;
-  drawList(idx);
-  delay(120);
+  const int idx = (touchY - listY) / ROW_H;
+  if (touchY < listY || idx < 0 || idx >= appCount) return;
+  drawItem(idx, COL_PICK);     // odezva na tuknuti
+  delay(150);
   runApp(idx);
 }

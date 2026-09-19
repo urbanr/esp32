@@ -3,6 +3,7 @@
 #include <stdint.h>
 #include <string.h>
 #include <math.h>
+#include "../common/pin_config.h"
 #include "config.h"
 #include "sand_palette.h"
 
@@ -12,13 +13,13 @@
 // zklidneni/freeze), "dolu" je smer vektoru gravitace z IMU.
 // ===================================================================
 
-#define GRID_W  (368 / SAND_SCALE)
-#define GRID_H  (448 / SAND_SCALE)
+#define GRID_W  (LCD_WIDTH / SAND_SCALE)
+#define GRID_H  (LCD_HEIGHT / SAND_SCALE)
 #define GRID_N  (GRID_W * GRID_H)
 
 // vycentrovani hraci plochy pri rozliseni nedelitelnem SAND_SCALE
-#define GRID_X_OFF  ((368 - GRID_W * SAND_SCALE) / 2)
-#define GRID_Y_OFF  ((448 - GRID_H * SAND_SCALE) / 2)
+#define GRID_X_OFF  ((LCD_WIDTH - GRID_W * SAND_SCALE) / 2)
+#define GRID_Y_OFF  ((LCD_HEIGHT - GRID_H * SAND_SCALE) / 2)
 
 #define TICK_DT (1.0f / TICK_HZ)
 
