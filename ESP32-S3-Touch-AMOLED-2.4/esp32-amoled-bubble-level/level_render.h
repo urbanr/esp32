@@ -115,21 +115,32 @@ static void renderFree() {
   textCanvas = nullptr;
 }
 
-// cely staticky obraz: pouzdro + kapalina po radcich pres LUT,
-// odlesk skla, kruznice
+// Cely staticky obraz: pouzdro + kapalina pres LUT, odlesk skla,
+// kruznice. Kresli se po vodorovnych pruzich do canvasu a na displej
+// jde vzdy cely pruh - panel RM690B0 zahazuje okna, ktera nezacinaji
+// na sudem pixelu, takze radek vysoky 1 px ani kresleni po pixelech
+// (odlesk, kruznice) primo pres gfx neni videt.
+#define STATIC_STRIPE_H 40   // musi delit LCD_HEIGHT a byt sude
 static void drawStaticScene(Arduino_GFX *gfx) {
-  static uint16_t row[LCD_WIDTH];
-  for (int y = 0; y < LCD_HEIGHT; y++) {
-    for (int x = 0; x < LCD_WIDTH; x++) row[x] = liquidColorAt(x, y);
-    gfx->draw16bitRGBBitmap(0, y, row, LCD_WIDTH, 1);
+  Arduino_Canvas *stripe = new Arduino_Canvas(LCD_WIDTH, STATIC_STRIPE_H, gfx, 0, 0);
+  if (!stripe->begin(GFX_SKIP_OUTPUT_BEGIN)) { delete stripe; return; }
+  uint16_t *fb = stripe->getFramebuffer();
+  for (int y0 = 0; y0 < LCD_HEIGHT; y0 += STATIC_STRIPE_H) {
+    for (int j = 0; j < STATIC_STRIPE_H; j++)
+      for (int i = 0; i < LCD_WIDTH; i++)
+        fb[j * LCD_WIDTH + i] = liquidColorAt(i, y0 + j);
+    drawGlassShineTo(stripe, 0, y0);
+    drawTargetCircleTo(stripe, 0, y0);
+    gfx->draw16bitRGBBitmap(0, y0, fb, LCD_WIDTH, STATIC_STRIPE_H);
   }
-  drawGlassShineTo(gfx, 0, 0);
-  drawTargetCircleTo(gfx, 0, 0);
+  delete stripe;
 }
 
 // prekresli ctvercove okno BUBBLE_CANVAS_PX x BUBBLE_CANVAS_PX s levym
 // hornim rohem (wx, wy): gradient -> bublina -> odlesk a kruznice navrch
 static void renderWindow(Arduino_GFX *gfx, int wx, int wy, int bubX, int bubY) {
+  wx &= ~1;   // okno musi zacinat na sudem pixelu, jinak ho panel zahodi
+  wy &= ~1;
   uint16_t *fb = bubbleCanvas->getFramebuffer();
   for (int j = 0; j < BUBBLE_CANVAS_PX; j++)
     for (int i = 0; i < BUBBLE_CANVAS_PX; i++)
@@ -152,7 +163,7 @@ static void renderBubbleMove(Arduino_GFX *gfx, int oldX, int oldY, int newX, int
   const int minY = min(oldY, newY) - e, maxY = max(oldY, newY) + e;
   const int wxMax = LCD_WIDTH - BUBBLE_CANVAS_PX;
   const int wyMax = LCD_HEIGHT - BUBBLE_CANVAS_PX;
-  if (maxX - minX <= BUBBLE_CANVAS_PX && maxY - minY <= BUBBLE_CANVAS_PX) {
+  if (maxX - minX <= BUBBLE_CANVAS_PX - 2 && maxY - minY <= BUBBLE_CANVAS_PX - 2) {
     renderWindow(gfx, clampi(minX, 0, wxMax), clampi(minY, 0, wyMax), newX, newY);
   } else {
     renderWindow(gfx, clampi(oldX - BUBBLE_CANVAS_PX / 2, 0, wxMax),

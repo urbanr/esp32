@@ -29,23 +29,22 @@ public:
     uint8_t id = 0;
     if (!read(0x00, &id, 1) || id != 0x05) return false;
     write(0x60, 0xB0);                // softreset
-    delay(20);
-    write(0x02, 0x60);                // CTRL1: auto increment adresy, SPI 4dratovy
-    write(0x08, 0x00);                // CTRL7: zatim oba senzory vypnute
+    // Po resetu se musi pockat, jinak cip sice registry prijme (daji se
+    // precist zpatky), ale vzorkovani uz nerozjede - STATUS0 zustane 0
+    // a datove registry vraci same nuly. delay(20) bylo malo, 50 staci.
+    delay(50);
+    write(0x02, 0x40);                // CTRL1: auto increment adresy, little-endian, SPI 4dratovy
     return true;
   }
 
   void configAccelerometer(uint8_t range, uint8_t odr) { write(0x03, (uint8_t)((range << 4) | odr)); _aScale = 32768.0f / (2 << range); }
   void configGyroscope(uint8_t range, uint8_t odr)     { write(0x04, (uint8_t)((range << 4) | odr)); _gScale = 32768.0f / (16 << range); }
 
-  void enableAccelerometer() { _ctrl7 |= 0x01; write(0x08, _ctrl7); }
+  void enableAccelerometer() { _ctrl7 |= 0x01; write(0x08, _ctrl7); delay(100); }
   void enableGyroscope()     { _ctrl7 |= 0x02; write(0x08, _ctrl7); }
 
-  // Pozor: priznaky nove hodnoty ve STATUS0 se plni jen v rezimu
-  // syncSmpl, ktery nepouzivame - v beznem rezimu zustavaji nulove
-  // a cekani na ne by znamenalo, ze aplikace nedostane data nikdy.
-  // Datove registry drzi vzdy posledni vzorek, takze staci vedet,
-  // ze je senzor zapnuty.
+  // Datove registry drzi vzdy posledni vzorek, takze staci vedet, ze je
+  // senzor zapnuty; na priznak ve STATUS0 se neceka.
   bool getDataReady() { return _ctrl7 != 0; }
 
   bool getAccelerometer(float &x, float &y, float &z) { return readVec(0x35, _aScale, x, y, z); }   // v g
